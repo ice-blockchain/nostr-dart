@@ -1,0 +1,27 @@
+name: Test
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  test:
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout main repo
+        id: checkout-main-repo
+        uses: actions/checkout@v3
+      - name: Setup Dart
+        id: setup-dart
+        uses: dart-lang/setup-dart@v1
+      - name: Install dependencies
+        id: install-dependencies
+        run: dart pub get
+      - name: Run analyze
+        id: run-analyze
+        run: dart analyze
+      - name: Run tests
+        id: run-tests
+        run: dart test
