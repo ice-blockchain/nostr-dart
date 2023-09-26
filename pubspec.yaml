@@ -1,0 +1,19 @@
+name: nostr_dart
+description: A Dart Library for making Nostr clients
+version: 1.0.0
+# repository: https://github.com/my_org/my_repo
+
+environment:
+  sdk: ^3.0.7
+
+dependencies:
+  bip340: ^0.2.0
+  crypto: ^3.0.3
+  equatable: ^2.0.5
+  logging: ^1.2.0
+
+dev_dependencies:
+  lint: ^2.1.2
+  lints: ^2.0.0
+  test: ^1.21.0
+  
