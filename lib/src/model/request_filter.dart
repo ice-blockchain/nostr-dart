@@ -71,7 +71,40 @@ class RequestFilter extends Equatable {
   }
 
   @override
-  List<Object?> get props => [ids, authors, kinds, e, p, since, until, limit];
+  List<Object?> get props {
+    return [
+      ids,
+      authors,
+      kinds,
+      e,
+      p,
+      since,
+      until,
+      limit,
+    ];
+  }
+
+  RequestFilter copyWith({
+    List<String>? Function()? ids,
+    List<String>? Function()? authors,
+    List<int>? Function()? kinds,
+    List<String>? Function()? e,
+    List<String>? Function()? p,
+    DateTime? Function()? since,
+    DateTime? Function()? until,
+    int? Function()? limit,
+  }) {
+    return RequestFilter(
+      ids: ids != null ? ids() : this.ids,
+      authors: authors != null ? authors() : this.authors,
+      kinds: kinds != null ? kinds() : this.kinds,
+      e: e != null ? e() : this.e,
+      p: p != null ? p() : this.p,
+      since: since != null ? since() : this.since,
+      until: until != null ? until() : this.until,
+      limit: limit != null ? limit() : this.limit,
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {

@@ -2,16 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:nostr_dart/src/exceptions/subscription_not_found.dart';
+import 'package:nostr_dart/nostr_dart.dart';
 import 'package:nostr_dart/src/logging.dart';
-import 'package:nostr_dart/src/model/close_message.dart';
-import 'package:nostr_dart/src/model/eose_message.dart';
-import 'package:nostr_dart/src/model/event_message.dart';
-import 'package:nostr_dart/src/model/notice_message.dart';
-import 'package:nostr_dart/src/model/ok_message.dart';
-import 'package:nostr_dart/src/model/relay_message.dart';
-import 'package:nostr_dart/src/model/request_message.dart';
-import 'package:nostr_dart/src/subscription.dart';
 
 /// A class to represent a Nostr relay.
 ///
@@ -19,10 +11,9 @@ import 'package:nostr_dart/src/subscription.dart';
 /// They allow Nostr clients to send them messages, and they may (or may not)
 /// store those messages and broadcast those messages to all other connected clients.
 class NostrRelay {
-  /// Closes the connection if the user forgets to, using [Finalizer](https://api.flutter.dev/flutter/dart-core/Finalizer-class.html)
-  static final Finalizer<WebSocket> _finalizer = Finalizer((socket) {
-    socket.close();
-  });
+  /// Closes the connection if the user forgets to
+  static final Finalizer<WebSocket> _finalizer =
+      Finalizer((socket) => socket.close());
 
   /// URL of the Relay's WebSocket.
   ///
@@ -33,78 +24,119 @@ class NostrRelay {
   final WebSocket socket;
 
   /// Stream of decoded WebSocket's messages
-  final Stream<RelayMessage> messages;
+  late Stream<RelayMessage> messages;
 
-  /// Active Relay's subscriptions
-  final Map<String, NostrSubscription> subscriptions = {};
+  /// Active Relay's [NostrSubscription]s
+  final Map<String, NostrSubscription> _subscriptions = {};
 
-  NostrRelay._({
+  NostrRelay({
     required this.url,
-    required this.messages,
     required this.socket,
-  });
+  }) {
+    final controller = StreamController<RelayMessage>.broadcast();
+    controller
+        .addStream(socket.messages.transform(_messageTransformer))
+        .whenComplete(controller.close);
+    messages = controller.stream;
+    socket.connection.listen(_onConnectionStateChange);
+    messages.listen(_onIncomingMessage);
+    _finalizer.attach(this, socket, detach: this);
+  }
 
-  /// Close the corresponding socket connection
+  /// Closes the corresponding socket connection.
   void close() {
     socket.close();
     _finalizer.detach(this);
   }
 
-  /// Send an [EventMessage] to the Relay and wait for
-  /// the corresponding [OkMessage] in response.
+  /// Sends the [EventMessage] to the Relay and waits for
+  /// an [OkMessage] with the same eventId.
   Future<OkMessage> sendEvent(EventMessage event) async {
-    socket.add(event.toString());
-    return messages
-        .where((message) => message is OkMessage)
-        .cast<OkMessage>()
-        .firstWhere((message) => message.eventId == event.id);
+    try {
+      sendMessage(event);
+      return messages
+          .where((message) => message is OkMessage)
+          .cast<OkMessage>()
+          .firstWhere((message) => message.eventId == event.id);
+    } catch (error, stack) {
+      logWarning("$url Failed to send event $event", error, stack);
+      rethrow;
+    }
+  }
+
+  /// Sends the [RelayMessage] to the Relay
+  void sendMessage(RelayMessage message) {
+    if (socket.connection is Connecting ||
+        socket.connection is Reconnecting ||
+        socket.connection is Disconnected) {
+      throw SocketException('Connection to $url is not established');
+    }
+    socket.send(message.toString());
+    logInfo(() => '↑ $url $message');
   }
 
   /// Sends the provided [RequestMessage] to the Relay and
   /// returns an instance of [NostrSubscription] that contains
   /// a stream of [RelayMessage] filtered by the [requestMessage]'s [subscriptionId]
   NostrSubscription subscribe(RequestMessage requestMessage) {
-    final NostrSubscription subscription =
-        NostrSubscription(requestMessage, messages);
-    subscriptions[subscription.id] = subscription;
-    socket.add(requestMessage.toString());
-    return subscription;
+    try {
+      sendMessage(requestMessage);
+      final NostrSubscription subscription =
+          NostrSubscription(requestMessage, messages);
+      _subscriptions[subscription.id] = subscription;
+      return subscription;
+    } catch (error, stack) {
+      logWarning("Failed to subscribe to relay $url", error, stack);
+      rethrow;
+    }
   }
 
   /// Closes the previously created [NostrSubscription] identified by the provided [subscriptionId].
   void unsubscribe(String subscriptionId) {
     try {
-      final NostrSubscription? subscription = subscriptions[subscriptionId];
+      final NostrSubscription? subscription = _subscriptions[subscriptionId];
       if (subscription == null) {
         throw SubscriptionNotFoundException(subscriptionId);
       }
-      socket.add(CloseMessage(subscriptionId: subscriptionId).toString());
+      sendMessage(CloseMessage(subscriptionId: subscriptionId));
       subscription.dispose();
-      subscriptions.remove(subscriptionId);
+      _subscriptions.remove(subscriptionId);
     } catch (error, stack) {
-      logWarningWithError(
-        () => ("Unable to unsubscribe from relay $url", error, stack),
-      );
+      logWarning("Failed to unsubscribe from relay $url", error, stack);
       rethrow;
     }
   }
 
-  /// Creates a new Relay with the provided url.
-  ///
-  /// Method creates a new WebSocket connection to the given url and
-  /// creates a stream of [RelayMessage]s using [_messagesTransformer]
-  static Future<NostrRelay> connect(String url) async {
-    final WebSocket socket = await WebSocket.connect(url);
-    final Stream<RelayMessage> messages =
-        socket.asBroadcastStream().transform(_messagesTransformer);
-    final NostrRelay relay =
-        NostrRelay._(url: url, messages: messages, socket: socket);
-    _finalizer.attach(relay, socket, detach: relay);
+  void _onConnectionStateChange(ConnectionState state) {
+    logInfo(() => '$url connection state is ${state.runtimeType}');
+    if (state is Reconnected) {
+      _renewSubscriptions();
+    }
+  }
+
+  void _onIncomingMessage(RelayMessage message) {
+    logInfo(() => '↓ $url $message');
+  }
+
+  void _renewSubscriptions() {
+    for (final NostrSubscription subscription in _subscriptions.values) {
+      sendMessage(subscription.getRenewRequestMessage());
+    }
+  }
+
+  /// Creates a new Relay and waits for it to be connected.
+  static Future<NostrRelay> connect(
+    String url, [
+    WebSocket? customSocket,
+  ]) async {
+    final WebSocket socket = customSocket ?? WebSocket(Uri.parse(url));
+    final relay = NostrRelay(url: url, socket: socket);
+    await socket.connection.firstWhere((state) => state is Connected);
     return relay;
   }
 }
 
-StreamTransformer<dynamic, RelayMessage> _messagesTransformer =
+StreamTransformer<dynamic, RelayMessage> _messageTransformer =
     StreamTransformer.fromHandlers(
   handleData: (message, sink) {
     try {
@@ -122,7 +154,7 @@ StreamTransformer<dynamic, RelayMessage> _messagesTransformer =
           logWarning(() => 'Unknown message $message');
       }
     } catch (error, stack) {
-      logWarningWithError(() => ('Stream transform error', error, stack));
+      logWarning(() => 'Stream transform error', error, stack);
       sink.addError(error);
     }
   },

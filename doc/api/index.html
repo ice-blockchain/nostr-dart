@@ -57,10 +57,10 @@
 <h2 id="features">Features</h2>
 <p>Add this library to your Dart app to:</p>
 <ul>
-<li>Connect to Nostr Relays</li>
-<li>Start subscriptions using Nostr Filters and get a handy Stream of filtered, decoded and verified Messages</li>
-<li>Send Nostr Events to a Relay</li>
-<li>Deal with Nostr Cryptography - sign your messages, verify signatures of the incoming Messages, generate private and public keys</li>
+<li>Connect to Nostr relays</li>
+<li>Start subscriptions using filters and get a handy Stream of decoded and verified messages</li>
+<li>Send Nostr events to relays</li>
+<li>Deal with Nostr Cryptography - sign and verify messages, generate private and public keys</li>
 </ul>
 <h2 id="getting-started">Getting started</h2>
 <p>This lib is in beta. Please use with caution and file and potential issues you see on our issue tracker.</p>
@@ -71,8 +71,8 @@
   final NostrRelay relay = await NostrRelay.connect('wss://relay.damus.io');
 
   final RequestMessage requestMessage = RequestMessage()
-      .addFilter(const RequestFilter(kinds: [1], limit: 5))
-      .addFilter(
+      ..addFilter(const RequestFilter(kinds: [1], limit: 5))
+      ..addFilter(
         RequestFilter(kinds: const [0], limit: 1, since: DateTime(2020)),
       );
 
@@ -149,7 +149,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      1.0.0
+      0.0.1
   </span>
 
   

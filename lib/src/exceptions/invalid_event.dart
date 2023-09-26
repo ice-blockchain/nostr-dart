@@ -1,4 +1,4 @@
-import 'package:nostr_dart/src/model/event_message.dart';
+import 'package:nostr_dart/nostr_dart.dart';
 
 class InvalidEventException implements Exception {
   final EventMessage event;

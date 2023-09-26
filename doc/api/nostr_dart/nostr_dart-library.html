@@ -70,12 +70,91 @@
       <h2>Classes</h2>
 
       <dl>
+        <dt id="Backoff">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/Backoff-class.html">Backoff</a></span> 
+
+</dt>
+<dd>
+  An backoff strategy abstraction.
+A backoff strategy is a technique used to re-attempt
+failing calls after a delay.
+</dd>
+
+        <dt id="BinaryExponentialBackoff">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/BinaryExponentialBackoff-class.html">BinaryExponentialBackoff</a></span> 
+
+</dt>
+<dd>
+  A binary exponential backoff strategy.
+This backoff strategy will double the backoff duration on each attempt
+until the maximum step is reached.
+</dd>
+
         <dt id="CloseMessage">
   <span class="name "><a href="../nostr_dart/CloseMessage-class.html">CloseMessage</a></span> 
 
 </dt>
 <dd>
   Representation of a Nostr CLOSE Message
+</dd>
+
+        <dt id="Connected">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/Connected-class.html">Connected</a></span> 
+
+</dt>
+<dd>
+  The WebSocket connection is established and communication is possible.
+</dd>
+
+        <dt id="Connecting">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/Connecting-class.html">Connecting</a></span> 
+
+</dt>
+<dd>
+  The WebSocket connection has not yet been established.
+</dd>
+
+        <dt id="Connection">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/Connection-class.html">Connection</a></span> 
+
+</dt>
+<dd>
+  An object which contains information regarding the
+current WebSocket connection.
+</dd>
+
+        <dt id="ConnectionState">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/ConnectionState-class.html">ConnectionState</a></span> 
+
+</dt>
+<dd>
+  The state of a WebSocket connection.
+</dd>
+
+        <dt id="ConstantBackoff">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/ConstantBackoff-class.html">ConstantBackoff</a></span> 
+
+</dt>
+<dd>
+  A constant backoff strategy.
+This backoff strategy will always return the same value.
+</dd>
+
+        <dt id="Disconnected">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/Disconnected-class.html">Disconnected</a></span> 
+
+</dt>
+<dd>
+  The WebSocket connection has been closed or could not be established.
+</dd>
+
+        <dt id="Disconnecting">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/Disconnecting-class.html">Disconnecting</a></span> 
+
+</dt>
+<dd>
+  The WebSocket connection is going through the closing handshake,
+or the close() method has been invoked.
 </dd>
 
         <dt id="EoseMessage">
@@ -100,6 +179,16 @@
 </dt>
 <dd>
   Encapsulation of crypto-related tasks.
+</dd>
+
+        <dt id="LinearBackoff">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/LinearBackoff-class.html">LinearBackoff</a></span> 
+
+</dt>
+<dd>
+  A linear backoff strategy.
+This backoff strategy will increase the backoff duration
+by a constant duration on each attempt.
 </dd>
 
         <dt id="NostrLogLevel">
@@ -142,6 +231,23 @@
   Representation of a Nostr OK Message
 </dd>
 
+        <dt id="Reconnected">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/Reconnected-class.html">Reconnected</a></span> 
+
+</dt>
+<dd>
+  The WebSocket connection was lost and has been re-established.
+</dd>
+
+        <dt id="Reconnecting">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/Reconnecting-class.html">Reconnecting</a></span> 
+
+</dt>
+<dd>
+  The WebSocket connection was lost
+and is in the process of being re-established.
+</dd>
+
         <dt id="RelayMessage">
   <span class="name "><a href="../nostr_dart/RelayMessage-class.html">RelayMessage</a></span> 
 
@@ -166,6 +272,14 @@
   Representation of Nostr REQ message.
 </dd>
 
+        <dt id="WebSocket">
+  <span class="name "><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/WebSocket-class.html">WebSocket</a></span> 
+
+</dt>
+<dd>
+  A reusable WebSocket client for Dart.
+</dd>
+
       </dl>
     </section>
 
@@ -179,7 +293,7 @@
       <dl class="callables">
         <dt id="setNostrLogLevel" class="callable">
   <span class="name"><a href="../nostr_dart/setNostrLogLevel.html">setNostrLogLevel</a></span><span class="signature">(<wbr><span class="parameter" id="setNostrLogLevel-param-level"><span class="type-annotation"><a href="../nostr_dart/NostrLogLevel-class.html">NostrLogLevel</a></span> <span class="parameter-name">level</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.1.3/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
   </span>
   
 
@@ -251,7 +365,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      1.0.0
+      0.0.1
   </span>
 
   

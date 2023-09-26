@@ -63,7 +63,7 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.1.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../nostr_dart/OkMessage-class.html">OkMessage</a></span>&gt;</span></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.1.3/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../nostr_dart/OkMessage-class.html">OkMessage</a></span>&gt;</span></span>
 <span class="name ">sendEvent</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="sendEvent-param-event"><span class="type-annotation"><a href="../../nostr_dart/EventMessage-class.html">EventMessage</a></span> <span class="parameter-name">event</span></span></li>
 </ol>)
 
@@ -72,8 +72,8 @@
     </section>
     
 <section class="desc markdown">
-  <p>Send an <a href="../../nostr_dart/EventMessage-class.html">EventMessage</a> to the Relay and wait for
-the corresponding <code>OkMessage</code> in response.</p>
+  <p>Sends the <a href="../../nostr_dart/EventMessage-class.html">EventMessage</a> to the Relay and waits for
+an <code>OkMessage</code> with the same eventId.</p>
 </section>
 
 
@@ -81,11 +81,16 @@ the corresponding <code>OkMessage</code> in response.</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">Future&lt;OkMessage&gt; sendEvent(EventMessage event) async {
-  socket.add(event.toString());
-  return messages
-      .where((message) =&gt; message is OkMessage)
-      .cast&lt;OkMessage&gt;()
-      .firstWhere((message) =&gt; message.eventId == event.id);
+  try {
+    sendMessage(event);
+    return messages
+        .where((message) =&gt; message is OkMessage)
+        .cast&lt;OkMessage&gt;()
+        .firstWhere((message) =&gt; message.eventId == event.id);
+  } catch (error, stack) {
+    logWarning(&quot;$url Failed to send event $event&quot;, error, stack);
+    rethrow;
+  }
 }</code></pre>
 </section>
 
@@ -119,7 +124,7 @@ the corresponding <code>OkMessage</code> in response.</p>
 <footer>
   <span class="no-break">
     nostr_dart
-      1.0.0
+      0.0.1
   </span>
 
   

@@ -5,44 +5,24 @@ import 'dart:developer' as developer;
 
 import 'package:logging/logging.dart' as logging;
 
-final logging.Logger _logger = logging.Logger('Nostr');
+final logging.Logger _logger = logging.Logger.detached('Nostr');
 
 StreamSubscription<logging.LogRecord>? _subscription;
 
-void logInfo(Object? Function() log) =>
-    _productionGuard(() => _logger.info(log()));
+final logInfo = _logger.info;
 
-void logInfoWithError(
-  (Object?, Object? error, StackTrace? stackTrace) Function() log,
-) {
-  _productionGuard(() {
-    final (message, error, stackTrace) = log();
-    _logger.info(message, error, stackTrace);
-  });
-}
-
-void logWarning(Object? Function() log) =>
-    _productionGuard(() => _logger.warning(log()));
-
-void logWarningWithError(
-  (Object? message, Object? error, StackTrace? stackTrace) Function() log,
-) {
-  _productionGuard(() {
-    final (message, error, stackTrace) = log();
-    _logger.warning(message, error, stackTrace);
-  });
-}
+final logWarning = _logger.warning;
 
 /// Method to set a desired logging output level.
 ///
 /// ```
 /// setNostrLogLevel(NostrLogLevel.ALL);
 /// ```
-void setNostrLogLevel(NostrLogLevel level) {
+Future<void> setNostrLogLevel(NostrLogLevel level) async {
   logging.hierarchicalLoggingEnabled = true;
   _logger.level = level;
 
-  _subscription?.cancel();
+  await _subscription?.cancel();
 
   _subscription = _logger.onRecord.listen((logging.LogRecord record) {
     developer.log(
@@ -58,22 +38,12 @@ void setNostrLogLevel(NostrLogLevel level) {
   });
 }
 
-void _productionGuard(void Function() func) {
-  assert(() {
-    func();
-    return true;
-  }());
-}
-
 /// Logging output level.
 ///
 /// The lower the integer value of a log level, the more verbose the output is.
 class NostrLogLevel extends logging.Level {
   /// Turn on all levels
   static const NostrLogLevel ALL = NostrLogLevel('ALL', 0);
-
-  /// Highly detailed tracing
-  static const NostrLogLevel FINE = NostrLogLevel('FINE', 500);
 
   /// Informational messages
   static const NostrLogLevel INFO = NostrLogLevel('INFO', 800);

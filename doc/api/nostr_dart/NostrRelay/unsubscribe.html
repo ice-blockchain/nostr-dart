@@ -64,7 +64,7 @@
       
 
 <span class="returntype">void</span>
-<span class="name ">unsubscribe</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="unsubscribe-param-subscriptionId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">subscriptionId</span></span></li>
+<span class="name ">unsubscribe</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="unsubscribe-param-subscriptionId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.3/dart-core/String-class.html">String</a></span> <span class="parameter-name">subscriptionId</span></span></li>
 </ol>)
 
       
@@ -81,17 +81,15 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">void unsubscribe(String subscriptionId) {
   try {
-    final NostrSubscription? subscription = subscriptions[subscriptionId];
+    final NostrSubscription? subscription = _subscriptions[subscriptionId];
     if (subscription == null) {
       throw SubscriptionNotFoundException(subscriptionId);
     }
-    socket.add(CloseMessage(subscriptionId: subscriptionId).toString());
+    sendMessage(CloseMessage(subscriptionId: subscriptionId));
     subscription.dispose();
-    subscriptions.remove(subscriptionId);
+    _subscriptions.remove(subscriptionId);
   } catch (error, stack) {
-    logWarningWithError(
-      () =&gt; (&quot;Unable to unsubscribe from relay $url&quot;, error, stack),
-    );
+    logWarning(&quot;Failed to unsubscribe from relay $url&quot;, error, stack);
     rethrow;
   }
 }</code></pre>
@@ -127,7 +125,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      1.0.0
+      0.0.1
   </span>
 
   

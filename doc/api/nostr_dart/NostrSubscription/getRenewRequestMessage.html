@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the type constant from the EoseMessage class, for the Dart programming language.">
-  <title>type constant - EoseMessage class - nostr_dart library - Dart API</title>
+  <meta name="description" content="API docs for the getRenewRequestMessage property from the NostrSubscription class, for the Dart programming language.">
+  <title>getRenewRequestMessage property - NostrSubscription class - nostr_dart library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart</a></li>
-    <li><a href="../../nostr_dart/EoseMessage-class.html">EoseMessage</a></li>
-    <li class="self-crumb">type constant</li>
+    <li><a href="../../nostr_dart/NostrSubscription-class.html">NostrSubscription</a></li>
+    <li class="self-crumb">getRenewRequestMessage property</li>
   </ol>
-  <div class="self-name">type</div>
+  <div class="self-name">getRenewRequestMessage</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,25 +54,37 @@
   <div
       id="dartdoc-main-content"
       class="main-content"
-      data-above-sidebar="nostr_dart&#47;EoseMessage-class-sidebar.html"
+      data-above-sidebar="nostr_dart&#47;NostrSubscription-class-sidebar.html"
       data-below-sidebar="">
       <div>
-<h1><span class="kind-property">type</span> constant 
+<h1><span class="kind-property">getRenewRequestMessage</span> property 
 </h1></div>
 
         <section class="multi-line-signature">
           
-          <a href="https://api.dart.dev/stable/3.1.3/dart-core/String-class.html">String</a>
-          const <span class="name ">type</span>
-          
+          <a href="../../nostr_dart/RequestMessage-class.html">RequestMessage</a> Function<span class="signature">()</span>
+          <span class="name ">getRenewRequestMessage</span>
+          <div class="features"><span class="feature">read / write</span></div>
 
         </section>
         
+<section class="desc markdown">
+  <p>Method to generate a <a href="../../nostr_dart/RequestMessage-class.html">RequestMessage</a> to renew the subscription.</p>
+<p><a href="../../nostr_dart/NostrRelay-class.html">NostrRelay</a>'s connection may be aborted due to variety of reasons -
+no internet connection on the user's device, device lock screen is triggered,
+OS takes away the resources due to staying in the background and many more.
+In those cases <a href="../../nostr_dart/NostrRelay-class.html">NostrRelay</a> tries to reconnect as soon as possible. And
+since each reconnection is a new WebSocket connection, previous nostr
+subscriptions should also be renewed.
+But to renew a subscription the initial <a href="../../nostr_dart/RequestMessage-class.html">RequestMessage</a> is not suitable for
+most cases, hence we're using <a href="../../nostr_dart/NostrSubscription/getRenewRequestMessage.html">getRenewRequestMessage</a> function to generate a new one.</p>
+<p>The default implementation for this function is defined in <code>_defaultGetRenewRequestMessage</code>.</p>
+</section>
 
         
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static const String type = &#39;EOSE&#39;;</code></pre>
+  <pre class="language-dart"><code class="language-dart">late RequestMessage Function() getRenewRequestMessage;</code></pre>
 </section>
 
 
@@ -89,12 +101,12 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart</a></li>
-    <li><a href="../../nostr_dart/EoseMessage-class.html">EoseMessage</a></li>
-    <li class="self-crumb">type constant</li>
+    <li><a href="../../nostr_dart/NostrSubscription-class.html">NostrSubscription</a></li>
+    <li class="self-crumb">getRenewRequestMessage property</li>
 </ol>
 
 
-    <h5>EoseMessage class</h5>
+    <h5>NostrSubscription class</h5>
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">

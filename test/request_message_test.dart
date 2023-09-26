@@ -27,10 +27,10 @@ void main() {
     });
 
     test('provides a way to add filters after instantiating', () {
-      final RequestMessage requestMessage = RequestMessage();
-      requestMessage.addFilter(const RequestFilter(kinds: [1]));
-      requestMessage.addFilter(const RequestFilter(kinds: [2]));
-      requestMessage.addFilter(const RequestFilter(authors: []));
+      final RequestMessage requestMessage = RequestMessage()
+        ..addFilter(const RequestFilter(kinds: [1]))
+        ..addFilter(const RequestFilter(kinds: [2]))
+        ..addFilter(const RequestFilter(authors: []));
       expect(requestMessage.filters.length, equals(3));
     });
 

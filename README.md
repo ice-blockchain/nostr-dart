@@ -23,8 +23,8 @@ void main() async {
   final NostrRelay relay = await NostrRelay.connect('wss://relay.damus.io');
 
   final RequestMessage requestMessage = RequestMessage()
-      .addFilter(const RequestFilter(kinds: [1], limit: 5))
-      .addFilter(
+      ..addFilter(const RequestFilter(kinds: [1], limit: 5))
+      ..addFilter(
         RequestFilter(kinds: const [0], limit: 1, since: DateTime(2020)),
       );
 

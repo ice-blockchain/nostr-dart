@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the type constant from the EoseMessage class, for the Dart programming language.">
-  <title>type constant - EoseMessage class - nostr_dart library - Dart API</title>
+  <meta name="description" content="API docs for the sendMessage method from the NostrRelay class, for the Dart programming language.">
+  <title>sendMessage method - NostrRelay class - nostr_dart library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart</a></li>
-    <li><a href="../../nostr_dart/EoseMessage-class.html">EoseMessage</a></li>
-    <li class="self-crumb">type constant</li>
+    <li><a href="../../nostr_dart/NostrRelay-class.html">NostrRelay</a></li>
+    <li class="self-crumb">sendMessage method</li>
   </ol>
-  <div class="self-name">type</div>
+  <div class="self-name">sendMessage</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,25 +54,40 @@
   <div
       id="dartdoc-main-content"
       class="main-content"
-      data-above-sidebar="nostr_dart&#47;EoseMessage-class-sidebar.html"
+      data-above-sidebar="nostr_dart&#47;NostrRelay-class-sidebar.html"
       data-below-sidebar="">
       <div>
-<h1><span class="kind-property">type</span> constant 
+<h1><span class="kind-method">sendMessage</span> method 
 </h1></div>
 
-        <section class="multi-line-signature">
-          
-          <a href="https://api.dart.dev/stable/3.1.3/dart-core/String-class.html">String</a>
-          const <span class="name ">type</span>
-          
+    <section class="multi-line-signature">
+      
 
-        </section>
-        
+<span class="returntype">void</span>
+<span class="name ">sendMessage</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="sendMessage-param-message"><span class="type-annotation"><a href="../../nostr_dart/RelayMessage-class.html">RelayMessage</a></span> <span class="parameter-name">message</span></span></li>
+</ol>)
 
-        
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Sends the <a href="../../nostr_dart/RelayMessage-class.html">RelayMessage</a> to the Relay</p>
+</section>
+
+
+    
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static const String type = &#39;EOSE&#39;;</code></pre>
+  <pre class="language-dart"><code class="language-dart">void sendMessage(RelayMessage message) {
+  if (socket.connection is Connecting ||
+      socket.connection is Reconnecting ||
+      socket.connection is Disconnected) {
+    throw SocketException(&#39;Connection to $url is not established&#39;);
+  }
+  socket.send(message.toString());
+  logInfo(() =&gt; &#39;↑ $url $message&#39;);
+}</code></pre>
 </section>
 
 
@@ -89,12 +104,12 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart</a></li>
-    <li><a href="../../nostr_dart/EoseMessage-class.html">EoseMessage</a></li>
-    <li class="self-crumb">type constant</li>
+    <li><a href="../../nostr_dart/NostrRelay-class.html">NostrRelay</a></li>
+    <li class="self-crumb">sendMessage method</li>
 </ol>
 
 
-    <h5>EoseMessage class</h5>
+    <h5>NostrRelay class</h5>
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">

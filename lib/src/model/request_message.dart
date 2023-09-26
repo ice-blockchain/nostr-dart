@@ -1,8 +1,7 @@
 import 'dart:convert';
 
+import 'package:nostr_dart/nostr_dart.dart';
 import 'package:nostr_dart/src/crypto/utils.dart';
-import 'package:nostr_dart/src/model/relay_message.dart';
-import 'package:nostr_dart/src/model/request_filter.dart';
 
 /// Representation of Nostr REQ message.
 ///
@@ -33,9 +32,8 @@ class RequestMessage extends RelayMessage {
       : subscriptionId = subscriptionId ?? hexedRandomBytes(32),
         filters = filters ?? [];
 
-  RequestMessage addFilter(RequestFilter filter) {
+  void addFilter(RequestFilter filter) {
     filters.add(filter);
-    return this;
   }
 
   factory RequestMessage.fromJson(List<dynamic> json) {

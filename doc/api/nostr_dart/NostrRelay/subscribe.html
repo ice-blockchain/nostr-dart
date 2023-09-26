@@ -82,11 +82,16 @@ a stream of <a href="../../nostr_dart/RelayMessage-class.html">RelayMessage</a> 
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">NostrSubscription subscribe(RequestMessage requestMessage) {
-  final NostrSubscription subscription =
-      NostrSubscription(requestMessage, messages);
-  subscriptions[subscription.id] = subscription;
-  socket.add(requestMessage.toString());
-  return subscription;
+  try {
+    sendMessage(requestMessage);
+    final NostrSubscription subscription =
+        NostrSubscription(requestMessage, messages);
+    _subscriptions[subscription.id] = subscription;
+    return subscription;
+  } catch (error, stack) {
+    logWarning(&quot;Failed to subscribe to relay $url&quot;, error, stack);
+    rethrow;
+  }
 }</code></pre>
 </section>
 
@@ -120,7 +125,7 @@ a stream of <a href="../../nostr_dart/RelayMessage-class.html">RelayMessage</a> 
 <footer>
   <span class="no-break">
     nostr_dart
-      1.0.0
+      0.0.1
   </span>
 
   

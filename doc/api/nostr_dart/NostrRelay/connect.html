@@ -63,8 +63,9 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.1.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../nostr_dart/NostrRelay-class.html">NostrRelay</a></span>&gt;</span></span>
-<span class="name ">connect</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="connect-param-url"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">url</span></span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.1.3/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../nostr_dart/NostrRelay-class.html">NostrRelay</a></span>&gt;</span></span>
+<span class="name ">connect</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="connect-param-url"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.3/dart-core/String-class.html">String</a></span> <span class="parameter-name">url</span>, </span></li>
+<li><span class="parameter" id="connect-param-customSocket">[<span class="type-annotation"><a href="https://pub.dev/documentation/web_socket_client/0.1.0/web_socket_client/WebSocket-class.html">WebSocket</a>?</span> <span class="parameter-name">customSocket</span>]</span></li>
 </ol>)
 
       
@@ -72,22 +73,20 @@
     </section>
     
 <section class="desc markdown">
-  <p>Creates a new Relay with the provided url.</p>
-<p>Method creates a new WebSocket connection to the given url and
-creates a stream of <a href="../../nostr_dart/RelayMessage-class.html">RelayMessage</a>s using <code>_messagesTransformer</code></p>
+  <p>Creates a new Relay and waits for it to be connected.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Future&lt;NostrRelay&gt; connect(String url) async {
-  final WebSocket socket = await WebSocket.connect(url);
-  final Stream&lt;RelayMessage&gt; messages =
-      socket.asBroadcastStream().transform(_messagesTransformer);
-  final NostrRelay relay =
-      NostrRelay._(url: url, messages: messages, socket: socket);
-  _finalizer.attach(relay, socket, detach: relay);
+  <pre class="language-dart"><code class="language-dart">static Future&lt;NostrRelay&gt; connect(
+  String url, [
+  WebSocket? customSocket,
+]) async {
+  final WebSocket socket = customSocket ?? WebSocket(Uri.parse(url));
+  final relay = NostrRelay(url: url, socket: socket);
+  await socket.connection.firstWhere((state) =&gt; state is Connected);
   return relay;
 }</code></pre>
 </section>
@@ -122,7 +121,7 @@ creates a stream of <a href="../../nostr_dart/RelayMessage-class.html">RelayMess
 <footer>
   <span class="no-break">
     nostr_dart
-      1.0.0
+      0.0.1
   </span>
 
   

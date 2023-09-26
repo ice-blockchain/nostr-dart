@@ -1,6 +1,7 @@
 /// A Dart Library for making Nostr clients
 library nostr_dart;
 
+export 'package:web_socket_client/web_socket_client.dart';
 export 'src/crypto/key_store.dart';
 export 'src/exceptions/invalid_event.dart';
 export 'src/exceptions/subscription_not_found.dart';

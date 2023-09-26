@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:nostr_dart/src/crypto/key_store.dart';
+import 'package:nostr_dart/nostr_dart.dart';
 import 'package:nostr_dart/src/crypto/utils.dart';
-import 'package:nostr_dart/src/exceptions/invalid_event.dart';
-import 'package:nostr_dart/src/model/relay_message.dart';
 
 /// Representation of a Nostr EVENT Message
 ///
@@ -28,8 +26,8 @@ import 'package:nostr_dart/src/model/relay_message.dart';
 /// ```
 /// final NostrRelay relay = await NostrRelay.connect('wss://relay.damus.io');
 ///
-/// final RequestMessage requestMessage =
-///    RequestMessage().addFilter(const RequestFilter(kinds: [1], limit: 5));
+/// final RequestMessage requestMessage = RequestMessage()
+///     ..addFilter(const RequestFilter(kinds: [1], limit: 5));
 ///
 /// final NostrSubscription subscription = relay.subscribe(requestMessage);
 ///

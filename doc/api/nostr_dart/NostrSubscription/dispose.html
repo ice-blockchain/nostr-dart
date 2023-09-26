@@ -81,7 +81,10 @@ See <a href="../../nostr_dart/NostrRelay/unsubscribe.html">NostrRelay.unsubscrib
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">void dispose() {
-  _lastEventCreatedTimeSubscription.cancel();
+  for (final StreamSubscription subscription in _streamSubscriptions) {
+    subscription.cancel();
+  }
+  _messagesController.close();
 }</code></pre>
 </section>
 
@@ -115,7 +118,7 @@ See <a href="../../nostr_dart/NostrRelay/unsubscribe.html">NostrRelay.unsubscrib
 <footer>
   <span class="no-break">
     nostr_dart
-      1.0.0
+      0.0.1
   </span>
 
   

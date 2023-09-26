@@ -1,4 +1,4 @@
-import 'package:nostr_dart/src/model/relay_message.dart';
+import 'package:nostr_dart/nostr_dart.dart';
 
 /// Representation of a Nostr CLOSE Message
 ///
