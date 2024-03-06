@@ -26,7 +26,10 @@ void main() async {
         }
       });
       final EoseMessage eoseMessage = await completer.future;
+
+      relay.unsubscribe(subscription.id);
       listener.cancel();
+
       expect(eoseMessage.subscriptionId, equals(subscription.id));
       expect(events.length, equals(2));
     });
