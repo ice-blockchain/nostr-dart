@@ -1,58 +1,44 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:async';
-import 'dart:developer' as developer;
 
-import 'package:logging/logging.dart' as logging;
+import 'package:logger/web.dart';
 
-final logging.Logger _logger = logging.Logger.detached('Nostr');
+final log = Logger(
+  printer: PrettyPrinter(
+    methodCount: 0,
+    printTime: true,
+  ),
+);
 
-StreamSubscription<logging.LogRecord>? _subscription;
+void logInfo(dynamic message, [Object? error, StackTrace? stackTrace]) =>
+    log.i(message, error: error, stackTrace: stackTrace);
 
-final logInfo = _logger.info;
-
-final logWarning = _logger.warning;
+void logWarning(dynamic message, [Object? error, StackTrace? stackTrace]) =>
+    log.w(message, error: error, stackTrace: stackTrace);
 
 /// Method to set a desired logging output level.
 ///
 /// ```
 /// setNostrLogLevel(NostrLogLevel.ALL);
 /// ```
-Future<void> setNostrLogLevel(NostrLogLevel level) async {
-  logging.hierarchicalLoggingEnabled = true;
-  _logger.level = level;
-
-  await _subscription?.cancel();
-
-  _subscription = _logger.onRecord.listen((logging.LogRecord record) {
-    developer.log(
-      record.message,
-      time: record.time,
-      sequenceNumber: record.sequenceNumber,
-      level: record.level.value,
-      name: record.loggerName,
-      zone: record.zone,
-      error: record.error,
-      stackTrace: record.stackTrace,
-    );
-  });
+Future<void> setNostrLogLevel(Level level) async {
+  Logger.level = level;
 }
 
 /// Logging output level.
 ///
 /// The lower the integer value of a log level, the more verbose the output is.
-class NostrLogLevel extends logging.Level {
+class NostrLogLevel {
   /// Turn on all levels
-  static const NostrLogLevel ALL = NostrLogLevel('ALL', 0);
+  static const Level ALL = Level.all;
 
   /// Informational messages
-  static const NostrLogLevel INFO = NostrLogLevel('INFO', 800);
+  static const Level INFO = Level.info;
 
   /// Potential problems
-  static const NostrLogLevel WARNING = NostrLogLevel('WARNING', 900);
+  static const Level WARNING = Level.warning;
 
   /// Turn off the logging
-  static const NostrLogLevel OFF = NostrLogLevel('OFF', 2000);
-
-  const NostrLogLevel(super.name, super.value);
+  static const Level OFF = Level.off;
 }
