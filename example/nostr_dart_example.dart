@@ -17,10 +17,13 @@ void main() async {
 
   final NostrSubscription subscription = relay.subscribe(requestMessage);
 
+  final List<EventMessage> storedEvents =
+      await collectStoredEvents(subscription);
+
+  print(storedEvents);
+
   final StreamSubscription listener = subscription.messages.listen((event) {
-    if (event is EoseMessage) {
-      print('Stored events are received');
-    }
+    print('Real-time events');
   });
 
   await Future.delayed(const Duration(seconds: 2));
