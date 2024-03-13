@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:nostr_dart/nostr_dart.dart';
 import 'package:nostr_dart/src/crypto/utils.dart';
 
-/// Representation of a Nostr EVENT Message
+/// Representation of a Nostr `EVENT` Message
 ///
 /// Used to publish events to relays AND receive events requested by clients.
 ///

@@ -1,6 +1,6 @@
 import 'package:nostr_dart/nostr_dart.dart';
 
-/// Representation of a Nostr EOSE Message
+/// Representation of a Nostr `EOSE` Message
 ///
 /// Used to indicate the end of stored events and the beginning of events newly received in real-time.
 ///

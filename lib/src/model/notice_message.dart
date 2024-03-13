@@ -1,6 +1,6 @@
 import 'package:nostr_dart/nostr_dart.dart';
 
-/// Representation of a Nostr NOTICE Message
+/// Representation of a Nostr `NOTICE` Message
 ///
 /// Used to send human-readable error messages or other things from relays to clients.
 ///

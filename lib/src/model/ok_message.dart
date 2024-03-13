@@ -1,6 +1,6 @@
 import 'package:nostr_dart/nostr_dart.dart';
 
-/// Representation of a Nostr OK Message
+/// Representation of a Nostr `OK` Message
 ///
 /// Used to indicate acceptance or denial of an [EventMessage].
 ///

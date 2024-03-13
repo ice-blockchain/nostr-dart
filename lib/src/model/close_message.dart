@@ -1,6 +1,6 @@
 import 'package:nostr_dart/nostr_dart.dart';
 
-/// Representation of a Nostr CLOSE Message
+/// Representation of a Nostr `CLOSE` Message
 ///
 /// Used to stop previous subscriptions.
 ///

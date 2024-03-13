@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:nostr_dart/nostr_dart.dart';
 import 'package:nostr_dart/src/crypto/utils.dart';
 
-/// Representation of Nostr REQ message.
+/// Representation of Nostr `REQ` message.
 ///
 /// Used to request events and subscribe to new updates.
 ///

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-/// Representation of REQ message filter.
+/// Representation of `REQ` message filter.
 ///
 /// The class is used in conjunction with [RequestMessage] and determines
 /// what events will be sent in the corresponding subscription.
