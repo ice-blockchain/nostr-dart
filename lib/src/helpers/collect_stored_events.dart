@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:nostr_dart/nostr_dart.dart';
+import 'package:nostr_dart/src/model/closed_message.dart';
 
 /// Collects stored [EventMessage]s from the provided [NostrSubscription].
 ///
@@ -17,11 +18,12 @@ Future<List<EventMessage>> collectStoredEvents(
 
   final StreamSubscription messageListener = subscription.messages.listen(
     (event) {
-      //TODO::process CLOSED when implemented
-      if (event is EoseMessage) {
-        completer.complete(event);
-      } else if (event is EventMessage) {
+      if (event is EventMessage) {
         events.add(event);
+      } else if (event is EoseMessage) {
+        completer.complete(event);
+      } else if (event is ClosedMessage) {
+        completer.completeError(event.message);
       }
     },
   );
