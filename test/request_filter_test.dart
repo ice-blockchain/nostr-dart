@@ -23,8 +23,9 @@ void main() {
     final DateTime until =
         DateTime.fromMillisecondsSinceEpoch(1577822600 * 1000);
     const int limit = 10;
+    const String search = 'some search query';
     final String rawFilter =
-        '{"ids":${jsonEncode(ids)},"authors":${jsonEncode(authors)},"kinds":${jsonEncode(kinds)},"#e":${jsonEncode(eventIds)},"#p":${jsonEncode(publicKeys)},"since":${since.millisecondsSinceEpoch ~/ 1000},"until":${until.millisecondsSinceEpoch ~/ 1000},"limit":$limit}';
+        '{"ids":${jsonEncode(ids)},"authors":${jsonEncode(authors)},"kinds":${jsonEncode(kinds)},"#e":${jsonEncode(eventIds)},"#p":${jsonEncode(publicKeys)},"since":${since.millisecondsSinceEpoch ~/ 1000},"until":${until.millisecondsSinceEpoch ~/ 1000},"limit":$limit,"search":"$search"}';
     test('might be instantiated with unnamed constructor', () {
       final RequestFilter filter = RequestFilter(
         ids: ids,
@@ -35,6 +36,7 @@ void main() {
         since: since,
         until: until,
         limit: limit,
+        search: search,
       );
       expect(filter.runtimeType, equals(RequestFilter));
       expect(filter.ids, equals(ids));
@@ -45,6 +47,7 @@ void main() {
       expect(filter.since, equals(since));
       expect(filter.until, equals(until));
       expect(filter.limit, equals(limit));
+      expect(filter.search, equals(search));
     });
 
     test('might be instantiated with fromJson constructor', () {
@@ -59,6 +62,7 @@ void main() {
       expect(filter.since, equals(since));
       expect(filter.until, equals(until));
       expect(filter.limit, equals(limit));
+      expect(filter.search, equals(search));
     });
 
     test('might be stringified to a raw filter with toString method', () {

@@ -32,6 +32,9 @@ class RequestFilter extends Equatable {
   /// maximum number of events relays return in the initial query
   final int? limit;
 
+  /// search query
+  final String? search;
+
   const RequestFilter({
     this.ids,
     this.authors,
@@ -41,6 +44,7 @@ class RequestFilter extends Equatable {
     this.since,
     this.until,
     this.limit,
+    this.search,
   });
 
   factory RequestFilter.fromJson(Map<String, dynamic> json) {
@@ -67,6 +71,7 @@ class RequestFilter extends Equatable {
           ? DateTime.fromMillisecondsSinceEpoch((json['until'] as int) * 1000)
           : null,
       limit: json['limit'] != null ? json['limit'] as int : null,
+      search: json['search'] != null ? json['search'] as String : null,
     );
   }
 
@@ -81,6 +86,7 @@ class RequestFilter extends Equatable {
       since,
       until,
       limit,
+      search,
     ];
   }
 
@@ -93,6 +99,7 @@ class RequestFilter extends Equatable {
     DateTime? Function()? since,
     DateTime? Function()? until,
     int? Function()? limit,
+    String? Function()? search,
   }) {
     return RequestFilter(
       ids: ids != null ? ids() : this.ids,
@@ -103,6 +110,7 @@ class RequestFilter extends Equatable {
       since: since != null ? since() : this.since,
       until: until != null ? until() : this.until,
       limit: limit != null ? limit() : this.limit,
+      search: search != null ? search() : this.search,
     );
   }
 
@@ -116,6 +124,7 @@ class RequestFilter extends Equatable {
       if (since != null) 'since': since!.millisecondsSinceEpoch ~/ 1000,
       if (until != null) 'until': until!.millisecondsSinceEpoch ~/ 1000,
       if (limit != null) 'limit': limit,
+      if (search != null) 'search': search,
     };
   }
 
