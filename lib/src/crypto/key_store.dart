@@ -63,19 +63,4 @@ class KeyStore with EventSigner {
   String toString() {
     return "KeyStore privateKey:$privateKey publicKey:$publicKey";
   }
-
-  /// Verifies a schnorr signature using the BIP-340 scheme.
-  ///
-  /// It returns true if the signature is valid, false otherwise.
-  static bool verifySignature({
-    required String signature,
-    required String message,
-    required String publicKey,
-  }) {
-    return verifyBip340Signature(
-      signature: signature,
-      publicKey: publicKey,
-      message: message,
-    );
-  }
 }

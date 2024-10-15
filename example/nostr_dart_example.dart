@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:nostr_dart/nostr_dart.dart';
 
 void main() async {
-  setNostrLogLevel(NostrLogLevel.ALL);
+  NostrDart.configure(logLevel: NostrLogLevel.ALL);
 
   final NostrRelay relay = await NostrRelay.connect('wss://relay.damus.io');
 

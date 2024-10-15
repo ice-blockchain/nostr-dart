@@ -183,7 +183,7 @@ class EventMessage extends RelayMessage {
       return false;
     }
 
-    return KeyStore.verifySignature(
+    return getIt<SignatureVerifier>().verify(
       signature: sig,
       message: id,
       publicKey: pubkey,

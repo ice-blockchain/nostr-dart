@@ -18,7 +18,7 @@ This lib is in beta. Please use with caution and file and potential issues you s
 
 ```dart
 void main() async {
-  setNostrLogLevel(NostrLogLevel.ALL);
+  NostrDart.configure(NostrLogLevel.ALL);
 
   final NostrRelay relay = await NostrRelay.connect('wss://relay.damus.io');
 

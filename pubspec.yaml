@@ -4,12 +4,13 @@ version: 0.0.1
 repository: https://github.com/ice-blockchain/nostr-dart
 
 environment:
-  sdk: ^3.0.7
+  sdk: ">=3.4.1 <4.0.0"
 
 dependencies:
   bip340: ^0.2.0
   crypto: ^3.0.3
   equatable: ^2.0.5
+  get_it: ^7.2.0
   logger: ^2.1.0
   web_socket_client: ^0.1.0
 

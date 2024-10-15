@@ -5,6 +5,8 @@ import 'package:test/test.dart';
 
 void main() async {
   group('Relay', () {
+    NostrDart.configure(logLevel: NostrLogLevel.ALL);
+
     test('must support subscribing', () async {
       final NostrRelay relay = await NostrRelay.connect('wss://relay.damus.io');
 
