@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
@@ -29,40 +29,40 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">nostr_dart</a></li>
-    <li><a href="../nostr_dart/nostr_dart-library.html">nostr_dart</a></li>
+    <li><a href="../nostr_dart/nostr_dart-library.html">nostr_dart.dart</a></li>
     <li class="self-crumb">NoticeMessage class</li>
   </ol>
   <div class="self-name">NoticeMessage</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="nostr_dart&#47;nostr_dart-library-sidebar.html"
-      data-below-sidebar="nostr_dart&#47;NoticeMessage-class-sidebar.html">
-      <div>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="nostr_dart&#47;nostr_dart-library-sidebar.html"
+    data-below-sidebar="nostr_dart&#47;NoticeMessage-class-sidebar.html">
+    <div>
 <h1><span class="kind-class">NoticeMessage</span> class 
  
 </h1></div>
 
     
 <section class="desc markdown">
-  <p>Representation of a Nostr NOTICE Message</p>
+  <p>Representation of a Nostr <code>NOTICE</code> Message</p>
 <p>Used to send human-readable error messages or other things from relays to clients.</p>
 <p><a href="../nostr_dart/NoticeMessage-class.html">NoticeMessage</a> is sent from relay to client.
 JSON representation is <code>["NOTICE", &lt;message&gt;]</code></p>
@@ -82,7 +82,7 @@ JSON representation is <code>["NOTICE", &lt;message&gt;]</code></p>
   <dt>Inheritance</dt>
   <dd>
     <ul class="gt-separated dark clazz-relationships">
-      <li><a href="https://api.dart.dev/stable/3.1.3/dart-core/Object-class.html">Object</a></li>
+      <li><a href="https://api.dart.dev/stable/3.5.2/dart-core/Object-class.html">Object</a></li>
         <li><a href="https://pub.dev/documentation/equatable/2.0.5/equatable/Equatable-class.html">Equatable</a></li>
         <li><a href="../nostr_dart/RelayMessage-class.html">RelayMessage</a></li>
       <li>NoticeMessage</li>
@@ -106,13 +106,13 @@ JSON representation is <code>["NOTICE", &lt;message&gt;]</code></p>
 
     <dl class="constructor-summary-list">
         <dt id="NoticeMessage" class="callable">
-          <span class="name"><a href="../nostr_dart/NoticeMessage/NoticeMessage.html">NoticeMessage</a></span><span class="signature">(<span class="parameter" id="-param-message">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.3/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>}</span>)</span>
+          <span class="name"><a href="../nostr_dart/NoticeMessage/NoticeMessage.html">NoticeMessage</a></span><span class="signature">({<span class="parameter" id="-param-message"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span></span>})</span>
         </dt>
         <dd>
           
         </dd>
         <dt id="NoticeMessage.fromJson" class="callable">
-          <span class="name"><a href="../nostr_dart/NoticeMessage/NoticeMessage.fromJson.html">NoticeMessage.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.3/dart-core/List-class.html">List</a></span> <span class="parameter-name">json</span></span>)</span>
+          <span class="name"><a href="../nostr_dart/NoticeMessage/NoticeMessage.fromJson.html">NoticeMessage.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/List-class.html">List</a></span> <span class="parameter-name">json</span></span>)</span>
         </dt>
         <dd>
           
@@ -120,25 +120,28 @@ JSON representation is <code>["NOTICE", &lt;message&gt;]</code></p>
         </dd>
     </dl>
   </section>
-
-    <section class="summary offset-anchor" id="instance-properties">
-      <h2>Properties</h2>
-
-      <dl class="properties">
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
         <dt id="hashCode" class="property inherited">
   <span class="name"><a href="https://pub.dev/documentation/equatable/2.0.5/equatable/Equatable/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.1.3/dart-core/int-class.html">int</a></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.5.2/dart-core/int-class.html">int</a></span>
+  
 
 </dt>
 <dd class="inherited">
   The hash code for this object.
-  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="message" class="property">
   <span class="name"><a href="../nostr_dart/NoticeMessage/message.html">message</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.1.3/dart-core/String-class.html">String</a></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span>
+  
 
 </dt>
 <dd>
@@ -149,42 +152,44 @@ JSON representation is <code>["NOTICE", &lt;message&gt;]</code></p>
 
         <dt id="props" class="property">
   <span class="name"><a href="../nostr_dart/NoticeMessage/props.html">props</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.1.3/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.1.3/dart-core/Object-class.html">Object</a></span>&gt;</span></span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.5.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span>
+  
 
 </dt>
 <dd>
   The list of properties that will be used to determine whether
 two instances are equal.
-  <div class="features"><span class="feature">read-only</span><span class="feature">override</span></div>
+  <div class="features"><span class="feature">no setter</span><span class="feature">override</span></div>
 
 </dd>
 
         <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.1.3/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.1.3/dart-core/Type-class.html">Type</a></span> 
+  <span class="name"><a href="https://api.dart.dev/stable/3.5.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.5.2/dart-core/Type-class.html">Type</a></span>
+  
 
 </dt>
 <dd class="inherited">
   A representation of the runtime type of the object.
-  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="stringify" class="property inherited">
   <span class="name"><a href="https://pub.dev/documentation/equatable/2.0.5/equatable/Equatable/stringify.html">stringify</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.1.3/dart-core/bool-class.html">bool</a>?</span> 
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.5.2/dart-core/bool-class.html">bool</a>?</span>
+  
 
 </dt>
 <dd class="inherited">
   If set to <code>true</code>, the <a href="../nostr_dart/RelayMessage/toString.html">toString</a> method will be overridden to output
 this instance's <a href="../nostr_dart/NoticeMessage/props.html">props</a>.
-  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
 
 </dd>
 
-      </dl>
-    </section>
-
+    </dl>
+  </section>
     
   <section
       class="summary offset-anchor"
@@ -192,7 +197,7 @@ this instance's <a href="../nostr_dart/NoticeMessage/props.html">props</a>.
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/3.1.3/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.3/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+  <span class="name"><a href="https://api.dart.dev/stable/3.5.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
   </span>
   
@@ -206,7 +211,7 @@ this instance's <a href="../nostr_dart/NoticeMessage/props.html">props</a>.
 
         <dt id="toJson" class="callable">
   <span class="name"><a href="../nostr_dart/NoticeMessage/toJson.html">toJson</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.1.3/dart-core/List-class.html">List</a></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.5.2/dart-core/List-class.html">List</a></span>
   </span>
   
 
@@ -219,7 +224,7 @@ this instance's <a href="../nostr_dart/NoticeMessage/props.html">props</a>.
 
         <dt id="toString" class="callable inherited">
   <span class="name"><a href="../nostr_dart/RelayMessage/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.1.3/dart-core/String-class.html">String</a></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span>
   </span>
   
 
@@ -239,8 +244,8 @@ this instance's <a href="../nostr_dart/NoticeMessage/props.html">props</a>.
     <h2>Operators</h2>
     <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://pub.dev/documentation/equatable/2.0.5/equatable/Equatable/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.1.3/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.1.3/dart-core/bool-class.html">bool</a></span>
+  <span class="name"><a href="https://pub.dev/documentation/equatable/2.0.5/equatable/Equatable/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.5.2/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
@@ -263,7 +268,7 @@ this instance's <a href="../nostr_dart/NoticeMessage/props.html">props</a>.
     <dl class="properties">
         <dt id="type" class="constant">
     <span class="name "><a href="../nostr_dart/NoticeMessage/type-constant.html">type</a></span>
-  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.1.3/dart-core/String-class.html">String</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span>
   
 
 </dt>
@@ -271,9 +276,6 @@ this instance's <a href="../nostr_dart/NoticeMessage/props.html">props</a>.
   
   
 
-    <div>
-      <span class="signature"><code>&#39;NOTICE&#39;</code></span>
-    </div>
 </dd>
 
     </dl>
@@ -296,7 +298,7 @@ this instance's <a href="../nostr_dart/NoticeMessage/props.html">props</a>.
 </ol>
 
 
-    <!--<h5>nostr_dart library</h5>-->
+    <h5>nostr_dart library</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div>
 
