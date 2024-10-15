@@ -4,6 +4,7 @@ import 'package:nostr_dart/nostr_dart.dart';
 import 'package:test/test.dart';
 
 void main() {
+  NostrDart.configure(logLevel: NostrLogLevel.ALL);
   group('Event Message', () {
     const String privateKey =
         'ab67ae56758c77096a65e7f2ff41aaf8fcddd0817da971895885848fadf6eef9';
