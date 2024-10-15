@@ -39,7 +39,7 @@ void main() async {
     content: '{"name":"test"}',
   );
 
-  final OkMessage result = await relay.sendEvent(event);
+  await relay.sendEvent(event);
 
-  print("Event is accepted - ${result.accepted} $result");
+  print("Event is sent");
 }

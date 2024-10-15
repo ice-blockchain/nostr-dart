@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:nostr_dart/nostr_dart.dart';
 import 'package:nostr_dart/src/logging.dart';
+import 'package:nostr_dart/src/model/grouped_events_message.dart';
 
 /// A class to represent a Nostr relay.
 ///
@@ -49,17 +50,36 @@ class NostrRelay {
     _finalizer.detach(this);
   }
 
-  /// Sends the [EventMessage] to the Relay and waits for
-  /// an [OkMessage] with the same eventId.
-  Future<OkMessage> sendEvent(EventMessage event) async {
+  /// Convenient method to send one [EventMessage] to the Relay.
+  ///
+  /// For details check [sendEvents] method.
+  Future<void> sendEvent(EventMessage event) async {
+    return sendEvents([event]);
+  }
+
+  /// Sends the [EventMessage]s to the Relay.
+  ///
+  /// It checks for corresponding `OkMessage` responses to ensure
+  /// that all events were accepted. If any events are not accepted,
+  /// it throws a [SendEventException] with the message from the first
+  /// non-accepted event.
+  Future<void> sendEvents(List<EventMessage> events) async {
     try {
-      sendMessage(event);
-      return messages
+      final eventIds = events.map((event) => event.id).toList();
+      final eventsMessage = GroupedEventsMessage(events: events);
+      sendMessage(eventsMessage);
+      final okMessages = await messages
           .where((message) => message is OkMessage)
           .cast<OkMessage>()
-          .firstWhere((message) => message.eventId == event.id);
+          .where((message) => eventIds.contains(message.eventId))
+          .take(events.length)
+          .toList();
+      final notAccepted = okMessages.where((message) => !message.accepted);
+      if (notAccepted.isNotEmpty) {
+        throw SendEventException(notAccepted.first.message);
+      }
     } catch (error, stack) {
-      logWarning("$url Failed to send event $event", error, stack);
+      logWarning("$url Failed to send events $events", error, stack);
       rethrow;
     }
   }
