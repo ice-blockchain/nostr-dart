@@ -54,7 +54,7 @@ void main() {
     test('might be instantiated with fromData constructor', () {
       final KeyStore keyStore = KeyStore.fromPrivate(privateKey);
       final EventMessage message = EventMessage.fromData(
-        keyStore: keyStore,
+        signer: keyStore,
         kind: kind,
         content: content,
         createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt * 1000),

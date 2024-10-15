@@ -1,13 +1,22 @@
 import 'package:nostr_dart/src/crypto/utils.dart';
 
+mixin EventSigner {
+
+  String get publicKey;
+
+  String sign({required String message});
+
+}
+
 /// Encapsulation of crypto-related tasks.
 ///
 /// Signatures, public key, and encodings are done according to the
 /// [Schnorr signatures standard for the curve secp256k1](https://bips.xyz/340).
-class KeyStore {
+class KeyStore with EventSigner {
   /// 32-bytes lowercase hex-encoded public key.
   /// Used to encrypt messages and verify signatures.
   /// Can be shared with anyone.
+  @override
   final String publicKey;
 
   /// 32-bytes lowercase hex-encoded private key.
@@ -45,6 +54,7 @@ class KeyStore {
   /// Generates a schnorr signature using the BIP-340 scheme.
   ///
   /// It returns the signature as a string of 64 bytes hex-encoded.
+  @override
   String sign({required String message}) {
     return signBip340(message: message, privateKey: privateKey);
   }

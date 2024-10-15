@@ -15,7 +15,7 @@ import 'package:nostr_dart/src/crypto/utils.dart';
 /// ```
 /// final KeyStore keyStore = KeyStore.generate();
 /// final EventMessage event = EventMessage.fromData(
-///   keyStore: keyStore,
+///   signer: keyStore,
 ///   kind: 0,
 ///   content: '{"name":"test"}',
 /// );
@@ -101,7 +101,7 @@ class EventMessage extends RelayMessage {
   }
 
   factory EventMessage.fromData({
-    required KeyStore keyStore,
+    required EventSigner signer,
     required int kind,
     required String content,
     List<List<String>> tags = const [],
@@ -110,7 +110,7 @@ class EventMessage extends RelayMessage {
     createdAt ??= DateTime.now();
 
     final String eventId = calculateEventId(
-      publicKey: keyStore.publicKey,
+      publicKey: signer.publicKey,
       createdAt: createdAt,
       kind: kind,
       tags: tags,
@@ -119,12 +119,12 @@ class EventMessage extends RelayMessage {
 
     return EventMessage(
       id: eventId,
-      pubkey: keyStore.publicKey,
+      pubkey: signer.publicKey,
       createdAt: createdAt,
       kind: kind,
       tags: tags,
       content: content,
-      sig: keyStore.sign(message: eventId),
+      sig: signer.sign(message: eventId),
     );
   }
 
