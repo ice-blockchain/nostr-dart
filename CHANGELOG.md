@@ -1,3 +1,8 @@
+## 0.0.3
+
+* Make `SignatureVerifier.verify` method async
+* Transform socket messages async way (asyncMap)
+
 ## 0.0.2
 
 * Introduced the `NostrDart.configure` method, allowing users to pass a custom `SignatureVerifier`.

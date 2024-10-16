@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the toJson method from the NoticeMessage class, for the Dart programming language.">
-  <title>toJson method - NoticeMessage class - nostr_dart library - Dart API</title>
+  <meta name="description" content="API docs for the validate method from the EventMessage class, for the Dart programming language.">
+  <title>validate method - EventMessage class - nostr_dart library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart.dart</a></li>
-    <li><a href="../../nostr_dart/NoticeMessage-class.html">NoticeMessage</a></li>
-    <li class="self-crumb">toJson method</li>
+    <li><a href="../../nostr_dart/EventMessage-class.html">EventMessage</a></li>
+    <li class="self-crumb">validate method</li>
   </ol>
-  <div class="self-name">toJson</div>
+  <div class="self-name">validate</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,24 +54,19 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="nostr_dart&#47;NoticeMessage-class-sidebar.html"
+    data-above-sidebar="nostr_dart&#47;EventMessage-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">toJson</span> method 
+<h1><span class="kind-method">validate</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
       
-  <div>
-    <ol class="annotation-list">
-        <li>@<a href="https://api.dart.dev/stable/3.5.2/dart-core/override-constant.html">override</a></li>
-    </ol>
-  </div>
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.5.2/dart-core/List-class.html">List</a></span>
-<span class="name ">toJson</span>(<wbr>)
+<span class="returntype"><a href="https://api.dart.dev/stable/3.5.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+<span class="name ">validate</span>(<wbr>)
 
-      <div class="features"><span class="feature">override</span></div>
+      
 
     </section>
     
@@ -80,9 +75,24 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@override
-List&lt;dynamic&gt; toJson() {
-  return [NoticeMessage.type, message];
+  <pre class="language-dart"><code class="language-dart">Future&lt;bool&gt; validate() async {
+  final String calculatedId = calculateEventId(
+    publicKey: pubkey,
+    createdAt: createdAt,
+    kind: kind,
+    tags: tags,
+    content: content,
+  );
+
+  if (id != calculatedId) {
+    return false;
+  }
+
+  return await getIt&lt;SignatureVerifier&gt;().verify(
+    signature: sig,
+    message: id,
+    publicKey: pubkey,
+  );
 }</code></pre>
 </section>
 
@@ -100,12 +110,12 @@ List&lt;dynamic&gt; toJson() {
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart</a></li>
-    <li><a href="../../nostr_dart/NoticeMessage-class.html">NoticeMessage</a></li>
-    <li class="self-crumb">toJson method</li>
+    <li><a href="../../nostr_dart/EventMessage-class.html">EventMessage</a></li>
+    <li class="self-crumb">validate method</li>
 </ol>
 
 
-    <h5>NoticeMessage class</h5>
+    <h5>EventMessage class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
 
