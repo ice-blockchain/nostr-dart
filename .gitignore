@@ -1,7 +1,5 @@
 .dart_tool/
 
-pubspec.lock
-
 # IDEs
 .idea/
 *.iml
