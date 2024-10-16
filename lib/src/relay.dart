@@ -36,7 +36,7 @@ class NostrRelay {
   }) {
     final controller = StreamController<RelayMessage>.broadcast();
     controller
-        .addStream(socket.messages.transform(_messageTransformer))
+        .addStream(_transformMessages(socket.messages))
         .whenComplete(controller.close);
     messages = controller.stream;
     socket.connection.listen(_onConnectionStateChange);
@@ -144,6 +144,38 @@ class NostrRelay {
     }
   }
 
+  Stream<RelayMessage> _transformMessages(Stream<dynamic> messages) {
+    return messages
+        .asyncMap<RelayMessage?>((message) async {
+          try {
+            final jsonMessage = jsonDecode(message as String) as List<dynamic>;
+            switch (jsonMessage[0]) {
+              case EventMessage.type:
+                final eventMessage = EventMessage.fromJson(jsonMessage);
+                if (await eventMessage.validate()) {
+                  return eventMessage;
+                } else {
+                  return null;
+                }
+              case EoseMessage.type:
+                return EoseMessage.fromJson(jsonMessage);
+              case OkMessage.type:
+                return OkMessage.fromJson(jsonMessage);
+              case NoticeMessage.type:
+                return NoticeMessage.fromJson(jsonMessage);
+              default:
+                logWarning(() => 'Unknown message $message');
+                return null;
+            }
+          } catch (error, stack) {
+            logWarning(() => 'Stream transform error', error, stack);
+            return null;
+          }
+        })
+        .where((event) => event != null)
+        .cast<RelayMessage>();
+  }
+
   /// Creates a new Relay and waits for it to be connected.
   static Future<NostrRelay> connect(
     String url, [
@@ -155,27 +187,3 @@ class NostrRelay {
     return relay;
   }
 }
-
-StreamTransformer<dynamic, RelayMessage> _messageTransformer =
-    StreamTransformer.fromHandlers(
-  handleData: (message, sink) {
-    try {
-      final jsonMessage = jsonDecode(message as String) as List<dynamic>;
-      switch (jsonMessage[0]) {
-        case EventMessage.type:
-          sink.add(EventMessage.fromJson(jsonMessage));
-        case EoseMessage.type:
-          sink.add(EoseMessage.fromJson(jsonMessage));
-        case OkMessage.type:
-          sink.add(OkMessage.fromJson(jsonMessage));
-        case NoticeMessage.type:
-          sink.add(NoticeMessage.fromJson(jsonMessage));
-        default:
-          logWarning(() => 'Unknown message $message');
-      }
-    } catch (error, stack) {
-      logWarning(() => 'Stream transform error', error, stack);
-      sink.addError(error);
-    }
-  },
-);

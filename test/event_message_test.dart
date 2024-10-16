@@ -98,22 +98,27 @@ void main() {
       expect(message.toString(), equals(rawEvent));
     });
 
-    test('must throw an exception if id is incorrect', () {
-      expect(
-        () => EventMessage.fromJson(
-          jsonDecode(rawEvent.replaceFirst(eventId, '123')) as List<dynamic>,
-        ),
-        throwsException,
-      );
+    test('validate() should return true for a valid event', () async {
+      final eventValid =
+          await EventMessage.fromJson(jsonDecode(rawEvent) as List<dynamic>)
+              .validate();
+      expect(eventValid, isTrue);
     });
 
-    test('must throw an exception if signature is incorrect', () {
-      expect(
-        () => EventMessage.fromJson(
-          jsonDecode(rawEvent.replaceFirst(sig, '123')) as List<dynamic>,
-        ),
-        throwsException,
-      );
+    test('validate() should return false for event with incorrect id',
+        () async {
+      final eventValid = await EventMessage.fromJson(
+        jsonDecode(rawEvent.replaceFirst(eventId, '123')) as List<dynamic>,
+      ).validate();
+      expect(eventValid, isFalse);
+    });
+
+    test('validate() should return false for event with incorrect signature',
+        () async {
+      final eventValid = await EventMessage.fromJson(
+        jsonDecode(rawEvent.replaceFirst(eventId, '123')) as List<dynamic>,
+      ).validate();
+      expect(eventValid, isFalse);
     });
   });
 }

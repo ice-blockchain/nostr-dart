@@ -94,11 +94,7 @@ class EventMessage extends RelayMessage {
     required this.content,
     required this.sig,
     this.subscriptionId,
-  }) {
-    if (!_validate()) {
-      throw InvalidEventException(this);
-    }
-  }
+  });
 
   factory EventMessage.fromData({
     required EventSigner signer,
@@ -170,7 +166,7 @@ class EventMessage extends RelayMessage {
     }
   }
 
-  bool _validate() {
+  Future<bool> validate() async {
     final String calculatedId = calculateEventId(
       publicKey: pubkey,
       createdAt: createdAt,
@@ -183,7 +179,7 @@ class EventMessage extends RelayMessage {
       return false;
     }
 
-    return getIt<SignatureVerifier>().verify(
+    return await getIt<SignatureVerifier>().verify(
       signature: sig,
       message: id,
       publicKey: pubkey,
