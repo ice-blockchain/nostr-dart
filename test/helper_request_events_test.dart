@@ -11,7 +11,11 @@ void main() {
       final RequestMessage requestMessage = RequestMessage()
         ..addFilter(const RequestFilter(kinds: [1], limit: 2));
 
-      final events = await requestEvents(requestMessage, relay);
+      final events = [];
+      final stream = requestEvents(requestMessage, relay);
+      await for (final event in stream) {
+        events.add(event);
+      }
 
       expect(events.length, equals(2));
     });

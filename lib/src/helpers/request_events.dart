@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:nostr_dart/nostr_dart.dart';
+import 'package:nostr_dart/src/model/closed_message.dart';
 
 /// Requests stored [EventMessage]s from the provided [NostrRelay] using [RequestMessage].
 ///
@@ -10,15 +11,17 @@ import 'package:nostr_dart/nostr_dart.dart';
 /// Upon receiving the stored events, the subscription is closed. If you
 /// need to keep the subscription to receive real-time [EventMessage]s, consider
 /// using [collectStoredEvents] instead.
-Future<List<EventMessage>> requestEvents(
+Stream<EventMessage> requestEvents(
   RequestMessage requestMessage,
   NostrRelay relay,
-) async {
+) async* {
   final NostrSubscription subscription = relay.subscribe(requestMessage);
 
-  final events = await collectStoredEvents(subscription);
-
-  relay.unsubscribe(subscription.id);
-
-  return events;
+  await for (final message in subscription.messages) {
+    if (message is EventMessage) {
+      yield message;
+    } else if (message is EoseMessage || message is ClosedMessage) {
+      relay.unsubscribe(subscription.id);
+    }
+  }
 }
