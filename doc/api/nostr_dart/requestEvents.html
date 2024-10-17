@@ -63,7 +63,7 @@
     <section class="multi-line-signature">
         
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.5.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../nostr_dart/EventMessage-class.html">EventMessage</a></span>&gt;</span></span>&gt;</span></span>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.5.2/dart-async/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../nostr_dart/EventMessage-class.html">EventMessage</a></span>&gt;</span></span>
 <span class="name ">requestEvents</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="requestEvents-param-requestMessage"><span class="type-annotation"><a href="../nostr_dart/RequestMessage-class.html">RequestMessage</a></span> <span class="parameter-name">requestMessage</span>, </span></li>
 <li><span class="parameter" id="requestEvents-param-relay"><span class="type-annotation"><a href="../nostr_dart/NostrRelay-class.html">NostrRelay</a></span> <span class="parameter-name">relay</span></span></li>
 </ol>)
@@ -85,17 +85,19 @@ using <a href="../nostr_dart/collectStoredEvents.html">collectStoredEvents</a> i
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;EventMessage&gt;&gt; requestEvents(
+  <pre class="language-dart"><code class="language-dart">Stream&lt;EventMessage&gt; requestEvents(
   RequestMessage requestMessage,
   NostrRelay relay,
-) async {
+) async* {
   final NostrSubscription subscription = relay.subscribe(requestMessage);
 
-  final events = await collectStoredEvents(subscription);
-
-  relay.unsubscribe(subscription.id);
-
-  return events;
+  await for (final message in subscription.messages) {
+    if (message is EventMessage) {
+      yield message;
+    } else if (message is EoseMessage || message is ClosedMessage) {
+      relay.unsubscribe(subscription.id);
+    }
+  }
 }</code></pre>
 </section>
 
@@ -129,7 +131,7 @@ using <a href="../nostr_dart/collectStoredEvents.html">collectStoredEvents</a> i
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.3
+      0.0.5
   </span>
 
   

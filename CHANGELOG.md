@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Breaking: `requestEvents` now returns `Stream<EventMessage>` instead of `Future<List<EventMessage>>`
+
 ## 0.0.4
 
 * Update dependencies
