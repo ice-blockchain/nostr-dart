@@ -23,6 +23,9 @@ class RequestFilter extends Equatable {
   /// a list of event pubkeys
   final List<String>? p;
 
+  /// a list of kinds
+  final List<String>? k;
+
   /// an integer unix timestamp in seconds, events must be newer than this to pass
   final DateTime? since;
 
@@ -41,6 +44,7 @@ class RequestFilter extends Equatable {
     this.kinds,
     this.e,
     this.p,
+    this.k,
     this.since,
     this.until,
     this.limit,
@@ -64,6 +68,9 @@ class RequestFilter extends Equatable {
       p: json['#p'] != null
           ? List<String>.from(json['#p'] as List<dynamic>)
           : null,
+      k: json['#k'] != null
+          ? List<String>.from(json['#k'] as List<dynamic>)
+          : null,
       since: json['since'] != null
           ? DateTime.fromMillisecondsSinceEpoch((json['since'] as int) * 1000)
           : null,
@@ -83,6 +90,7 @@ class RequestFilter extends Equatable {
       kinds,
       e,
       p,
+      k,
       since,
       until,
       limit,
@@ -96,6 +104,7 @@ class RequestFilter extends Equatable {
     List<int>? Function()? kinds,
     List<String>? Function()? e,
     List<String>? Function()? p,
+    List<String>? Function()? k,
     DateTime? Function()? since,
     DateTime? Function()? until,
     int? Function()? limit,
@@ -107,6 +116,7 @@ class RequestFilter extends Equatable {
       kinds: kinds != null ? kinds() : this.kinds,
       e: e != null ? e() : this.e,
       p: p != null ? p() : this.p,
+      k: k != null ? k() : this.k,
       since: since != null ? since() : this.since,
       until: until != null ? until() : this.until,
       limit: limit != null ? limit() : this.limit,
@@ -121,6 +131,7 @@ class RequestFilter extends Equatable {
       if (kinds != null) 'kinds': kinds,
       if (e != null) '#e': e,
       if (p != null) '#p': p,
+      if (k != null) '#k': k,
       if (since != null) 'since': since!.millisecondsSinceEpoch ~/ 1000,
       if (until != null) 'until': until!.millisecondsSinceEpoch ~/ 1000,
       if (limit != null) 'limit': limit,
