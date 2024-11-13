@@ -1,3 +1,7 @@
+## 0.0.6
+
+* Add `k` field to `RequestFilter`
+
 ## 0.0.5
 
 * Breaking: `requestEvents` now returns `Stream<EventMessage>` instead of `Future<List<EventMessage>>`
