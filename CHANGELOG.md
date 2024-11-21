@@ -1,3 +1,7 @@
+## 0.0.7
+
+* Add `q` field to `RequestFilter`
+
 ## 0.0.6
 
 * Add `k` field to `RequestFilter`

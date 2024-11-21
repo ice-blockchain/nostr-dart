@@ -92,6 +92,9 @@
     k: json[&#39;#k&#39;] != null
         ? List&lt;String&gt;.from(json[&#39;#k&#39;] as List&lt;dynamic&gt;)
         : null,
+    q: json[&#39;#q&#39;] != null
+        ? List&lt;String&gt;.from(json[&#39;#q&#39;] as List&lt;dynamic&gt;)
+        : null,
     since: json[&#39;since&#39;] != null
         ? DateTime.fromMillisecondsSinceEpoch((json[&#39;since&#39;] as int) * 1000)
         : null,
@@ -135,7 +138,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.6
+      0.0.7
   </span>
 
   
