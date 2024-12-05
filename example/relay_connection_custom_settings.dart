@@ -17,7 +17,7 @@ void main() async {
 
   final KeyStore keyStore = KeyStore.generate();
 
-  final EventMessage event = EventMessage.fromData(
+  final EventMessage event = await EventMessage.fromData(
     signer: keyStore,
     kind: 0,
     content: '{"name":"test"}',

@@ -52,9 +52,9 @@ void main() {
       );
     });
 
-    test('might be instantiated with fromData constructor', () {
+    test('might be instantiated with fromData constructor', () async {
       final KeyStore keyStore = KeyStore.fromPrivate(privateKey);
-      final EventMessage message = EventMessage.fromData(
+      final EventMessage message = await EventMessage.fromData(
         signer: keyStore,
         kind: kind,
         content: content,

@@ -1,10 +1,12 @@
+import 'dart:async';
+
 import 'package:nostr_dart/src/crypto/utils.dart';
 
 mixin EventSigner {
 
   String get publicKey;
 
-  String sign({required String message});
+  FutureOr<String> sign({required String message});
 
 }
 

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:nostr_dart/nostr_dart.dart';
@@ -96,13 +97,13 @@ class EventMessage extends RelayMessage {
     this.subscriptionId,
   });
 
-  factory EventMessage.fromData({
+  static FutureOr<EventMessage> fromData({
     required EventSigner signer,
     required int kind,
     required String content,
     List<List<String>> tags = const [],
     DateTime? createdAt,
-  }) {
+  }) async {
     createdAt ??= DateTime.now();
 
     final String eventId = calculateEventId(
@@ -120,7 +121,7 @@ class EventMessage extends RelayMessage {
       kind: kind,
       tags: tags,
       content: content,
-      sig: signer.sign(message: eventId),
+      sig: await signer.sign(message: eventId),
     );
   }
 
