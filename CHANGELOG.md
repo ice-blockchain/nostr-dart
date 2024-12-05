@@ -1,3 +1,7 @@
+## 0.0.8
+
+* Breaking: `EventSigner.sign` now returns `FutureOr<String>` instead of `String`
+
 ## 0.0.7
 
 * Add `q` field to `RequestFilter`

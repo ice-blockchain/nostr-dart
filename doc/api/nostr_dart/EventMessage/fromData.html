@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the verify method from the SchnorrSignatureVerifier class, for the Dart programming language.">
-  <title>verify method - SchnorrSignatureVerifier class - nostr_dart library - Dart API</title>
+  <meta name="description" content="API docs for the fromData method from the EventMessage class, for the Dart programming language.">
+  <title>fromData method - EventMessage class - nostr_dart library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart.dart</a></li>
-    <li><a href="../../nostr_dart/SchnorrSignatureVerifier-class.html">SchnorrSignatureVerifier</a></li>
-    <li class="self-crumb">verify method</li>
+    <li><a href="../../nostr_dart/EventMessage-class.html">EventMessage</a></li>
+    <li class="self-crumb">fromData static method</li>
   </ol>
-  <div class="self-name">verify</div>
+  <div class="self-name">fromData</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,49 +54,57 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="nostr_dart&#47;SchnorrSignatureVerifier-class-sidebar.html"
+    data-above-sidebar="nostr_dart&#47;EventMessage-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">verify</span> method 
+<h1><span class="kind-method">fromData</span> static method 
 </h1></div>
 
     <section class="multi-line-signature">
       
-  <div>
-    <ol class="annotation-list">
-        <li>@<a href="https://api.dart.dev/stable/3.5.2/dart-core/override-constant.html">override</a></li>
-    </ol>
-  </div>
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.5.2/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
-<span class="name ">verify</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="verify-param-signature"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">signature</span>, </span></li>
-<li><span class="parameter" id="verify-param-message"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span></li>
-<li><span class="parameter" id="verify-param-publicKey"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">publicKey</span>, </span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.5.2/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../nostr_dart/EventMessage-class.html">EventMessage</a></span>&gt;</span></span>
+<span class="name ">fromData</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="fromData-param-signer"><span>required</span> <span class="type-annotation"><a href="../../nostr_dart/EventSigner-mixin.html">EventSigner</a></span> <span class="parameter-name">signer</span>, </span></li>
+<li><span class="parameter" id="fromData-param-kind"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">kind</span>, </span></li>
+<li><span class="parameter" id="fromData-param-content"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">content</span>, </span></li>
+<li><span class="parameter" id="fromData-param-tags"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">tags</span> = <span class="default-value">const []</span>, </span></li>
+<li><span class="parameter" id="fromData-param-createdAt"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">createdAt</span>, </span></li>
 </ol>})
 
-      <div class="features"><span class="feature">override</span></div>
+      
 
     </section>
     
-<section class="desc markdown">
-  <p>Verifies a schnorr signature using the BIP-340 scheme.</p>
-<p>It returns true if the signature is valid, false otherwise.</p>
-</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@override
-Future&lt;bool&gt; verify({
-  required String signature,
-  required String message,
-  required String publicKey,
+  <pre class="language-dart"><code class="language-dart">static FutureOr&lt;EventMessage&gt; fromData({
+  required EventSigner signer,
+  required int kind,
+  required String content,
+  List&lt;List&lt;String&gt;&gt; tags = const [],
+  DateTime? createdAt,
 }) async {
-  return verifyBip340Signature(
-    signature: signature,
-    publicKey: publicKey,
-    message: message,
+  createdAt ??= DateTime.now();
+
+  final String eventId = calculateEventId(
+    publicKey: signer.publicKey,
+    createdAt: createdAt,
+    kind: kind,
+    tags: tags,
+    content: content,
+  );
+
+  return EventMessage(
+    id: eventId,
+    pubkey: signer.publicKey,
+    createdAt: createdAt,
+    kind: kind,
+    tags: tags,
+    content: content,
+    sig: await signer.sign(message: eventId),
   );
 }</code></pre>
 </section>
@@ -115,12 +123,12 @@ Future&lt;bool&gt; verify({
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart</a></li>
-    <li><a href="../../nostr_dart/SchnorrSignatureVerifier-class.html">SchnorrSignatureVerifier</a></li>
-    <li class="self-crumb">verify method</li>
+    <li><a href="../../nostr_dart/EventMessage-class.html">EventMessage</a></li>
+    <li class="self-crumb">fromData static method</li>
 </ol>
 
 
-    <h5>SchnorrSignatureVerifier class</h5>
+    <h5>EventMessage class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
 
