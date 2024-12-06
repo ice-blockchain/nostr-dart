@@ -133,19 +133,26 @@ class EventMessage extends RelayMessage {
       throw ArgumentError('json', 'Must be of type "${EventMessage.type}"');
     }
 
+    return EventMessage.fromPayloadJson(
+      payload,
+      subscriptionId: json.length == 3 ? json[1] as String : null,
+    );
+  }
+
+  factory EventMessage.fromPayloadJson(Map<String, dynamic> payloadJson, {String? subscriptionId}) {
     return EventMessage(
-      id: payload['id'] as String,
-      pubkey: payload['pubkey'] as String,
+      id: payloadJson['id'] as String,
+      pubkey: payloadJson['pubkey'] as String,
       createdAt: DateTime.fromMillisecondsSinceEpoch(
-        (payload['created_at'] as int) * 1000,
+        (payloadJson['created_at'] as int) * 1000,
       ),
-      kind: payload['kind'] as int,
-      tags: (payload['tags'] as List<dynamic>)
+      kind: payloadJson['kind'] as int,
+      tags: (payloadJson['tags'] as List<dynamic>)
           .map((e) => (e as List<dynamic>).map((e) => e as String).toList())
           .toList(),
-      content: payload['content'] as String,
-      sig: payload['sig'] as String,
-      subscriptionId: json.length == 3 ? json[1] as String : null,
+      content: payloadJson['content'] as String,
+      sig: payloadJson['sig'] as String,
+      subscriptionId: subscriptionId,
     );
   }
 
