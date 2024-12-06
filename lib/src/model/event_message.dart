@@ -79,7 +79,7 @@ class EventMessage extends RelayMessage {
 
   /// 64-bytes lowercase hex of the signature of the sha256 hash of the serialized event data,
   /// which is the same as the [id] field.
-  final String sig;
+  final String? sig;
 
   /// An arbitrary, non-empty string of max length 64 chars, that should be used to represent a subscription.
   ///
@@ -176,12 +176,12 @@ class EventMessage extends RelayMessage {
       content: content,
     );
 
-    if (id != calculatedId) {
+    if (id != calculatedId || sig == null) {
       return false;
     }
 
     return await getIt<SignatureVerifier>().verify(
-      signature: sig,
+      signature: sig!,
       message: id,
       publicKey: pubkey,
     );
