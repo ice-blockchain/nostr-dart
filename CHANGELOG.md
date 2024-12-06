@@ -1,3 +1,8 @@
+## 0.0.9
+
+* Breaking: `EventMessage.sig` is not optional
+* Add `EventMessage.fromPayloadJson` factory constructor
+
 ## 0.0.8
 
 * Breaking: `EventSigner.sign` now returns `FutureOr<String>` instead of `String`

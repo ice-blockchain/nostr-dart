@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the unsubscribe method from the NostrRelay class, for the Dart programming language.">
-  <title>unsubscribe method - NostrRelay class - nostr_dart library - Dart API</title>
+  <meta name="description" content="API docs for the EventMessage.fromPayloadJson constructor from Class EventMessage from the nostr_dart library, for the Dart programming language.">
+  <title>EventMessage.fromPayloadJson constructor - EventMessage - nostr_dart library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart.dart</a></li>
-    <li><a href="../../nostr_dart/NostrRelay-class.html">NostrRelay</a></li>
-    <li class="self-crumb">unsubscribe method</li>
+    <li><a href="../../nostr_dart/EventMessage-class.html">EventMessage</a></li>
+    <li class="self-crumb">EventMessage.fromPayloadJson factory constructor</li>
   </ol>
-  <div class="self-name">unsubscribe</div>
+  <div class="self-name">EventMessage.fromPayloadJson</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -51,47 +51,43 @@
 </header>
 <main>
 
-<div
-    id="dartdoc-main-content"
-    class="main-content"
-    data-above-sidebar="nostr_dart&#47;NostrRelay-class-sidebar.html"
-    data-below-sidebar="">
-    <div>
-<h1><span class="kind-method">unsubscribe</span> method 
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="nostr_dart&#47;EventMessage-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">EventMessage.fromPayloadJson</span> constructor 
 </h1></div>
 
     <section class="multi-line-signature">
       
-
-<span class="returntype">void</span>
-<span class="name ">unsubscribe</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="unsubscribe-param-subscriptionId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">subscriptionId</span></span></li>
-</ol>)
-
-      
-
+      <span class="name ">EventMessage.fromPayloadJson</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="fromPayloadJson-param-payloadJson"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">payloadJson</span>, {</span></li>
+<li><span class="parameter" id="fromPayloadJson-param-subscriptionId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">subscriptionId</span>, </span></li>
+</ol>})
     </section>
+
     
-<section class="desc markdown">
-  <p>Closes the previously created <a href="../../nostr_dart/NostrSubscription-class.html">NostrSubscription</a> identified by the provided <code>subscriptionId</code>.</p>
-</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">void unsubscribe(String subscriptionId) {
-  try {
-    final NostrSubscription? subscription = _subscriptions[subscriptionId];
-    if (subscription == null) {
-      throw SubscriptionNotFoundException(subscriptionId);
-    }
-    sendMessage(CloseMessage(subscriptionId: subscriptionId));
-    subscription.dispose();
-    _subscriptions.remove(subscriptionId);
-  } catch (error, stack) {
-    logWarning(&quot;Failed to unsubscribe from relay $url&quot;, error, stack);
-    rethrow;
-  }
+  <pre class="language-dart"><code class="language-dart">factory EventMessage.fromPayloadJson(Map&lt;String, dynamic&gt; payloadJson, {String? subscriptionId}) {
+  return EventMessage(
+    id: payloadJson[&#39;id&#39;] as String,
+    pubkey: payloadJson[&#39;pubkey&#39;] as String,
+    createdAt: DateTime.fromMillisecondsSinceEpoch(
+      (payloadJson[&#39;created_at&#39;] as int) * 1000,
+    ),
+    kind: payloadJson[&#39;kind&#39;] as int,
+    tags: (payloadJson[&#39;tags&#39;] as List&lt;dynamic&gt;)
+        .map((e) =&gt; (e as List&lt;dynamic&gt;).map((e) =&gt; e as String).toList())
+        .toList(),
+    content: payloadJson[&#39;content&#39;] as String,
+    sig: payloadJson[&#39;sig&#39;] as String,
+    subscriptionId: subscriptionId,
+  );
 }</code></pre>
 </section>
 
@@ -109,17 +105,17 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart</a></li>
-    <li><a href="../../nostr_dart/NostrRelay-class.html">NostrRelay</a></li>
-    <li class="self-crumb">unsubscribe method</li>
+    <li><a href="../../nostr_dart/EventMessage-class.html">EventMessage</a></li>
+    <li class="self-crumb">EventMessage.fromPayloadJson factory constructor</li>
 </ol>
 
 
-    <h5>NostrRelay class</h5>
+    <h5>EventMessage class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-->
+  </div><!--/.sidebar-offcanvas-left-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-</div><!--/.sidebar-offcanvas-->
+  </div><!--/.sidebar-offcanvas-->
 
 </main>
 

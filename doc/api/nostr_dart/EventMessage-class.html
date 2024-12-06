@@ -125,13 +125,20 @@ listener.cancel();
 
     <dl class="constructor-summary-list">
         <dt id="EventMessage" class="callable">
-          <span class="name"><a href="../nostr_dart/EventMessage/EventMessage.html">EventMessage</a></span><span class="signature">({<span class="parameter" id="-param-id"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">id</span>, </span><span class="parameter" id="-param-pubkey"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">pubkey</span>, </span><span class="parameter" id="-param-createdAt"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">createdAt</span>, </span><span class="parameter" id="-param-kind"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">kind</span>, </span><span class="parameter" id="-param-tags"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">tags</span>, </span><span class="parameter" id="-param-content"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">content</span>, </span><span class="parameter" id="-param-sig"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">sig</span>, </span><span class="parameter" id="-param-subscriptionId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">subscriptionId</span></span>})</span>
+          <span class="name"><a href="../nostr_dart/EventMessage/EventMessage.html">EventMessage</a></span><span class="signature">({<span class="parameter" id="-param-id"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">id</span>, </span><span class="parameter" id="-param-pubkey"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">pubkey</span>, </span><span class="parameter" id="-param-createdAt"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">createdAt</span>, </span><span class="parameter" id="-param-kind"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">kind</span>, </span><span class="parameter" id="-param-tags"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">tags</span>, </span><span class="parameter" id="-param-content"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">content</span>, </span><span class="parameter" id="-param-sig"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">sig</span>, </span><span class="parameter" id="-param-subscriptionId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">subscriptionId</span></span>})</span>
         </dt>
         <dd>
           
         </dd>
         <dt id="EventMessage.fromJson" class="callable">
           <span class="name"><a href="../nostr_dart/EventMessage/EventMessage.fromJson.html">EventMessage.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/List-class.html">List</a></span> <span class="parameter-name">json</span></span>)</span>
+        </dt>
+        <dd>
+          
+            <div class="constructor-modifier features">factory</div>
+        </dd>
+        <dt id="EventMessage.fromPayloadJson" class="callable">
+          <span class="name"><a href="../nostr_dart/EventMessage/EventMessage.fromPayloadJson.html">EventMessage.fromPayloadJson</a></span><span class="signature">(<span class="parameter" id="fromPayloadJson-param-payloadJson"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">payloadJson</span>, {</span><span class="parameter" id="fromPayloadJson-param-subscriptionId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">subscriptionId</span></span>})</span>
         </dt>
         <dd>
           
@@ -244,7 +251,7 @@ two instances are equal.
 
         <dt id="sig" class="property">
   <span class="name"><a href="../nostr_dart/EventMessage/sig.html">sig</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.5.2/dart-core/String-class.html">String</a>?</span>
   
 
 </dt>
@@ -458,7 +465,7 @@ this instance's <a href="../nostr_dart/EventMessage/props.html">props</a>.
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.8
+      0.0.9
   </span>
 
   

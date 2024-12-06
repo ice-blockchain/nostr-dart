@@ -80,18 +80,8 @@
     throw ArgumentError(&#39;json&#39;, &#39;Must be of type &quot;${EventMessage.type}&quot;&#39;);
   }
 
-  return EventMessage(
-    id: payload[&#39;id&#39;] as String,
-    pubkey: payload[&#39;pubkey&#39;] as String,
-    createdAt: DateTime.fromMillisecondsSinceEpoch(
-      (payload[&#39;created_at&#39;] as int) * 1000,
-    ),
-    kind: payload[&#39;kind&#39;] as int,
-    tags: (payload[&#39;tags&#39;] as List&lt;dynamic&gt;)
-        .map((e) =&gt; (e as List&lt;dynamic&gt;).map((e) =&gt; e as String).toList())
-        .toList(),
-    content: payload[&#39;content&#39;] as String,
-    sig: payload[&#39;sig&#39;] as String,
+  return EventMessage.fromPayloadJson(
+    payload,
     subscriptionId: json.length == 3 ? json[1] as String : null,
   );
 }</code></pre>
@@ -128,7 +118,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.8
+      0.0.9
   </span>
 
   
