@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:nostr_dart/src/crypto/utils.dart';
 
 mixin EventSigner {
-
   String get publicKey;
 
-  FutureOr<String> sign({required String message});
+  String get privateKey;
 
+  FutureOr<String> sign({required String message});
 }
 
 /// Encapsulation of crypto-related tasks.
@@ -24,6 +24,7 @@ class KeyStore with EventSigner {
   /// 32-bytes lowercase hex-encoded private key.
   /// Used to decrypt messages and generate message signatures.
   /// Must be kept secret.
+  @override
   final String privateKey;
 
   /// Produces the [KeyStore] from a private key.
