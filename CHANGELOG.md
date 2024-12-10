@@ -1,3 +1,7 @@
+## 0.0.10
+
+* Add `EventSigner.privateKey` getter
+
 ## 0.0.9
 
 * Breaking: `EventMessage.sig` is not optional
