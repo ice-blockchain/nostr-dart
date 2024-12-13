@@ -30,6 +30,10 @@ class NostrRelay {
   /// Active Relay's [NostrSubscription]s
   final Map<String, NostrSubscription> _subscriptions = {};
 
+  /// Active Relay's [NostrSubscription]s count stream controller
+  final StreamController<int> _subscriptionsCountController =
+      StreamController<int>.broadcast();
+
   NostrRelay({
     required this.url,
     required this.socket,
@@ -43,6 +47,10 @@ class NostrRelay {
     messages.listen(_onIncomingMessage);
     _finalizer.attach(this, socket, detach: this);
   }
+
+  /// Active Relay's [NostrSubscription]s count stream
+  Stream<int> get subscriptionsCountStream =>
+      _subscriptionsCountController.stream;
 
   /// Closes the corresponding socket connection.
   void close() {
@@ -104,6 +112,7 @@ class NostrRelay {
       final NostrSubscription subscription =
           NostrSubscription(requestMessage, messages);
       _subscriptions[subscription.id] = subscription;
+      _subscriptionsCountController.add(_subscriptions.keys.length);
       return subscription;
     } catch (error, stack) {
       logWarning("Failed to subscribe to relay $url", error, stack);
@@ -121,6 +130,7 @@ class NostrRelay {
       sendMessage(CloseMessage(subscriptionId: subscriptionId));
       subscription.dispose();
       _subscriptions.remove(subscriptionId);
+      _subscriptionsCountController.add(_subscriptions.keys.length);
     } catch (error, stack) {
       logWarning("Failed to unsubscribe from relay $url", error, stack);
       rethrow;
