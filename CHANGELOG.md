@@ -1,5 +1,9 @@
 ## 0.0.11
 
+* close `relay.subscriptionsCountStreamController` on relay close
+
+## 0.0.11
+
 * Add `relay.subscriptionsCountStream` getter
 
 ## 0.0.10

@@ -13,8 +13,7 @@ import 'package:nostr_dart/src/model/grouped_events_message.dart';
 /// store those messages and broadcast those messages to all other connected clients.
 class NostrRelay {
   /// Closes the connection if the user forgets to
-  static final Finalizer<WebSocket> _finalizer =
-      Finalizer((socket) => socket.close());
+  static final Finalizer<WebSocket> _finalizer = Finalizer((socket) => socket.close());
 
   /// URL of the Relay's WebSocket.
   ///
@@ -31,17 +30,14 @@ class NostrRelay {
   final Map<String, NostrSubscription> _subscriptions = {};
 
   /// Active Relay's [NostrSubscription]s count stream controller
-  final StreamController<int> _subscriptionsCountController =
-      StreamController<int>.broadcast();
+  final StreamController<int> _subscriptionsCountController = StreamController<int>.broadcast();
 
   NostrRelay({
     required this.url,
     required this.socket,
   }) {
     final controller = StreamController<RelayMessage>.broadcast();
-    controller
-        .addStream(_transformMessages(socket.messages))
-        .whenComplete(controller.close);
+    controller.addStream(_transformMessages(socket.messages)).whenComplete(controller.close);
     messages = controller.stream;
     socket.connection.listen(_onConnectionStateChange);
     messages.listen(_onIncomingMessage);
@@ -49,12 +45,12 @@ class NostrRelay {
   }
 
   /// Active Relay's [NostrSubscription]s count stream
-  Stream<int> get subscriptionsCountStream =>
-      _subscriptionsCountController.stream;
+  Stream<int> get subscriptionsCountStream => _subscriptionsCountController.stream;
 
   /// Closes the corresponding socket connection.
   void close() {
     socket.close();
+    _subscriptionsCountController.close();
     _finalizer.detach(this);
   }
 
@@ -109,8 +105,7 @@ class NostrRelay {
   NostrSubscription subscribe(RequestMessage requestMessage) {
     try {
       sendMessage(requestMessage);
-      final NostrSubscription subscription =
-          NostrSubscription(requestMessage, messages);
+      final NostrSubscription subscription = NostrSubscription(requestMessage, messages);
       _subscriptions[subscription.id] = subscription;
       _subscriptionsCountController.add(_subscriptions.keys.length);
       return subscription;
