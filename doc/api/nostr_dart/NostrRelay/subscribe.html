@@ -84,8 +84,7 @@ a stream of <a href="../../nostr_dart/RelayMessage-class.html">RelayMessage</a> 
   <pre class="language-dart"><code class="language-dart">NostrSubscription subscribe(RequestMessage requestMessage) {
   try {
     sendMessage(requestMessage);
-    final NostrSubscription subscription =
-        NostrSubscription(requestMessage, messages);
+    final NostrSubscription subscription = NostrSubscription(requestMessage, messages);
     _subscriptions[subscription.id] = subscription;
     _subscriptionsCountController.add(_subscriptions.keys.length);
     return subscription;
@@ -127,7 +126,7 @@ a stream of <a href="../../nostr_dart/RelayMessage-class.html">RelayMessage</a> 
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.11
+      0.0.12
   </span>
 
   

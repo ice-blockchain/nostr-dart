@@ -78,9 +78,7 @@
   required this.socket,
 }) {
   final controller = StreamController&lt;RelayMessage&gt;.broadcast();
-  controller
-      .addStream(_transformMessages(socket.messages))
-      .whenComplete(controller.close);
+  controller.addStream(_transformMessages(socket.messages)).whenComplete(controller.close);
   messages = controller.stream;
   socket.connection.listen(_onConnectionStateChange);
   messages.listen(_onIncomingMessage);
@@ -119,7 +117,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.11
+      0.0.12
   </span>
 
   

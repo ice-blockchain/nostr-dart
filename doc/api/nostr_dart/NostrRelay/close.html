@@ -80,6 +80,7 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">void close() {
   socket.close();
+  _subscriptionsCountController.close();
   _finalizer.detach(this);
 }</code></pre>
 </section>
@@ -115,7 +116,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.11
+      0.0.12
   </span>
 
   
