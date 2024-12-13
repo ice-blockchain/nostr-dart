@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the since property from the RequestFilter class, for the Dart programming language.">
-  <title>since property - RequestFilter class - nostr_dart library - Dart API</title>
+  <meta name="description" content="API docs for the subscriptionsCountStream property from the NostrRelay class, for the Dart programming language.">
+  <title>subscriptionsCountStream property - NostrRelay class - nostr_dart library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart.dart</a></li>
-    <li><a href="../../nostr_dart/RequestFilter-class.html">RequestFilter</a></li>
-    <li class="self-crumb">since property</li>
+    <li><a href="../../nostr_dart/NostrRelay-class.html">NostrRelay</a></li>
+    <li class="self-crumb">subscriptionsCountStream property</li>
   </ol>
-  <div class="self-name">since</div>
+  <div class="self-name">subscriptionsCountStream</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,29 +54,37 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="nostr_dart&#47;RequestFilter-class-sidebar.html"
+    data-above-sidebar="nostr_dart&#47;NostrRelay-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-property">since</span> property 
+<h1><span class="kind-property">subscriptionsCountStream</span> property 
 </h1></div>
 
-      <section class="multi-line-signature">
-        
-        <a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a>?
-        <span class="name ">since</span>
-        <div class="features"><span class="feature">final</span></div>
 
-      </section>
+        
+  <section id="getter">
+
+    <section class="multi-line-signature">
       
+      <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>&gt;</span></span>
+      <span class="name ">subscriptionsCountStream</span>
+      
+
+    </section>
+
+    
 <section class="desc markdown">
-  <p>an integer unix timestamp in seconds, events must be newer than this to pass</p>
+  <p>Active Relay's <a href="../../nostr_dart/NostrSubscription-class.html">NostrSubscription</a>s count stream</p>
 </section>
 
-      
+    
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">final DateTime? since;</code></pre>
+  <pre class="language-dart"><code class="language-dart">Stream&lt;int&gt; get subscriptionsCountStream =&gt;
+    _subscriptionsCountController.stream;</code></pre>
 </section>
+
+  </section>
 
 
 </div> <!-- /.main-content -->
@@ -92,12 +100,12 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart</a></li>
-    <li><a href="../../nostr_dart/RequestFilter-class.html">RequestFilter</a></li>
-    <li class="self-crumb">since property</li>
+    <li><a href="../../nostr_dart/NostrRelay-class.html">NostrRelay</a></li>
+    <li class="self-crumb">subscriptionsCountStream property</li>
 </ol>
 
 
-  <h5>RequestFilter class</h5>
+  <h5>NostrRelay class</h5>
   <div id="dartdoc-sidebar-left-content"></div>
 </div><!--/.sidebar-offcanvas-->
 

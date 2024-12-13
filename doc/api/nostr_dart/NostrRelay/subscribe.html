@@ -87,6 +87,7 @@ a stream of <a href="../../nostr_dart/RelayMessage-class.html">RelayMessage</a> 
     final NostrSubscription subscription =
         NostrSubscription(requestMessage, messages);
     _subscriptions[subscription.id] = subscription;
+    _subscriptionsCountController.add(_subscriptions.keys.length);
     return subscription;
   } catch (error, stack) {
     logWarning(&quot;Failed to subscribe to relay $url&quot;, error, stack);
@@ -126,7 +127,7 @@ a stream of <a href="../../nostr_dart/RelayMessage-class.html">RelayMessage</a> 
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.10
+      0.0.11
   </span>
 
   

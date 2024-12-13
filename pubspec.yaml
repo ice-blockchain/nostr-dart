@@ -1,6 +1,6 @@
 name: nostr_dart
 description: A Dart Library for making Nostr clients
-version: 0.0.10
+version: 0.0.11
 repository: https://github.com/ice-blockchain/nostr-dart
 
 environment:

@@ -1,3 +1,7 @@
+## 0.0.11
+
+* Add `relay.subscriptionsCountStream` getter
+
 ## 0.0.10
 
 * Add `EventSigner.privateKey` getter

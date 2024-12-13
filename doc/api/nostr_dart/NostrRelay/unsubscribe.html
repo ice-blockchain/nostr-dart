@@ -88,6 +88,7 @@
     sendMessage(CloseMessage(subscriptionId: subscriptionId));
     subscription.dispose();
     _subscriptions.remove(subscriptionId);
+    _subscriptionsCountController.add(_subscriptions.keys.length);
   } catch (error, stack) {
     logWarning(&quot;Failed to unsubscribe from relay $url&quot;, error, stack);
     rethrow;
@@ -126,7 +127,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.10
+      0.0.11
   </span>
 
   
