@@ -63,7 +63,7 @@
     <section class="multi-line-signature">
         
 
-<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../nostr_dart/EventMessage-class.html">EventMessage</a></span>&gt;</span></span>
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../nostr_dart/RelayMessage-class.html">RelayMessage</a></span>&gt;</span></span>
 <span class="name ">requestEvents</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="requestEvents-param-requestMessage"><span class="type-annotation"><a href="../nostr_dart/RequestMessage-class.html">RequestMessage</a></span> <span class="parameter-name">requestMessage</span>, </span></li>
 <li><span class="parameter" id="requestEvents-param-relay"><span class="type-annotation"><a href="../nostr_dart/NostrRelay-class.html">NostrRelay</a></span> <span class="parameter-name">relay</span></span></li>
 </ol>)
@@ -73,11 +73,11 @@
     </section>
     
 <section class="desc markdown">
-  <p>Requests stored <a href="../nostr_dart/EventMessage-class.html">EventMessage</a>s from the provided <a href="../nostr_dart/NostrRelay-class.html">NostrRelay</a> using <a href="../nostr_dart/RequestMessage-class.html">RequestMessage</a>.</p>
+  <p>Requests stored <a href="../nostr_dart/RelayMessage-class.html">RelayMessage</a>s from the provided <a href="../nostr_dart/NostrRelay-class.html">NostrRelay</a> using <a href="../nostr_dart/RequestMessage-class.html">RequestMessage</a>.</p>
 <p>Stored events are those controlled by the <code>limit</code> property of a filter
 and are returned before the <a href="../nostr_dart/EoseMessage-class.html">EoseMessage</a>.</p>
 <p>Upon receiving the stored events, the subscription is closed. If you
-need to keep the subscription to receive real-time <a href="../nostr_dart/EventMessage-class.html">EventMessage</a>s, consider
+need to keep the subscription to receive real-time <a href="../nostr_dart/RelayMessage-class.html">RelayMessage</a>s, consider
 using <a href="../nostr_dart/collectStoredEvents.html">collectStoredEvents</a> instead.</p>
 </section>
 
@@ -85,17 +85,16 @@ using <a href="../nostr_dart/collectStoredEvents.html">collectStoredEvents</a> i
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Stream&lt;EventMessage&gt; requestEvents(
+  <pre class="language-dart"><code class="language-dart">Stream&lt;RelayMessage&gt; requestEvents(
   RequestMessage requestMessage,
   NostrRelay relay,
 ) async* {
   final NostrSubscription subscription = relay.subscribe(requestMessage);
 
   await for (final message in subscription.messages) {
-    if (message is EventMessage) {
-      yield message;
-    } else if (message is EoseMessage || message is ClosedMessage) {
-      relay.unsubscribe(subscription.id);
+    yield message;
+    if (message is EoseMessage || message is ClosedMessage || message is NoticeMessage) {
+      relay.unsubscribe(subscription.id, sendCloseMessage: message is EoseMessage);
     }
   }
 }</code></pre>
@@ -131,7 +130,7 @@ using <a href="../nostr_dart/collectStoredEvents.html">collectStoredEvents</a> i
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.12
+      0.0.13
   </span>
 
   

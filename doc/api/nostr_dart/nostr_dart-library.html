@@ -96,6 +96,14 @@ This backoff strategy will double the backoff duration on each attempt
 until the maximum step is reached.
 </dd>
 
+          <dt id="ClosedMessage">
+  <span class="name "><a href="../nostr_dart/ClosedMessage-class.html">ClosedMessage</a></span> 
+
+</dt>
+<dd>
+  Representation of a Nostr <code>CLOSED</code> Message
+</dd>
+
           <dt id="CloseMessage">
   <span class="name "><a href="../nostr_dart/CloseMessage-class.html">CloseMessage</a></span> 
 
@@ -370,13 +378,13 @@ and is in the process of being re-established.
 
           <dt id="requestEvents" class="callable">
   <span class="name"><a href="../nostr_dart/requestEvents.html">requestEvents</a></span><span class="signature">(<wbr><span class="parameter" id="requestEvents-param-requestMessage"><span class="type-annotation"><a href="../nostr_dart/RequestMessage-class.html">RequestMessage</a></span> <span class="parameter-name">requestMessage</span>, </span><span class="parameter" id="requestEvents-param-relay"><span class="type-annotation"><a href="../nostr_dart/NostrRelay-class.html">NostrRelay</a></span> <span class="parameter-name">relay</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../nostr_dart/EventMessage-class.html">EventMessage</a></span>&gt;</span></span>
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../nostr_dart/RelayMessage-class.html">RelayMessage</a></span>&gt;</span></span>
   </span>
   
 
 </dt>
 <dd>
-  Requests stored <a href="../nostr_dart/EventMessage-class.html">EventMessage</a>s from the provided <a href="../nostr_dart/NostrRelay-class.html">NostrRelay</a> using <a href="../nostr_dart/RequestMessage-class.html">RequestMessage</a>.
+  Requests stored <a href="../nostr_dart/RelayMessage-class.html">RelayMessage</a>s from the provided <a href="../nostr_dart/NostrRelay-class.html">NostrRelay</a> using <a href="../nostr_dart/RequestMessage-class.html">RequestMessage</a>.
   
 
 </dd>
@@ -449,7 +457,7 @@ and is in the process of being re-established.
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.12
+      0.0.13
   </span>
 
   

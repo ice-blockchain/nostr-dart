@@ -1,3 +1,9 @@
+## 0.0.13
+
+* make `requestEvents` return `Stream<RelayMessage>` instead of `Stream<EventMessage>`
+* expose `ClosedMessage`
+* stop sending `CloseMessage` as a response to `ClosedMessage`
+
 ## 0.0.12
 
 * close `relay.subscriptionsCountStreamController` on relay close
