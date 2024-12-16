@@ -17,7 +17,7 @@ void main() {
         events.add(event);
       }
 
-      expect(events.length, equals(2));
+      expect(events.length, equals(3));
     });
   });
 }

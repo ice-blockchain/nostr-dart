@@ -116,13 +116,13 @@ class NostrRelay {
   }
 
   /// Closes the previously created [NostrSubscription] identified by the provided [subscriptionId].
-  void unsubscribe(String subscriptionId) {
+  void unsubscribe(String subscriptionId, {bool sendCloseMessage = true}) {
     try {
       final NostrSubscription? subscription = _subscriptions[subscriptionId];
       if (subscription == null) {
         throw SubscriptionNotFoundException(subscriptionId);
       }
-      sendMessage(CloseMessage(subscriptionId: subscriptionId));
+      if (sendCloseMessage) sendMessage(CloseMessage(subscriptionId: subscriptionId));
       subscription.dispose();
       _subscriptions.remove(subscriptionId);
       _subscriptionsCountController.add(_subscriptions.keys.length);
