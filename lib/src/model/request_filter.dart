@@ -29,6 +29,9 @@ class RequestFilter extends Equatable {
   /// a list of quoted events
   final List<String>? q;
 
+  /// a list of sets kinds
+  final List<String>? d;
+
   /// an integer unix timestamp in seconds, events must be newer than this to pass
   final DateTime? since;
 
@@ -49,6 +52,7 @@ class RequestFilter extends Equatable {
     this.p,
     this.k,
     this.q,
+    this.d,
     this.since,
     this.until,
     this.limit,
@@ -57,27 +61,14 @@ class RequestFilter extends Equatable {
 
   factory RequestFilter.fromJson(Map<String, dynamic> json) {
     return RequestFilter(
-      ids: json['ids'] != null
-          ? List<String>.from(json['ids'] as List<dynamic>)
-          : null,
-      authors: json['authors'] != null
-          ? List<String>.from(json['authors'] as List<dynamic>)
-          : null,
-      kinds: json['kinds'] != null
-          ? List<int>.from(json['kinds'] as List<dynamic>)
-          : null,
-      e: json['#e'] != null
-          ? List<String>.from(json['#e'] as List<dynamic>)
-          : null,
-      p: json['#p'] != null
-          ? List<String>.from(json['#p'] as List<dynamic>)
-          : null,
-      k: json['#k'] != null
-          ? List<String>.from(json['#k'] as List<dynamic>)
-          : null,
-      q: json['#q'] != null
-          ? List<String>.from(json['#q'] as List<dynamic>)
-          : null,
+      ids: json['ids'] != null ? List<String>.from(json['ids'] as List<dynamic>) : null,
+      authors: json['authors'] != null ? List<String>.from(json['authors'] as List<dynamic>) : null,
+      kinds: json['kinds'] != null ? List<int>.from(json['kinds'] as List<dynamic>) : null,
+      e: json['#e'] != null ? List<String>.from(json['#e'] as List<dynamic>) : null,
+      p: json['#p'] != null ? List<String>.from(json['#p'] as List<dynamic>) : null,
+      k: json['#k'] != null ? List<String>.from(json['#k'] as List<dynamic>) : null,
+      q: json['#q'] != null ? List<String>.from(json['#q'] as List<dynamic>) : null,
+      d: json['#d'] != null ? List<String>.from(json['#d'] as List<dynamic>) : null,
       since: json['since'] != null
           ? DateTime.fromMillisecondsSinceEpoch((json['since'] as int) * 1000)
           : null,
@@ -99,6 +90,7 @@ class RequestFilter extends Equatable {
       p,
       k,
       q,
+      d,
       since,
       until,
       limit,
@@ -114,6 +106,7 @@ class RequestFilter extends Equatable {
     List<String>? Function()? p,
     List<String>? Function()? k,
     List<String>? Function()? q,
+    List<String>? Function()? d,
     DateTime? Function()? since,
     DateTime? Function()? until,
     int? Function()? limit,
@@ -127,6 +120,7 @@ class RequestFilter extends Equatable {
       p: p != null ? p() : this.p,
       k: k != null ? k() : this.k,
       q: q != null ? q() : this.q,
+      d: d != null ? d() : this.d,
       since: since != null ? since() : this.since,
       until: until != null ? until() : this.until,
       limit: limit != null ? limit() : this.limit,
@@ -143,6 +137,7 @@ class RequestFilter extends Equatable {
       if (p != null) '#p': p,
       if (k != null) '#k': k,
       if (q != null) '#q': q,
+      if (d != null) '#d': d,
       if (since != null) 'since': since!.millisecondsSinceEpoch ~/ 1000,
       if (until != null) 'until': until!.millisecondsSinceEpoch ~/ 1000,
       if (limit != null) 'limit': limit,

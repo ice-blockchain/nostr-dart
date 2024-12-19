@@ -1,3 +1,7 @@
+## 0.0.14
+
+* Add `d` field to `RequestFilter`
+
 ## 0.0.13
 
 * make `requestEvents` return `Stream<RelayMessage>` instead of `Stream<EventMessage>`
