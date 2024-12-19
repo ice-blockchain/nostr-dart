@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:nostr_dart/nostr_dart.dart';
-import 'package:nostr_dart/src/model/closed_message.dart';
 
 /// Collects stored [EventMessage]s from the provided [NostrSubscription].
 ///

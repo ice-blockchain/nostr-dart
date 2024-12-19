@@ -7,7 +7,8 @@ import 'package:logger/web.dart';
 final log = Logger(
   printer: PrettyPrinter(
     methodCount: 0,
-    printTime: true,
+    dateTimeFormat: DateTimeFormat.dateAndTime,
+    lineLength: 1000,
   ),
 );
 
