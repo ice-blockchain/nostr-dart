@@ -41,4 +41,9 @@ class AuthMessage extends RelayMessage {
   List<dynamic> toJson() {
     return [AuthMessage.type, challenge];
   }
+
+  @override
+  String toString() {
+    return '["$type", $challenge]';
+  }
 }

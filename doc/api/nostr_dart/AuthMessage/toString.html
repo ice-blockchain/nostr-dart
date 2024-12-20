@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the toJson method from the ClosedMessage class, for the Dart programming language.">
-  <title>toJson method - ClosedMessage class - nostr_dart library - Dart API</title>
+  <meta name="description" content="API docs for the toString method from the AuthMessage class, for the Dart programming language.">
+  <title>toString method - AuthMessage class - nostr_dart library - Dart API</title>
 
 
   
@@ -26,10 +26,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart.dart</a></li>
-    <li><a href="../../nostr_dart/ClosedMessage-class.html">ClosedMessage</a></li>
-    <li class="self-crumb">toJson method</li>
+    <li><a href="../../nostr_dart/AuthMessage-class.html">AuthMessage</a></li>
+    <li class="self-crumb">toString method</li>
   </ol>
-  <div class="self-name">toJson</div>
+  <div class="self-name">toString</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -49,10 +49,10 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="nostr_dart&#47;ClosedMessage-class-sidebar.html"
+    data-above-sidebar="nostr_dart&#47;AuthMessage-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">toJson</span> method 
+<h1><span class="kind-method">toString</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
@@ -62,21 +62,33 @@
         <li>@<a href="https://api.flutter.dev/flutter/dart-core/override-constant.html">override</a></li>
     </ol>
   </div>
-<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a></span>
-<span class="name ">toJson</span>(<wbr>)
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+<span class="name ">toString</span>(<wbr>)
 
       <div class="features"><span class="feature">override</span></div>
 
     </section>
     
+<section class="desc markdown">
+  <p>A string representation of this object.</p>
+<p>Some classes have a default textual representation,
+often paired with a static <code>parse</code> function (like <a href="https://api.flutter.dev/flutter/dart-core/int/parse.html">int.parse</a>).
+These classes will provide the textual representation as
+their string representation.</p>
+<p>Other classes have no meaningful textual representation
+that a program will care about.
+Such classes will typically override <code>toString</code> to provide
+useful information when inspecting the object,
+mainly for debugging or logging.</p>
+</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-List&lt;dynamic&gt; toJson() {
-  return [ClosedMessage.type, subscriptionId, message];
+String toString() {
+  return &#39;[&quot;$type&quot;, $challenge]&#39;;
 }</code></pre>
 </section>
 
@@ -92,11 +104,11 @@ List&lt;dynamic&gt; toJson() {
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">nostr_dart</a></li>
     <li><a href="../../nostr_dart/nostr_dart-library.html">nostr_dart</a></li>
-    <li><a href="../../nostr_dart/ClosedMessage-class.html">ClosedMessage</a></li>
-    <li class="self-crumb">toJson method</li>
+    <li><a href="../../nostr_dart/AuthMessage-class.html">AuthMessage</a></li>
+    <li class="self-crumb">toString method</li>
 </ol>
 
-    <h5>ClosedMessage class</h5>
+    <h5>AuthMessage class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
