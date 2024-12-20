@@ -15,16 +15,14 @@ void main() {
     });
 
     test('can be instantiated with fromJson constructor', () {
-      final AuthMessage message =
-          AuthMessage.fromJson(jsonDecode(rawEvent) as List<dynamic>);
+      final AuthMessage message = AuthMessage.fromJson(jsonDecode(rawEvent) as List<dynamic>);
       expect(message.runtimeType, equals(AuthMessage));
       expect(message.challenge, equals(challenge));
     });
 
     test('can be converted to a raw message with toString method', () {
-      final AuthMessage message =
-          AuthMessage.fromJson(jsonDecode(rawEvent) as List<dynamic>);
-      expect(message.toString(), equals(rawEvent));
+      final AuthMessage message = AuthMessage.fromJson(jsonDecode(rawEvent) as List<dynamic>);
+      expect(message.toString(), equals('["AUTH", $challenge]'));
     });
   });
 }
