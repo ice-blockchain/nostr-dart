@@ -168,6 +168,8 @@ class NostrRelay {
                 return OkMessage.fromJson(jsonMessage);
               case NoticeMessage.type:
                 return NoticeMessage.fromJson(jsonMessage);
+              case AuthMessage.type:
+                return AuthMessage.fromJson(jsonMessage);
               default:
                 logWarning(() => 'Unknown message $message');
                 return null;

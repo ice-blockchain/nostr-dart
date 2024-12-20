@@ -9,6 +9,7 @@ export 'src/exceptions/exceptions.dart';
 export 'src/helpers/collect_stored_events.dart';
 export 'src/helpers/request_events.dart';
 export 'src/logging.dart' show NostrLogLevel;
+export 'src/model/auth_message.dart';
 export 'src/model/close_message.dart';
 export 'src/model/closed_message.dart';
 export 'src/model/eose_message.dart';
