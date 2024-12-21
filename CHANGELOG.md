@@ -1,3 +1,7 @@
+## 0.0.17
+
+* Add optional keep subscription flag for request events method
+
 ## 0.0.14
 
 * Add `d` field to `RequestFilter`
