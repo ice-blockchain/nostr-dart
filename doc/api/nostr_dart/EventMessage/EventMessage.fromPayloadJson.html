@@ -79,7 +79,7 @@
         .map((e) =&gt; (e as List&lt;dynamic&gt;).map((e) =&gt; e as String).toList())
         .toList(),
     content: payloadJson[&#39;content&#39;] as String,
-    sig: payloadJson[&#39;sig&#39;] as String,
+    sig: payloadJson[&#39;sig&#39;] as String?,
     subscriptionId: subscriptionId,
   );
 }</code></pre>
