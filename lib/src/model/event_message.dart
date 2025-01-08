@@ -151,7 +151,7 @@ class EventMessage extends RelayMessage {
           .map((e) => (e as List<dynamic>).map((e) => e as String).toList())
           .toList(),
       content: payloadJson['content'] as String,
-      sig: payloadJson['sig'] as String,
+      sig: payloadJson['sig'] as String?,
       subscriptionId: subscriptionId,
     );
   }
