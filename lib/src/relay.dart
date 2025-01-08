@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:nostr_dart/nostr_dart.dart';
-import 'package:nostr_dart/src/logging.dart';
 import 'package:nostr_dart/src/model/grouped_events_message.dart';
 
 /// A class to represent a Nostr relay.
@@ -31,6 +30,9 @@ class NostrRelay {
 
   /// Active Relay's [NostrSubscription]s count stream controller
   final StreamController<int> _subscriptionsCountController = StreamController<int>.broadcast();
+
+  /// Logger instance
+  NostrDartLogger? get _logger => NostrDart.logger;
 
   NostrRelay({
     required this.url,
@@ -83,7 +85,7 @@ class NostrRelay {
         throw SendEventException(notAccepted.first.message);
       }
     } catch (error, stack) {
-      logWarning("$url Failed to send events $events", error, stack);
+      _logger?.warning("$url Failed to send events $events", error, stack);
       rethrow;
     }
   }
@@ -96,7 +98,7 @@ class NostrRelay {
       throw SocketException('Connection to $url is not established');
     }
     socket.send(message.toString());
-    logInfo(() => '↑ $url $message');
+    _logger?.info('↑ $url $message');
   }
 
   /// Sends the provided [RequestMessage] to the Relay and
@@ -110,7 +112,7 @@ class NostrRelay {
       _subscriptionsCountController.add(_subscriptions.keys.length);
       return subscription;
     } catch (error, stack) {
-      logWarning("Failed to subscribe to relay $url", error, stack);
+      _logger?.warning("Failed to subscribe to relay $url", error, stack);
       rethrow;
     }
   }
@@ -127,20 +129,20 @@ class NostrRelay {
       _subscriptions.remove(subscriptionId);
       _subscriptionsCountController.add(_subscriptions.keys.length);
     } catch (error, stack) {
-      logWarning("Failed to unsubscribe from relay $url", error, stack);
+      _logger?.warning("Failed to unsubscribe from relay $url", error, stack);
       rethrow;
     }
   }
 
   void _onConnectionStateChange(ConnectionState state) {
-    logInfo(() => '$url connection state is ${state.runtimeType}');
+    _logger?.info('$url connection state is ${state.runtimeType}');
     if (state is Reconnected) {
       _renewSubscriptions();
     }
   }
 
   void _onIncomingMessage(RelayMessage message) {
-    logInfo(() => '↓ $url $message');
+    _logger?.info('↓ $url $message');
   }
 
   void _renewSubscriptions() {
@@ -171,11 +173,11 @@ class NostrRelay {
               case AuthMessage.type:
                 return AuthMessage.fromJson(jsonMessage);
               default:
-                logWarning(() => 'Unknown message $message');
+                _logger?.warning('Unknown message $message');
                 return null;
             }
           } catch (error, stack) {
-            logWarning(() => 'Stream transform error', error, stack);
+            _logger?.warning('Stream transform error', error, stack);
             return null;
           }
         })

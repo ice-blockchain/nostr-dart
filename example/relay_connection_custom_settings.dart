@@ -3,7 +3,7 @@
 import 'package:nostr_dart/nostr_dart.dart';
 
 void main() async {
-  NostrDart.configure(logLevel: NostrLogLevel.ALL);
+  NostrDart.configure();
 
   const String url = 'wss://relay.damus.io';
 
