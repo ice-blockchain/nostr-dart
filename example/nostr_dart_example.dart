@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:nostr_dart/nostr_dart.dart';
 
 void main() async {
-  NostrDart.configure(logLevel: NostrLogLevel.ALL);
+  NostrDart.configure();
 
   final NostrRelay relay = await NostrRelay.connect('wss://relay.damus.io');
 
@@ -17,8 +17,7 @@ void main() async {
 
   final NostrSubscription subscription = relay.subscribe(requestMessage);
 
-  final List<EventMessage> storedEvents =
-      await collectStoredEvents(subscription);
+  final List<EventMessage> storedEvents = await collectStoredEvents(subscription);
 
   print(storedEvents);
 

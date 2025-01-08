@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('requestEvents helper', () {
-    NostrDart.configure(logLevel: NostrLogLevel.ALL);
+    NostrDart.configure();
 
     test('should fetch events', () async {
       final NostrRelay relay = await NostrRelay.connect('wss://relay.damus.io');

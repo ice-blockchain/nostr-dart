@@ -187,7 +187,7 @@ class EventMessage extends RelayMessage {
       return false;
     }
 
-    return await getIt<SignatureVerifier>().verify(
+    return await NostrDart.signatureVerifier.verify(
       signature: sig!,
       message: id,
       publicKey: pubkey,

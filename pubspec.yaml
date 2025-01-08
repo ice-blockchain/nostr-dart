@@ -1,21 +1,18 @@
 name: nostr_dart
 description: A Dart Library for making Nostr clients
-version: 0.0.17
+version: 0.0.18
 repository: https://github.com/ice-blockchain/nostr-dart
 
 environment:
   sdk: ">=3.4.1 <4.0.0"
 
 dependencies:
-  bip340: ^0.2.0
-  crypto: ^3.0.3
-  equatable: ^2.0.5
-  get_it: ^7.7.0
-  logger: ^2.4.0
+  bip340: ^0.3.0
+  crypto: ^3.0.6
+  equatable: ^2.0.7
   web_socket_client: ^0.1.5
 
 dev_dependencies:
-  lint: ^2.1.2
+  lint: ^2.3.0
   lints: ^2.0.0
-  test: ^1.21.0
-  
+  test: ^1.25.14

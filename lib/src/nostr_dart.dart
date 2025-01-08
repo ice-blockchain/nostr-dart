@@ -1,18 +1,19 @@
-import 'package:get_it/get_it.dart';
-import 'package:logger/web.dart';
-import 'package:nostr_dart/src/crypto/signature_verifier.dart';
-import 'package:nostr_dart/src/logging.dart';
-
-final GetIt getIt = GetIt.instance;
+import 'package:nostr_dart/nostr_dart.dart';
 
 class NostrDart {
   NostrDart._();
 
+  static SignatureVerifier get signatureVerifier => _signatureVerifier;
+  static NostrDartLogger? get logger => _logger;
+
+  static SignatureVerifier _signatureVerifier = SchnorrSignatureVerifier();
+  static NostrDartLogger? _logger;
+
   static void configure({
     SignatureVerifier? signatureVerifier,
-    Level logLevel = NostrLogLevel.OFF,
+    NostrDartLogger? logger,
   }) {
-    setNostrLogLevel(logLevel);
-    getIt.registerSingleton<SignatureVerifier>(signatureVerifier ?? SchnorrSignatureVerifier());
-  }  
+    if (signatureVerifier != null) _signatureVerifier = signatureVerifier;
+    if (logger != null) _logger = logger;
+  }
 }
