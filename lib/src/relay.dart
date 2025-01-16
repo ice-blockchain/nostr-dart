@@ -172,6 +172,8 @@ class NostrRelay {
                 return NoticeMessage.fromJson(jsonMessage);
               case AuthMessage.type:
                 return AuthMessage.fromJson(jsonMessage);
+              case ClosedMessage.type:
+                return ClosedMessage.fromJson(jsonMessage);
               default:
                 _logger?.warning('Unknown message $message');
                 return null;
