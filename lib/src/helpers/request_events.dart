@@ -12,17 +12,14 @@ import 'package:nostr_dart/nostr_dart.dart';
 /// using [collectStoredEvents] instead.
 Stream<RelayMessage> requestEvents(
   RequestMessage requestMessage,
-  NostrRelay relay, {
-  bool keepSubscription = false,
-}) async* {
+  NostrRelay relay,
+) async* {
   final NostrSubscription subscription = relay.subscribe(requestMessage);
 
   await for (final message in subscription.messages) {
     yield message;
     if (message is EoseMessage || message is ClosedMessage || message is NoticeMessage) {
-      if (!keepSubscription) {
-        relay.unsubscribe(subscription.id, sendCloseMessage: message is EoseMessage);
-      }
+      relay.unsubscribe(subscription.id, sendCloseMessage: message is EoseMessage);
     }
   }
 }
