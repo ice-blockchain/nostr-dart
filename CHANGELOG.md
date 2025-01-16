@@ -1,6 +1,6 @@
-## 0.0.20
+## 0.0.22
 
-* Process `ClosedMessage` in message transform
+* Process `ClosedMessage` in message transform and `_isSubscriptionMessage`
 
 ## 0.0.19
 
