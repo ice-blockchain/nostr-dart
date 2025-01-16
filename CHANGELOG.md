@@ -1,3 +1,7 @@
+## 0.0.19
+
+* REvert optional keep subscription flag for request events method
+
 ## 0.0.17
 
 * Add optional keep subscription flag for request events method
