@@ -2,13 +2,35 @@
 
 * Process `ClosedMessage` in message transform and `_isSubscriptionMessage`
 
+## 0.0.21
+
+* Add support for handling `ClosedMessage` in subscription message filtering
+
+## 0.0.20
+
+* Process `ClosedMessage` in message transform
+
 ## 0.0.19
 
 * Revert optional keep subscription flag for request events method
 
+## 0.0.18
+
+* Add logger improvements
+* Fix: Allow null for sig from json payload
+
 ## 0.0.17
 
 * Add optional keep subscription flag for request events method
+
+## 0.0.16
+
+* Add auth message toString support
+* Add authentication message support
+
+## 0.0.15
+
+* Update documentation
 
 ## 0.0.14
 
