@@ -1,6 +1,10 @@
+## 0.0.20
+
+* Process `ClosedMessage` in message transform
+
 ## 0.0.19
 
-* REvert optional keep subscription flag for request events method
+* Revert optional keep subscription flag for request events method
 
 ## 0.0.17
 
