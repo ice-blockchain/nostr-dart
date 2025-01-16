@@ -124,6 +124,8 @@ class NostrSubscription {
     return (message is EventMessage &&
             message.subscriptionId == requestMessage.subscriptionId) ||
         (message is EoseMessage &&
+            message.subscriptionId == requestMessage.subscriptionId) ||
+        (message is ClosedMessage &&
             message.subscriptionId == requestMessage.subscriptionId);
   }
 
