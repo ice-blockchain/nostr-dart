@@ -17,20 +17,8 @@ class RequestFilter extends Equatable {
   /// a list of a kind numbers
   final List<int>? kinds;
 
-  /// a list of event ids
-  final List<String>? e;
-
-  /// a list of event pubkeys
-  final List<String>? p;
-
-  /// a list of kinds
-  final List<String>? k;
-
-  /// a list of quoted events
-  final List<String>? q;
-
-  /// a list of sets kinds
-  final List<String>? d;
+  /// a map of tag name to list of values
+  final Map<String, List<String>>? tags;
 
   /// an integer unix timestamp in seconds, events must be newer than this to pass
   final DateTime? since;
@@ -48,11 +36,7 @@ class RequestFilter extends Equatable {
     this.ids,
     this.authors,
     this.kinds,
-    this.e,
-    this.p,
-    this.k,
-    this.q,
-    this.d,
+    this.tags,
     this.since,
     this.until,
     this.limit,
@@ -60,15 +44,24 @@ class RequestFilter extends Equatable {
   });
 
   factory RequestFilter.fromJson(Map<String, dynamic> json) {
+    // Extract standard tags (those starting with #)
+    final Map<String, List<String>> tags = {};
+
+    if (!tags.keys.every((key) => key.startsWith('#'))) {
+      throw ArgumentError('All tag keys must start with #, got: $tags');
+    }
+
+    for (final entry in json.entries) {
+      if (entry.key.startsWith('#')) {
+        tags[entry.key] = List<String>.from(entry.value as List<dynamic>);
+      }
+    }
+
     return RequestFilter(
       ids: json['ids'] != null ? List<String>.from(json['ids'] as List<dynamic>) : null,
       authors: json['authors'] != null ? List<String>.from(json['authors'] as List<dynamic>) : null,
       kinds: json['kinds'] != null ? List<int>.from(json['kinds'] as List<dynamic>) : null,
-      e: json['#e'] != null ? List<String>.from(json['#e'] as List<dynamic>) : null,
-      p: json['#p'] != null ? List<String>.from(json['#p'] as List<dynamic>) : null,
-      k: json['#k'] != null ? List<String>.from(json['#k'] as List<dynamic>) : null,
-      q: json['#q'] != null ? List<String>.from(json['#q'] as List<dynamic>) : null,
-      d: json['#d'] != null ? List<String>.from(json['#d'] as List<dynamic>) : null,
+      tags: tags,
       since: json['since'] != null
           ? DateTime.fromMillisecondsSinceEpoch((json['since'] as int) * 1000)
           : null,
@@ -86,11 +79,7 @@ class RequestFilter extends Equatable {
       ids,
       authors,
       kinds,
-      e,
-      p,
-      k,
-      q,
-      d,
+      tags,
       since,
       until,
       limit,
@@ -102,11 +91,7 @@ class RequestFilter extends Equatable {
     List<String>? Function()? ids,
     List<String>? Function()? authors,
     List<int>? Function()? kinds,
-    List<String>? Function()? e,
-    List<String>? Function()? p,
-    List<String>? Function()? k,
-    List<String>? Function()? q,
-    List<String>? Function()? d,
+    Map<String, List<String>>? Function()? tags,
     DateTime? Function()? since,
     DateTime? Function()? until,
     int? Function()? limit,
@@ -116,11 +101,7 @@ class RequestFilter extends Equatable {
       ids: ids != null ? ids() : this.ids,
       authors: authors != null ? authors() : this.authors,
       kinds: kinds != null ? kinds() : this.kinds,
-      e: e != null ? e() : this.e,
-      p: p != null ? p() : this.p,
-      k: k != null ? k() : this.k,
-      q: q != null ? q() : this.q,
-      d: d != null ? d() : this.d,
+      tags: tags != null ? tags() : this.tags,
       since: since != null ? since() : this.since,
       until: until != null ? until() : this.until,
       limit: limit != null ? limit() : this.limit,
@@ -129,20 +110,23 @@ class RequestFilter extends Equatable {
   }
 
   Map<String, dynamic> toJson() {
-    return {
+    final Map<String, dynamic> json = {
       if (ids != null) 'ids': ids,
       if (authors != null) 'authors': authors,
       if (kinds != null) 'kinds': kinds,
-      if (e != null) '#e': e,
-      if (p != null) '#p': p,
-      if (k != null) '#k': k,
-      if (q != null) '#q': q,
-      if (d != null) '#d': d,
       if (since != null) 'since': since!.millisecondsSinceEpoch ~/ 1000,
       if (until != null) 'until': until!.millisecondsSinceEpoch ~/ 1000,
       if (limit != null) 'limit': limit,
       if (search != null) 'search': search,
     };
+
+    if (tags != null) {
+      for (final entry in tags!.entries) {
+        json[entry.key] = entry.value;
+      }
+    }
+
+    return json;
   }
 
   @override
