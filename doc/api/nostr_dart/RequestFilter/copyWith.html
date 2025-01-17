@@ -67,11 +67,7 @@
 <span class="name ">copyWith</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="copyWith-param-ids"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">ids</span>()?, </span></li>
 <li><span class="parameter" id="copyWith-param-authors"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">authors</span>()?, </span></li>
 <li><span class="parameter" id="copyWith-param-kinds"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/int-class.html">int</a></span>&gt;</span>?</span> <span class="parameter-name">kinds</span>()?, </span></li>
-<li><span class="parameter" id="copyWith-param-e"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">e</span>()?, </span></li>
-<li><span class="parameter" id="copyWith-param-p"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">p</span>()?, </span></li>
-<li><span class="parameter" id="copyWith-param-k"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">k</span>()?, </span></li>
-<li><span class="parameter" id="copyWith-param-q"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">q</span>()?, </span></li>
-<li><span class="parameter" id="copyWith-param-d"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">d</span>()?, </span></li>
+<li><span class="parameter" id="copyWith-param-tags"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span>?</span> <span class="parameter-name">tags</span>()?, </span></li>
 <li><span class="parameter" id="copyWith-param-since"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">since</span>()?, </span></li>
 <li><span class="parameter" id="copyWith-param-until"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">until</span>()?, </span></li>
 <li><span class="parameter" id="copyWith-param-limit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">limit</span>()?, </span></li>
@@ -91,11 +87,7 @@
   List&lt;String&gt;? Function()? ids,
   List&lt;String&gt;? Function()? authors,
   List&lt;int&gt;? Function()? kinds,
-  List&lt;String&gt;? Function()? e,
-  List&lt;String&gt;? Function()? p,
-  List&lt;String&gt;? Function()? k,
-  List&lt;String&gt;? Function()? q,
-  List&lt;String&gt;? Function()? d,
+  Map&lt;String, List&lt;String&gt;&gt;? Function()? tags,
   DateTime? Function()? since,
   DateTime? Function()? until,
   int? Function()? limit,
@@ -105,11 +97,7 @@
     ids: ids != null ? ids() : this.ids,
     authors: authors != null ? authors() : this.authors,
     kinds: kinds != null ? kinds() : this.kinds,
-    e: e != null ? e() : this.e,
-    p: p != null ? p() : this.p,
-    k: k != null ? k() : this.k,
-    q: q != null ? q() : this.q,
-    d: d != null ? d() : this.d,
+    tags: tags != null ? tags() : this.tags,
     since: since != null ? since() : this.since,
     until: until != null ? until() : this.until,
     limit: limit != null ? limit() : this.limit,
@@ -149,7 +137,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.19
+      0.0.22
   </span>
 
   

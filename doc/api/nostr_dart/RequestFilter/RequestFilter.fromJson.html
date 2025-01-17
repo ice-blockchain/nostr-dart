@@ -73,15 +73,19 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">factory RequestFilter.fromJson(Map&lt;String, dynamic&gt; json) {
+  final Map&lt;String, List&lt;String&gt;&gt; tags = {};
+
+  for (final entry in json.entries) {
+    if (entry.key.startsWith(&#39;#&#39;)) {
+      tags[entry.key] = List&lt;String&gt;.from(entry.value as List&lt;dynamic&gt;);
+    }
+  }
+
   return RequestFilter(
     ids: json[&#39;ids&#39;] != null ? List&lt;String&gt;.from(json[&#39;ids&#39;] as List&lt;dynamic&gt;) : null,
     authors: json[&#39;authors&#39;] != null ? List&lt;String&gt;.from(json[&#39;authors&#39;] as List&lt;dynamic&gt;) : null,
     kinds: json[&#39;kinds&#39;] != null ? List&lt;int&gt;.from(json[&#39;kinds&#39;] as List&lt;dynamic&gt;) : null,
-    e: json[&#39;#e&#39;] != null ? List&lt;String&gt;.from(json[&#39;#e&#39;] as List&lt;dynamic&gt;) : null,
-    p: json[&#39;#p&#39;] != null ? List&lt;String&gt;.from(json[&#39;#p&#39;] as List&lt;dynamic&gt;) : null,
-    k: json[&#39;#k&#39;] != null ? List&lt;String&gt;.from(json[&#39;#k&#39;] as List&lt;dynamic&gt;) : null,
-    q: json[&#39;#q&#39;] != null ? List&lt;String&gt;.from(json[&#39;#q&#39;] as List&lt;dynamic&gt;) : null,
-    d: json[&#39;#d&#39;] != null ? List&lt;String&gt;.from(json[&#39;#d&#39;] as List&lt;dynamic&gt;) : null,
+    tags: tags,
     since: json[&#39;since&#39;] != null
         ? DateTime.fromMillisecondsSinceEpoch((json[&#39;since&#39;] as int) * 1000)
         : null,
@@ -125,7 +129,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.19
+      0.0.22
   </span>
 
   
