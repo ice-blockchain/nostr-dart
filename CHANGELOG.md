@@ -1,3 +1,7 @@
+## 0.0.23
+
+* Replace tags in `RequestFilter` with generic tags Map
+
 ## 0.0.22
 
 * Process `ClosedMessage` in message transform and `_isSubscriptionMessage`
