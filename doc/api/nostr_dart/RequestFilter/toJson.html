@@ -76,20 +76,23 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">Map&lt;String, dynamic&gt; toJson() {
-  return {
+  final Map&lt;String, dynamic&gt; json = {
     if (ids != null) &#39;ids&#39;: ids,
     if (authors != null) &#39;authors&#39;: authors,
     if (kinds != null) &#39;kinds&#39;: kinds,
-    if (e != null) &#39;#e&#39;: e,
-    if (p != null) &#39;#p&#39;: p,
-    if (k != null) &#39;#k&#39;: k,
-    if (q != null) &#39;#q&#39;: q,
-    if (d != null) &#39;#d&#39;: d,
     if (since != null) &#39;since&#39;: since!.millisecondsSinceEpoch ~&#47; 1000,
     if (until != null) &#39;until&#39;: until!.millisecondsSinceEpoch ~&#47; 1000,
     if (limit != null) &#39;limit&#39;: limit,
     if (search != null) &#39;search&#39;: search,
   };
+
+  if (tags != null) {
+    for (final entry in tags!.entries) {
+      json[entry.key] = entry.value;
+    }
+  }
+
+  return json;
 }</code></pre>
 </section>
 
@@ -124,7 +127,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.19
+      0.0.23
   </span>
 
   

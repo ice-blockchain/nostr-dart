@@ -19,28 +19,31 @@ void main() {
       '9e65c9a8a30778440065603a58aa5ab07d14ffd870a14c6c76b63cdea96b8ba0',
     ];
     const List<String> filterKinds = [
-      '1', '3005',
+      '1',
+      '3005',
     ];
     const List<String> quotedEvents = [
       '9e65c9a8a30778440065603a58aa5ab07d14ffd870a14c6c76b63cdea96b8ba1',
     ];
-    final DateTime since =
-        DateTime.fromMillisecondsSinceEpoch(1577822400 * 1000);
-    final DateTime until =
-        DateTime.fromMillisecondsSinceEpoch(1577822600 * 1000);
+    final DateTime since = DateTime.fromMillisecondsSinceEpoch(1577822400 * 1000);
+    final DateTime until = DateTime.fromMillisecondsSinceEpoch(1577822600 * 1000);
     const int limit = 10;
     const String search = 'some search query';
+    final Map<String, List<String>> tags = {
+      '#e': eventIds,
+      '#p': publicKeys,
+      '#k': filterKinds,
+      '#q': quotedEvents,
+    };
     final String rawFilter =
-        '{"ids":${jsonEncode(ids)},"authors":${jsonEncode(authors)},"kinds":${jsonEncode(kinds)},"#e":${jsonEncode(eventIds)},"#p":${jsonEncode(publicKeys)},"#k":${jsonEncode(filterKinds)},"#q":${jsonEncode(quotedEvents)},"since":${since.millisecondsSinceEpoch ~/ 1000},"until":${until.millisecondsSinceEpoch ~/ 1000},"limit":$limit,"search":"$search"}';
+        '{"ids":${jsonEncode(ids)},"authors":${jsonEncode(authors)},"kinds":${jsonEncode(kinds)},"since":${since.millisecondsSinceEpoch ~/ 1000},"until":${until.millisecondsSinceEpoch ~/ 1000},"limit":$limit,"search":"$search","#e":${jsonEncode(eventIds)},"#p":${jsonEncode(publicKeys)},"#k":${jsonEncode(filterKinds)},"#q":${jsonEncode(quotedEvents)}}';
+
     test('might be instantiated with unnamed constructor', () {
       final RequestFilter filter = RequestFilter(
         ids: ids,
         authors: authors,
         kinds: kinds,
-        e: eventIds,
-        p: publicKeys,
-        k: filterKinds,
-        q: quotedEvents,
+        tags: tags,
         since: since,
         until: until,
         limit: limit,
@@ -50,14 +53,14 @@ void main() {
       expect(filter.ids, equals(ids));
       expect(filter.authors, equals(authors));
       expect(filter.kinds, equals(kinds));
-      expect(filter.e, equals(eventIds));
-      expect(filter.p, equals(publicKeys));
-      expect(filter.k, equals(filterKinds));
-      expect(filter.q, equals(quotedEvents));
       expect(filter.since, equals(since));
       expect(filter.until, equals(until));
       expect(filter.limit, equals(limit));
       expect(filter.search, equals(search));
+      expect(filter.tags?['#e'], equals(eventIds));
+      expect(filter.tags?['#p'], equals(publicKeys));
+      expect(filter.tags?['#k'], equals(filterKinds));
+      expect(filter.tags?['#q'], equals(quotedEvents));
     });
 
     test('might be instantiated with fromJson constructor', () {
@@ -67,14 +70,14 @@ void main() {
       expect(filter.ids, equals(ids));
       expect(filter.authors, equals(authors));
       expect(filter.kinds, equals(kinds));
-      expect(filter.e, equals(eventIds));
-      expect(filter.p, equals(publicKeys));
-      expect(filter.k, equals(filterKinds));
-      expect(filter.q, equals(quotedEvents));
       expect(filter.since, equals(since));
       expect(filter.until, equals(until));
       expect(filter.limit, equals(limit));
       expect(filter.search, equals(search));
+      expect(filter.tags?['#e'], equals(eventIds));
+      expect(filter.tags?['#p'], equals(publicKeys));
+      expect(filter.tags?['#k'], equals(filterKinds));
+      expect(filter.tags?['#q'], equals(quotedEvents));
     });
 
     test('might be stringified to a raw filter with toString method', () {
