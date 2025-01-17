@@ -44,12 +44,7 @@ class RequestFilter extends Equatable {
   });
 
   factory RequestFilter.fromJson(Map<String, dynamic> json) {
-    // Extract standard tags (those starting with #)
     final Map<String, List<String>> tags = {};
-
-    if (!tags.keys.every((key) => key.startsWith('#'))) {
-      throw ArgumentError('All tag keys must start with #, got: $tags');
-    }
 
     for (final entry in json.entries) {
       if (entry.key.startsWith('#')) {
