@@ -18,7 +18,7 @@ class RequestFilter extends Equatable {
   final List<int>? kinds;
 
   /// a map of tag name to list of values
-  final Map<String, List<String>>? tags;
+  final Map<String, List<Object?>>? tags;
 
   /// an integer unix timestamp in seconds, events must be newer than this to pass
   final DateTime? since;
@@ -44,11 +44,11 @@ class RequestFilter extends Equatable {
   });
 
   factory RequestFilter.fromJson(Map<String, dynamic> json) {
-    final Map<String, List<String>> tags = {};
+    final Map<String, List<Object?>> tags = {};
 
     for (final entry in json.entries) {
       if (entry.key.startsWith('#')) {
-        tags[entry.key] = List<String>.from(entry.value as List<dynamic>);
+        tags[entry.key] = List<Object?>.from(entry.value as List<dynamic>);
       }
     }
 
