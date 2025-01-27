@@ -18,6 +18,15 @@ class RequestFilter extends Equatable {
   final List<int>? kinds;
 
   /// a map of tag name to list of values
+  ///
+  /// For tags, it uses a two-dimensional matching approach where:
+  /// - The outer dimension (different tag value sets) are matched using OR logic
+  /// - The inner dimension (values within a tag value set) are matched using AND logic
+  /// - nil values are ignored (i.e. they match any value)
+  /// For example, with filter tags ["t", [["chess"], ["gaming", "sports"]]]:
+  /// - Event matches if it has tag "t" AND:
+  ///   - (has value "chess") OR
+  ///   - (has both values "gaming" AND "sports")
   final Map<String, List<Object?>>? tags;
 
   /// an integer unix timestamp in seconds, events must be newer than this to pass
