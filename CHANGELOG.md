@@ -1,3 +1,7 @@
+## 0.0.24
+
+* Let `RequestFilter` tags be nested
+
 ## 0.0.23
 
 * Replace tags in `RequestFilter` with generic tags Map

@@ -62,7 +62,7 @@
 
       <section class="multi-line-signature">
         
-        <a href="https://api.dart.dev/stable/3.5.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span>?
+        <a href="https://api.dart.dev/stable/3.5.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>&gt;</span>?
         <span class="name ">tags</span>
         <div class="features"><span class="feature">final</span></div>
 
@@ -70,12 +70,25 @@
       
 <section class="desc markdown">
   <p>a map of tag name to list of values</p>
+<p>For tags, it uses a two-dimensional matching approach where:</p>
+<ul>
+<li>The outer dimension (different tag value sets) are matched using OR logic</li>
+<li>The inner dimension (values within a tag value set) are matched using AND logic</li>
+<li>nil values are ignored (i.e. they match any value)
+For example, with filter tags ["t", [<code>"chess"</code>, <code>"gaming", "sports"</code>]]:</li>
+<li>Event matches if it has tag "t" AND:
+<ul>
+<li>(has value "chess") OR</li>
+<li>(has both values "gaming" AND "sports")</li>
+</ul>
+</li>
+</ul>
 </section>
 
       
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">final Map&lt;String, List&lt;String&gt;&gt;? tags;</code></pre>
+  <pre class="language-dart"><code class="language-dart">final Map&lt;String, List&lt;Object?&gt;&gt;? tags;</code></pre>
 </section>
 
 
@@ -109,7 +122,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.23
+      0.0.24
   </span>
 
   
