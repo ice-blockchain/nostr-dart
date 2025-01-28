@@ -31,6 +31,12 @@ class NostrRelay {
   /// Active Relay's [NostrSubscription]s count stream controller
   final StreamController<int> _subscriptionsCountController = StreamController<int>.broadcast();
 
+  /// Stream controller to notify listeners when the relay is closed.
+  final StreamController<void> _closeNotificationController = StreamController<void>.broadcast();
+
+  /// Stream to notify listeners when the relay is closed.
+  Stream<void> get onClose => _closeNotificationController.stream;
+
   /// Logger instance
   NostrDartLogger? get _logger => NostrDart.logger;
 
@@ -53,6 +59,8 @@ class NostrRelay {
   void close() {
     socket.close();
     _subscriptionsCountController.close();
+    _closeNotificationController.add(null);
+    _closeNotificationController.close();
     _finalizer.detach(this);
   }
 
