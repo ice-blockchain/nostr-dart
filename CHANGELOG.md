@@ -1,3 +1,7 @@
+## 0.0.25
+
+* Introduced `onClose` stream in `NostrRelay` to notify listeners when the relay is closed
+
 ## 0.0.24
 
 * Let `RequestFilter` tags be nested
@@ -101,3 +105,7 @@
 ## 0.0.1
 
 - Initial version.
+
+## 0.0.26
+
+* Introduced `onClose` stream in `NostrRelay` to notify listeners when the relay is closed.
