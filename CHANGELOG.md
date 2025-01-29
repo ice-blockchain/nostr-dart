@@ -1,3 +1,7 @@
+## 0.0.26
+
+* Add `url` to `NostrRelay.onClose` stream
+
 ## 0.0.25
 
 * Introduced `onClose` stream in `NostrRelay` to notify listeners when the relay is closed

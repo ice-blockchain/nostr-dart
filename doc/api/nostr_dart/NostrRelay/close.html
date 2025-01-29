@@ -75,7 +75,7 @@
   <pre class="language-dart"><code class="language-dart">void close() {
   socket.close();
   _subscriptionsCountController.close();
-  _closeNotificationController.add(null);
+  _closeNotificationController.add(url);
   _closeNotificationController.close();
   _finalizer.detach(this);
 }</code></pre>
