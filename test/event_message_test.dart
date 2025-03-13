@@ -120,5 +120,23 @@ void main() {
       expect(message.content, isNull);
       expect(await message.validate(), isTrue);
     });
+
+    test('tags are normalized when using fromData constructor', () async {
+      final KeyStore keyStore = KeyStore.fromPrivate(privateKey);
+      final EventMessage message = await EventMessage.fromData(
+        signer: keyStore,
+        tags: [
+          ["e", "id", "", ""],
+          ["empty", "", ""],
+          ["e", "id", "", "pubkey"],
+          ["single"],
+        ],
+        kind: kind,
+      );
+      expect(message.tags.length, equals(3));
+      expect(message.tags[0], ["e", "id"]);
+      expect(message.tags[1], ["e", "id", "", "pubkey"]);
+      expect(message.tags[2], ["single"]);
+    });
   });
 }

@@ -105,12 +105,13 @@ class EventMessage extends RelayMessage {
     DateTime? createdAt,
   }) async {
     createdAt ??= DateTime.now();
+    final normalizedTags = _normalizeTags(tags);
 
     final String eventId = calculateEventId(
       publicKey: signer.publicKey,
       createdAt: createdAt,
       kind: kind,
-      tags: tags,
+      tags: normalizedTags,
       content: content,
     );
 
@@ -119,7 +120,7 @@ class EventMessage extends RelayMessage {
       pubkey: signer.publicKey,
       createdAt: createdAt,
       kind: kind,
-      tags: tags,
+      tags: normalizedTags,
       content: content,
       sig: await signer.sign(message: eventId),
     );
@@ -205,6 +206,35 @@ class EventMessage extends RelayMessage {
         sig,
         subscriptionId,
       ];
+
+  /// Normalizes tags by removing trailing empty strings from each tag
+  ///
+  /// A normalized tag is added to the result if:
+  /// 1. It contains more than one element after normalization, OR
+  /// 2. The original tag had exactly one element
+  ///
+  /// Example:
+  /// ```
+  /// Input: [["e", "id", "", ""], ["empty", "", ""], ["e", "id", "", "pubkey"], ["single"]]
+  /// Output: [["e", "id"], ["e", "id", "", "pubkey"], ["single"]]
+  /// ```
+  static List<List<String>> _normalizeTags(List<List<String>> tags) {
+    final normalizedTags = <List<String>>[];
+
+    for (final tagList in tags) {
+      final normalizedTagList = [...tagList];
+
+      while (normalizedTagList.isNotEmpty && normalizedTagList.last.isEmpty) {
+        normalizedTagList.removeLast();
+      }
+
+      if (normalizedTagList.length > 1 || tagList.length == 1) {
+        normalizedTags.add(normalizedTagList);
+      }
+    }
+
+    return normalizedTags;
+  }
 
   /// Calculate event id using a given event data.
   ///
