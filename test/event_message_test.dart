@@ -110,5 +110,15 @@ void main() {
       ).validate();
       expect(eventValid, isFalse);
     });
+
+    test('empty content is omitted', () async {
+      final KeyStore keyStore = KeyStore.fromPrivate(privateKey);
+      final EventMessage message = await EventMessage.fromData(
+        signer: keyStore,
+        kind: kind,
+      );
+      expect(message.content, isNull);
+      expect(await message.validate(), isTrue);
+    });
   });
 }
