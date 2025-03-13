@@ -88,8 +88,7 @@ List toJson() {
     &#39;created_at&#39;: createdAt.millisecondsSinceEpoch ~&#47; 1000,
     &#39;kind&#39;: kind,
     &#39;tags&#39;: tags,
-    if (content != null)
-      &#39;content&#39;: content,
+    if (content != null) &#39;content&#39;: content,
     &#39;sig&#39;: sig,
   };
   if (subscriptionId != null) {
@@ -131,7 +130,7 @@ List toJson() {
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.27
+      0.0.28
   </span>
 
   

@@ -1,3 +1,7 @@
+## 0.0.28
+
+* Fix `EventMessage.calculateEventId` with null content
+
 ## 0.0.27
 
 * Make `EventMessage` `content` optional
