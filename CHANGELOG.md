@@ -1,3 +1,8 @@
+## 0.0.27
+
+* Make `EventMessage` `content` optional
+* Add `EventMessage` `tags` normalization
+
 ## 0.0.26
 
 * Add `url` to `NostrRelay.onClose` stream
