@@ -165,8 +165,7 @@ class EventMessage extends RelayMessage {
       'created_at': createdAt.millisecondsSinceEpoch ~/ 1000,
       'kind': kind,
       'tags': tags,
-      if (content != null)
-        'content': content,
+      if (content != null) 'content': content,
       'sig': sig,
     };
     if (subscriptionId != null) {
@@ -265,8 +264,7 @@ class EventMessage extends RelayMessage {
         createdAt.millisecondsSinceEpoch ~/ 1000,
         kind,
         tags,
-        if (content != null)
-          content,
+        content ?? '',
       ]),
     );
   }
