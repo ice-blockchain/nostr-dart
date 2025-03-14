@@ -1,3 +1,7 @@
+## 0.0.29
+
+* Revert `EventMessage.content` - make it required
+
 ## 0.0.28
 
 * Fix `EventMessage.calculateEventId` with null content
