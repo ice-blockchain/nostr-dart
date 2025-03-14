@@ -75,7 +75,7 @@ class EventMessage extends RelayMessage {
   /// Arbitrary string.
   ///
   /// May be plain text OR encoded JSON depending on [kind].
-  final String? content;
+  final String content;
 
   /// 64-bytes lowercase hex of the signature of the sha256 hash of the serialized event data,
   /// which is the same as the [id] field.
@@ -92,15 +92,15 @@ class EventMessage extends RelayMessage {
     required this.createdAt,
     required this.kind,
     required this.tags,
+    required this.content,
     required this.sig,
-    this.content,
     this.subscriptionId,
   });
 
   static FutureOr<EventMessage> fromData({
     required EventSigner signer,
     required int kind,
-    String? content,
+    required String content,
     List<List<String>> tags = const [],
     DateTime? createdAt,
   }) async {
@@ -151,7 +151,7 @@ class EventMessage extends RelayMessage {
       tags: (payloadJson['tags'] as List<dynamic>)
           .map((e) => (e as List<dynamic>).map((e) => e as String).toList())
           .toList(),
-      content: payloadJson['content'] as String?,
+      content: payloadJson['content'] as String,
       sig: payloadJson['sig'] as String?,
       subscriptionId: subscriptionId,
     );
@@ -165,7 +165,7 @@ class EventMessage extends RelayMessage {
       'created_at': createdAt.millisecondsSinceEpoch ~/ 1000,
       'kind': kind,
       'tags': tags,
-      if (content != null) 'content': content,
+      'content': content,
       'sig': sig,
     };
     if (subscriptionId != null) {
@@ -255,7 +255,7 @@ class EventMessage extends RelayMessage {
     required DateTime createdAt,
     required int kind,
     required List<List<String>> tags,
-    String? content,
+    required String content,
   }) {
     return sha256(
       jsonEncode([
@@ -264,7 +264,7 @@ class EventMessage extends RelayMessage {
         createdAt.millisecondsSinceEpoch ~/ 1000,
         kind,
         tags,
-        content ?? '',
+        content,
       ]),
     );
   }
