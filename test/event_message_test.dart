@@ -115,6 +115,7 @@ void main() {
       final KeyStore keyStore = KeyStore.fromPrivate(privateKey);
       final EventMessage message = await EventMessage.fromData(
         signer: keyStore,
+        content: '',
         tags: [
           ["e", "id", "", ""],
           ["empty", "", ""],
