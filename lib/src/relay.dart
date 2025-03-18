@@ -32,7 +32,8 @@ class NostrRelay {
   final StreamController<int> _subscriptionsCountController = StreamController<int>.broadcast();
 
   /// Stream controller to notify listeners when the relay is closed.
-  final StreamController<String> _closeNotificationController = StreamController<String>.broadcast();
+  final StreamController<String> _closeNotificationController =
+      StreamController<String>.broadcast();
 
   /// Stream to notify listeners when the relay is closed.
   Stream<String> get onClose => _closeNotificationController.stream;
@@ -202,7 +203,7 @@ class NostrRelay {
   ]) async {
     final WebSocket socket = customSocket ?? WebSocket(Uri.parse(url));
     final relay = NostrRelay(url: url, socket: socket);
-    await socket.connection.firstWhere((state) => state is Connected);
+    await socket.connection.firstWhere((state) => state is Connected || state is Reconnected);
     return relay;
   }
 }
