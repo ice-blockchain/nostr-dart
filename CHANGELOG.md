@@ -1,3 +1,7 @@
+## 0.0.30
+
+* Handle `Reconnected` relay init state - case when the relay init is happening when no internet connection
+
 ## 0.0.29
 
 * Revert `EventMessage.content` - make it required
