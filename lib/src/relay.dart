@@ -171,6 +171,7 @@ class NostrRelay {
                 if (await eventMessage.validate()) {
                   return eventMessage;
                 } else {
+                  _logger?.warning('Invalid event $message');
                   return null;
                 }
               case EoseMessage.type:
