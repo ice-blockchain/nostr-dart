@@ -159,21 +159,22 @@ class EventMessage extends RelayMessage {
 
   @override
   List toJson() {
-    final Map<String, dynamic> payload = {
-      'id': id,
-      'pubkey': pubkey,
-      'created_at': createdAt.millisecondsSinceEpoch ~/ 1000,
-      'kind': kind,
-      'tags': tags,
-      'content': content,
-      'sig': sig,
-    };
     if (subscriptionId != null) {
-      return [EventMessage.type, subscriptionId, payload];
+      return [EventMessage.type, subscriptionId, jsonPayload];
     } else {
-      return [EventMessage.type, payload];
+      return [EventMessage.type, jsonPayload];
     }
   }
+
+  Map<String, dynamic> get jsonPayload => {
+        'id': id,
+        'pubkey': pubkey,
+        'created_at': createdAt.millisecondsSinceEpoch ~/ 1000,
+        'kind': kind,
+        'tags': tags,
+        'content': content,
+        'sig': sig,
+      };
 
   Future<bool> validate() async {
     final String calculatedId = calculateEventId(
