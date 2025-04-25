@@ -1,3 +1,7 @@
+## 0.0.32
+
+* Add `EventMessage.jsonPayload` getter
+
 ## 0.0.31
 
 * Add log for incoming invalid event
