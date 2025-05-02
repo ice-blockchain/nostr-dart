@@ -10,6 +10,19 @@ mixin EventSigner {
   FutureOr<String> sign({required String message});
 }
 
+class NoPrivateSigner with EventSigner {
+  NoPrivateSigner(this.publicKey);
+
+  @override
+  final String publicKey;
+
+  @override
+  String get privateKey => '';
+
+  @override
+  FutureOr<String> sign({required String message}) => '';
+}
+
 /// Encapsulation of crypto-related tasks.
 ///
 /// Signatures, public key, and encodings are done according to the

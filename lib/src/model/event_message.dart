@@ -122,7 +122,7 @@ class EventMessage extends RelayMessage {
       kind: kind,
       tags: normalizedTags,
       content: content,
-      sig: await signer.sign(message: eventId),
+      sig: (signer is NoPrivateSigner) ? null : await signer.sign(message: eventId),
     );
   }
 
@@ -173,7 +173,7 @@ class EventMessage extends RelayMessage {
         'kind': kind,
         'tags': tags,
         'content': content,
-        'sig': sig,
+        if (sig != null) 'sig': sig,
       };
 
   Future<bool> validate() async {
