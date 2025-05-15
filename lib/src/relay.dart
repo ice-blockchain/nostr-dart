@@ -89,6 +89,11 @@ class NostrRelay {
           .where((message) => eventIds.contains(message.eventId))
           .take(events.length)
           .toList();
+
+      if (okMessages.isEmpty) {
+        throw SendEventException('No OkMessage received for event $eventIds');
+      }
+
       final notAccepted = okMessages.where((message) => !message.accepted);
       if (notAccepted.isNotEmpty) {
         throw SendEventException(notAccepted.first.message);
