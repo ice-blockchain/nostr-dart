@@ -1,3 +1,7 @@
+## 0.0.34
+
+* Handle the case in `sendEvents` where the underlying connection is interrupted and the `messages` stream is closed. This can result in an empty `okMessages`, in which case a `SendEventException` should be thrown. Previously, we incorrectly assumed the send operation was successful due to the absence of `ok: false` events.
+
 ## 0.0.32
 
 * Add `EventMessage.jsonPayload` getter
