@@ -245,7 +245,7 @@ class EventMessage extends RelayMessage {
   /// [
   ///   0,
   ///   <[pubkey], as a lowercase hex string>,
-  ///   <[createdAt], as unix timestamp in seconds>,
+  ///   <[createdAt], as unix timestamp in microseconds>,
   ///   <[kind], as a number>,
   ///   <[tags], as an array of arrays of non-null strings>,
   ///   <[content], as a string>
@@ -262,7 +262,7 @@ class EventMessage extends RelayMessage {
       jsonEncode([
         0,
         publicKey,
-        createdAt.millisecondsSinceEpoch ~/ 1000,
+        createdAt.microsecondsSinceEpoch,
         kind,
         tags,
         content,
