@@ -26,7 +26,7 @@ void main() {
       final EventMessage message = EventMessage(
         id: eventId,
         pubkey: publicKey,
-        createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt * 1000),
+        createdAt: DateTime.fromMicrosecondsSinceEpoch(createdAt),
         kind: kind,
         tags: const [
           ['e', tagE],
@@ -43,7 +43,7 @@ void main() {
       expect(message.kind, equals(kind));
       expect(
         message.createdAt,
-        equals(DateTime.fromMillisecondsSinceEpoch(createdAt * 1000)),
+        equals(DateTime.fromMicrosecondsSinceEpoch(createdAt)),
       );
     });
 
@@ -53,7 +53,7 @@ void main() {
         signer: keyStore,
         kind: kind,
         content: content,
-        createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt * 1000),
+        createdAt: DateTime.fromMicrosecondsSinceEpoch(createdAt),
         tags: const [
           ['e', tagE],
           ['p', tagP],
@@ -67,7 +67,7 @@ void main() {
       expect(message.kind, equals(kind));
       expect(
         message.createdAt,
-        equals(DateTime.fromMillisecondsSinceEpoch(createdAt * 1000)),
+        equals(DateTime.fromMicrosecondsSinceEpoch(createdAt)),
       );
     });
 
@@ -82,7 +82,7 @@ void main() {
       expect(message.kind, equals(kind));
       expect(
         message.createdAt,
-        equals(DateTime.fromMillisecondsSinceEpoch(createdAt * 1000)),
+        equals(DateTime.fromMicrosecondsSinceEpoch(createdAt)),
       );
     });
 

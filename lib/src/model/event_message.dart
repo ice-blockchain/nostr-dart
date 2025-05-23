@@ -144,8 +144,8 @@ class EventMessage extends RelayMessage {
     return EventMessage(
       id: payloadJson['id'] as String,
       pubkey: payloadJson['pubkey'] as String,
-      createdAt: DateTime.fromMillisecondsSinceEpoch(
-        (payloadJson['created_at'] as int) * 1000,
+      createdAt: DateTime.fromMicrosecondsSinceEpoch(
+        payloadJson['created_at'] as int,
       ),
       kind: payloadJson['kind'] as int,
       tags: (payloadJson['tags'] as List<dynamic>)
@@ -169,7 +169,7 @@ class EventMessage extends RelayMessage {
   Map<String, dynamic> get jsonPayload => {
         'id': id,
         'pubkey': pubkey,
-        'created_at': createdAt.millisecondsSinceEpoch ~/ 1000,
+        'created_at': createdAt.microsecondsSinceEpoch,
         'kind': kind,
         'tags': tags,
         'content': content,
@@ -200,7 +200,7 @@ class EventMessage extends RelayMessage {
   List<Object?> get props => [
         id,
         pubkey,
-        createdAt.millisecondsSinceEpoch ~/ 1000,
+        createdAt.microsecondsSinceEpoch,
         tags,
         content,
         sig,
@@ -245,7 +245,7 @@ class EventMessage extends RelayMessage {
   /// [
   ///   0,
   ///   <[pubkey], as a lowercase hex string>,
-  ///   <[createdAt], as unix timestamp in seconds>,
+  ///   <[createdAt], as unix timestamp in microseconds>,
   ///   <[kind], as a number>,
   ///   <[tags], as an array of arrays of non-null strings>,
   ///   <[content], as a string>
@@ -262,7 +262,7 @@ class EventMessage extends RelayMessage {
       jsonEncode([
         0,
         publicKey,
-        createdAt.millisecondsSinceEpoch ~/ 1000,
+        createdAt.microsecondsSinceEpoch,
         kind,
         tags,
         content,
