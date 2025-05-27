@@ -1,3 +1,7 @@
+## 0.0.36
+
+* Add `NostrRelay.sentMessages` stream
+
 ## 0.0.35
 
 * Change `EventMessage` time precision from seconds to microseconds

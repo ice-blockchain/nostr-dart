@@ -22,8 +22,14 @@ class NostrRelay {
   /// Corresponding Relay's WebSocket connection
   final WebSocket socket;
 
-  /// Stream of decoded WebSocket's messages
+  /// Stream of decoded incoming WebSocket's messages
   late Stream<RelayMessage> messages;
+
+  /// Stream of sent WebSocket's messages
+  late Stream<RelayMessage> sentMessages;
+
+  /// Stream controller for sent WebSocket's messages
+  late StreamController<RelayMessage> _sentMessagesController;
 
   /// Active Relay's [NostrSubscription]s
   final Map<String, NostrSubscription> _subscriptions = {};
@@ -45,11 +51,18 @@ class NostrRelay {
     required this.url,
     required this.socket,
   }) {
-    final controller = StreamController<RelayMessage>.broadcast();
-    controller.addStream(_transformMessages(socket.messages)).whenComplete(controller.close);
-    messages = controller.stream;
+    final incomingMessagesController = StreamController<RelayMessage>.broadcast();
+    incomingMessagesController
+      .addStream(_transformMessages(socket.messages))
+      .whenComplete(incomingMessagesController.close);
+    messages = incomingMessagesController.stream;
+
+    _sentMessagesController = StreamController<RelayMessage>.broadcast();
+    sentMessages = _sentMessagesController.stream;
+
     socket.connection.listen(_onConnectionStateChange);
     messages.listen(_onIncomingMessage);
+    sentMessages.listen(_onSentMessage);
     _finalizer.attach(this, socket, detach: this);
   }
 
@@ -62,6 +75,7 @@ class NostrRelay {
     _subscriptionsCountController.close();
     _closeNotificationController.add(url);
     _closeNotificationController.close();
+    _sentMessagesController.close();
     _finalizer.detach(this);
   }
 
@@ -112,7 +126,7 @@ class NostrRelay {
       throw SocketException('Connection to $url is not established');
     }
     socket.send(message.toString());
-    _logger?.info('↑ $url $message');
+    _sentMessagesController.add(message);
   }
 
   /// Sends the provided [RequestMessage] to the Relay and
@@ -157,6 +171,10 @@ class NostrRelay {
 
   void _onIncomingMessage(RelayMessage message) {
     _logger?.info('↓ $url $message');
+  }
+
+  void _onSentMessage(RelayMessage message) {
+    _logger?.info('↑ $url $message');
   }
 
   void _renewSubscriptions() {
