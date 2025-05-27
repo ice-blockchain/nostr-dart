@@ -25,11 +25,11 @@ class NostrRelay {
   /// Stream of decoded incoming WebSocket's messages
   late Stream<RelayMessage> messages;
 
-  /// Stream of sent WebSocket's messages
-  late Stream<RelayMessage> sentMessages;
+  /// Stream of decoded outgoing WebSocket's messages
+  late Stream<RelayMessage> outgoingMessages;
 
-  /// Stream controller for sent WebSocket's messages
-  late StreamController<RelayMessage> _sentMessagesController;
+  /// Stream controller for outgoing WebSocket's messages
+  late StreamController<RelayMessage> _outgoingMessagesController;
 
   /// Active Relay's [NostrSubscription]s
   final Map<String, NostrSubscription> _subscriptions = {};
@@ -57,12 +57,12 @@ class NostrRelay {
       .whenComplete(incomingMessagesController.close);
     messages = incomingMessagesController.stream;
 
-    _sentMessagesController = StreamController<RelayMessage>.broadcast();
-    sentMessages = _sentMessagesController.stream;
+    _outgoingMessagesController = StreamController<RelayMessage>.broadcast();
+    outgoingMessages = _outgoingMessagesController.stream;
 
     socket.connection.listen(_onConnectionStateChange);
     messages.listen(_onIncomingMessage);
-    sentMessages.listen(_onSentMessage);
+    outgoingMessages.listen(_onOutgoingMessage);
     _finalizer.attach(this, socket, detach: this);
   }
 
@@ -75,7 +75,7 @@ class NostrRelay {
     _subscriptionsCountController.close();
     _closeNotificationController.add(url);
     _closeNotificationController.close();
-    _sentMessagesController.close();
+    _outgoingMessagesController.close();
     _finalizer.detach(this);
   }
 
@@ -126,7 +126,7 @@ class NostrRelay {
       throw SocketException('Connection to $url is not established');
     }
     socket.send(message.toString());
-    _sentMessagesController.add(message);
+    _outgoingMessagesController.add(message);
   }
 
   /// Sends the provided [RequestMessage] to the Relay and
@@ -173,7 +173,7 @@ class NostrRelay {
     _logger?.info('↓ $url $message');
   }
 
-  void _onSentMessage(RelayMessage message) {
+  void _onOutgoingMessage(RelayMessage message) {
     _logger?.info('↑ $url $message');
   }
 

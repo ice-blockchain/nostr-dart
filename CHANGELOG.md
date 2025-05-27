@@ -1,3 +1,7 @@
+## 0.0.37
+
+* Refactor: `NostrRelay.sentMessages` -> `NostrRelay.outgoingMessages`
+
 ## 0.0.36
 
 * Add `NostrRelay.sentMessages` stream
