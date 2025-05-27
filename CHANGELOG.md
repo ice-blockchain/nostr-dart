@@ -1,3 +1,7 @@
+## 0.0.38
+
+* Change all timestamps to microseconds since epoch
+
 ## 0.0.37
 
 * Refactor: `NostrRelay.sentMessages` -> `NostrRelay.outgoingMessages`
