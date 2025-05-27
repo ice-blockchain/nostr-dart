@@ -74,8 +74,8 @@
     if (ids != null) &#39;ids&#39;: ids,
     if (authors != null) &#39;authors&#39;: authors,
     if (kinds != null) &#39;kinds&#39;: kinds,
-    if (since != null) &#39;since&#39;: since!.millisecondsSinceEpoch ~&#47; 1000,
-    if (until != null) &#39;until&#39;: until!.millisecondsSinceEpoch ~&#47; 1000,
+    if (since != null) &#39;since&#39;: since!.microsecondsSinceEpoch,
+    if (until != null) &#39;until&#39;: until!.microsecondsSinceEpoch,
     if (limit != null) &#39;limit&#39;: limit,
     if (search != null) &#39;search&#39;: search,
   };
@@ -115,7 +115,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.33
+      0.0.38
   </span>
   
 </footer>

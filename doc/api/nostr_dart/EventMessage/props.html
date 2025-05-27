@@ -86,7 +86,7 @@ two instances are equal.</p>
 List&lt;Object?&gt; get props =&gt; [
       id,
       pubkey,
-      createdAt.millisecondsSinceEpoch ~&#47; 1000,
+      createdAt.microsecondsSinceEpoch,
       tags,
       content,
       sig,
@@ -121,7 +121,7 @@ List&lt;Object?&gt; get props =&gt; [
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.33
+      0.0.38
   </span>
   
 </footer>

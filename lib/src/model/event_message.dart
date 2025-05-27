@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:nostr_dart/nostr_dart.dart';
 import 'package:nostr_dart/src/crypto/utils.dart';
+import 'package:nostr_dart/src/utils/date.dart';
 
 /// Representation of a Nostr `EVENT` Message
 ///
@@ -144,7 +145,7 @@ class EventMessage extends RelayMessage {
     return EventMessage(
       id: payloadJson['id'] as String,
       pubkey: payloadJson['pubkey'] as String,
-      createdAt: DateTime.fromMicrosecondsSinceEpoch(
+      createdAt: fromTimestamp(
         payloadJson['created_at'] as int,
       ),
       kind: payloadJson['kind'] as int,

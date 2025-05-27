@@ -77,7 +77,7 @@ The serialization is done over the UTF-8 JSON-serialized string
 <pre class="language-dart"><code>[
   0,
   &lt;[pubkey], as a lowercase hex string&gt;,
-  &lt;[createdAt], as unix timestamp in seconds&gt;,
+  &lt;[createdAt], as unix timestamp in microseconds&gt;,
   &lt;[kind], as a number&gt;,
   &lt;[tags], as an array of arrays of non-null strings&gt;,
   &lt;[content], as a string&gt;
@@ -100,7 +100,7 @@ The serialization is done over the UTF-8 JSON-serialized string
     jsonEncode([
       0,
       publicKey,
-      createdAt.millisecondsSinceEpoch ~&#47; 1000,
+      createdAt.microsecondsSinceEpoch,
       kind,
       tags,
       content,
@@ -134,7 +134,7 @@ The serialization is done over the UTF-8 JSON-serialized string
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.33
+      0.0.38
   </span>
   
 </footer>

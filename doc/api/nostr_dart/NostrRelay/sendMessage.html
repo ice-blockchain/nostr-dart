@@ -80,7 +80,7 @@
     throw SocketException(&#39;Connection to $url is not established&#39;);
   }
   socket.send(message.toString());
-  _logger?.info(&#39;↑ $url $message&#39;);
+  _outgoingMessagesController.add(message);
 }</code></pre>
 </section>
 
@@ -109,7 +109,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.33
+      0.0.38
   </span>
   
 </footer>

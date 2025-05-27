@@ -71,11 +71,18 @@
   required this.url,
   required this.socket,
 }) {
-  final controller = StreamController&lt;RelayMessage&gt;.broadcast();
-  controller.addStream(_transformMessages(socket.messages)).whenComplete(controller.close);
-  messages = controller.stream;
+  final incomingMessagesController = StreamController&lt;RelayMessage&gt;.broadcast();
+  incomingMessagesController
+    .addStream(_transformMessages(socket.messages))
+    .whenComplete(incomingMessagesController.close);
+  messages = incomingMessagesController.stream;
+
+  _outgoingMessagesController = StreamController&lt;RelayMessage&gt;.broadcast();
+  outgoingMessages = _outgoingMessagesController.stream;
+
   socket.connection.listen(_onConnectionStateChange);
   messages.listen(_onIncomingMessage);
+  outgoingMessages.listen(_onOutgoingMessage);
   _finalizer.attach(this, socket, detach: this);
 }</code></pre>
 </section>
@@ -105,7 +112,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.33
+      0.0.38
   </span>
   
 </footer>

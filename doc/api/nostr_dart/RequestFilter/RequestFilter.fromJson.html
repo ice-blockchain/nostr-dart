@@ -80,12 +80,10 @@
     authors: json[&#39;authors&#39;] != null ? List&lt;String&gt;.from(json[&#39;authors&#39;] as List&lt;dynamic&gt;) : null,
     kinds: json[&#39;kinds&#39;] != null ? List&lt;int&gt;.from(json[&#39;kinds&#39;] as List&lt;dynamic&gt;) : null,
     tags: tags,
-    since: json[&#39;since&#39;] != null
-        ? DateTime.fromMillisecondsSinceEpoch((json[&#39;since&#39;] as int) * 1000)
-        : null,
-    until: json[&#39;until&#39;] != null
-        ? DateTime.fromMillisecondsSinceEpoch((json[&#39;until&#39;] as int) * 1000)
-        : null,
+    since:
+        json[&#39;since&#39;] != null ? DateTime.fromMicrosecondsSinceEpoch(json[&#39;since&#39;] as int) : null,
+    until:
+        json[&#39;until&#39;] != null ? DateTime.fromMicrosecondsSinceEpoch(json[&#39;until&#39;] as int) : null,
     limit: json[&#39;limit&#39;] != null ? json[&#39;limit&#39;] as int : null,
     search: json[&#39;search&#39;] != null ? json[&#39;search&#39;] as String : null,
   );
@@ -117,7 +115,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.33
+      0.0.38
   </span>
   
 </footer>
