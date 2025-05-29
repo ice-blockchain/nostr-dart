@@ -25,8 +25,8 @@ void main() {
     const List<String> quotedEvents = [
       '9e65c9a8a30778440065603a58aa5ab07d14ffd870a14c6c76b63cdea96b8ba1',
     ];
-    final DateTime since = DateTime.fromMicrosecondsSinceEpoch(1577822400);
-    final DateTime until = DateTime.fromMicrosecondsSinceEpoch(1577822600);
+    const int since = 1577822400;
+    const int until = 1577822600;
     const int limit = 10;
     const String search = 'some search query';
     final Map<String, List<String>> tags = {
@@ -36,7 +36,7 @@ void main() {
       '#q': quotedEvents,
     };
     final String rawFilter =
-        '{"ids":${jsonEncode(ids)},"authors":${jsonEncode(authors)},"kinds":${jsonEncode(kinds)},"since":${since.microsecondsSinceEpoch},"until":${until.microsecondsSinceEpoch},"limit":$limit,"search":"$search","#e":${jsonEncode(eventIds)},"#p":${jsonEncode(publicKeys)},"#k":${jsonEncode(filterKinds)},"#q":${jsonEncode(quotedEvents)}}';
+        '{"ids":${jsonEncode(ids)},"authors":${jsonEncode(authors)},"kinds":${jsonEncode(kinds)},"since":${since},"until":${until},"limit":$limit,"search":"$search","#e":${jsonEncode(eventIds)},"#p":${jsonEncode(publicKeys)},"#k":${jsonEncode(filterKinds)},"#q":${jsonEncode(quotedEvents)}}';
 
     test('might be instantiated with unnamed constructor', () {
       final RequestFilter filter = RequestFilter(

@@ -14,7 +14,7 @@ void main() async {
       final RequestMessage requestMessage = RequestMessage()
         ..addFilter(const RequestFilter(kinds: [1], limit: 1))
         ..addFilter(
-          RequestFilter(kinds: const [0], limit: 1, since: DateTime(2020)),
+          RequestFilter(kinds: const [0], limit: 1, since: DateTime(2020).microsecondsSinceEpoch),
         );
 
       final NostrSubscription subscription = relay.subscribe(requestMessage);

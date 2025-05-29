@@ -71,9 +71,7 @@
   return EventMessage(
     id: payloadJson[&#39;id&#39;] as String,
     pubkey: payloadJson[&#39;pubkey&#39;] as String,
-    createdAt: fromTimestamp(
-      payloadJson[&#39;created_at&#39;] as int,
-    ),
+    createdAt: payloadJson[&#39;created_at&#39;] as int,
     kind: payloadJson[&#39;kind&#39;] as int,
     tags: (payloadJson[&#39;tags&#39;] as List&lt;dynamic&gt;)
         .map((e) =&gt; (e as List&lt;dynamic&gt;).map((e) =&gt; e as String).toList())

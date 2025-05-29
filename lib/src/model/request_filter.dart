@@ -29,11 +29,11 @@ class RequestFilter extends Equatable {
   ///   - (has both values "gaming" AND "sports")
   final Map<String, List<Object?>>? tags;
 
-  /// an integer unix timestamp in seconds, events must be newer than this to pass
-  final DateTime? since;
+  /// an integer unix timestamp, events must be newer than this to pass
+  final int? since;
 
-  /// an integer unix timestamp in seconds, events must be older than this to pass
-  final DateTime? until;
+  /// an integer unix timestamp, events must be older than this to pass
+  final int? until;
 
   /// maximum number of events relays return in the initial query
   final int? limit;
@@ -66,10 +66,8 @@ class RequestFilter extends Equatable {
       authors: json['authors'] != null ? List<String>.from(json['authors'] as List<dynamic>) : null,
       kinds: json['kinds'] != null ? List<int>.from(json['kinds'] as List<dynamic>) : null,
       tags: tags,
-      since:
-          json['since'] != null ? DateTime.fromMicrosecondsSinceEpoch(json['since'] as int) : null,
-      until:
-          json['until'] != null ? DateTime.fromMicrosecondsSinceEpoch(json['until'] as int) : null,
+      since: json['since'] != null ? json['since'] as int : null,
+      until: json['until'] != null ? json['until'] as int : null,
       limit: json['limit'] != null ? json['limit'] as int : null,
       search: json['search'] != null ? json['search'] as String : null,
     );
@@ -94,8 +92,8 @@ class RequestFilter extends Equatable {
     List<String>? Function()? authors,
     List<int>? Function()? kinds,
     Map<String, List<String>>? Function()? tags,
-    DateTime? Function()? since,
-    DateTime? Function()? until,
+    int? Function()? since,
+    int? Function()? until,
     int? Function()? limit,
     String? Function()? search,
   }) {
@@ -116,8 +114,8 @@ class RequestFilter extends Equatable {
       if (ids != null) 'ids': ids,
       if (authors != null) 'authors': authors,
       if (kinds != null) 'kinds': kinds,
-      if (since != null) 'since': since!.microsecondsSinceEpoch,
-      if (until != null) 'until': until!.microsecondsSinceEpoch,
+      if (since != null) 'since': since,
+      if (until != null) 'until': until,
       if (limit != null) 'limit': limit,
       if (search != null) 'search': search,
     };
