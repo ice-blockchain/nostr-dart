@@ -32,14 +32,13 @@ class NostrSubscription {
 
   /// A StreamController to filter the incoming [RelayMessage]s
   /// according to the Subscription's logic.
-  final StreamController<RelayMessage> _messagesController =
-      StreamController.broadcast();
+  final StreamController<RelayMessage> _messagesController = StreamController.broadcast();
 
   /// A stream of uniq [RelayMessage]s of the current Subscription.
   late Stream<RelayMessage> messages;
 
-  /// Created time of the last [EventMessage] received by the subscription.
-  DateTime? _lastEventCreatedTime;
+  /// Created timestamp of the last [EventMessage] received by the subscription.
+  int? _lastEventCreatedTime;
 
   /// Method to generate a [RequestMessage] to renew the subscription.
   ///
@@ -83,7 +82,7 @@ class NostrSubscription {
     _streamSubscriptions.add(messages.listen(_trackLastEventCreatedTime));
   }
 
-  DateTime? get lastMessageTime => _lastEventCreatedTime;
+  int? get lastMessageTime => _lastEventCreatedTime;
 
   /// Clean-up method called on subscription cancellation.
   ///
@@ -110,9 +109,7 @@ class NostrSubscription {
     for (final RequestFilter filter in this.requestMessage.filters) {
       requestMessage.addFilter(
         filter.copyWith(
-          since: _lastEventCreatedTime != null
-              ? () => _lastEventCreatedTime
-              : null,
+          since: _lastEventCreatedTime != null ? () => _lastEventCreatedTime : null,
           limit: () => null,
         ),
       );
@@ -121,12 +118,9 @@ class NostrSubscription {
   }
 
   bool _isSubscriptionMessage(RelayMessage message) {
-    return (message is EventMessage &&
-            message.subscriptionId == requestMessage.subscriptionId) ||
-        (message is EoseMessage &&
-            message.subscriptionId == requestMessage.subscriptionId) ||
-        (message is ClosedMessage &&
-            message.subscriptionId == requestMessage.subscriptionId);
+    return (message is EventMessage && message.subscriptionId == requestMessage.subscriptionId) ||
+        (message is EoseMessage && message.subscriptionId == requestMessage.subscriptionId) ||
+        (message is ClosedMessage && message.subscriptionId == requestMessage.subscriptionId);
   }
 
   /// In some cases there might be that the same [EventMessage] comes several times.

@@ -102,7 +102,7 @@ store those messages and broadcast those messages to all other connected clients
 
 </dt>
 <dd>
-  Stream of decoded WebSocket's messages
+  Stream of decoded incoming WebSocket's messages
   <div class="features"><span class="feature">getter/setter pair</span></div>
 
 </dd>
@@ -116,6 +116,18 @@ store those messages and broadcast those messages to all other connected clients
 <dd>
   Stream to notify listeners when the relay is closed.
   <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
+        <dt id="outgoingMessages" class="property">
+  <span class="name"><a href="../nostr_dart/NostrRelay/outgoingMessages.html">outgoingMessages</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../nostr_dart/RelayMessage-class.html">RelayMessage</a></span>&gt;</span></span>
+  
+
+</dt>
+<dd>
+  Stream of decoded outgoing WebSocket's messages
+  <div class="features"><span class="feature">getter/setter pair</span></div>
 
 </dd>
 
@@ -350,7 +362,7 @@ a stream of <a href="../nostr_dart/RelayMessage-class.html">RelayMessage</a> fil
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.33
+      0.0.38
   </span>
   
 </footer>

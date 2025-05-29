@@ -59,7 +59,7 @@
       
 <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
 <span class="name ">calculateEventId</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="calculateEventId-param-publicKey"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">publicKey</span>, </span></li>
-<li><span class="parameter" id="calculateEventId-param-createdAt"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">createdAt</span>, </span></li>
+<li><span class="parameter" id="calculateEventId-param-createdAt"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">createdAt</span>, </span></li>
 <li><span class="parameter" id="calculateEventId-param-kind"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">kind</span>, </span></li>
 <li><span class="parameter" id="calculateEventId-param-tags"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">tags</span>, </span></li>
 <li><span class="parameter" id="calculateEventId-param-content"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">content</span>, </span></li>
@@ -77,7 +77,7 @@ The serialization is done over the UTF-8 JSON-serialized string
 <pre class="language-dart"><code>[
   0,
   &lt;[pubkey], as a lowercase hex string&gt;,
-  &lt;[createdAt], as unix timestamp in seconds&gt;,
+  &lt;[createdAt], as unix timestamp&gt;,
   &lt;[kind], as a number&gt;,
   &lt;[tags], as an array of arrays of non-null strings&gt;,
   &lt;[content], as a string&gt;
@@ -91,7 +91,7 @@ The serialization is done over the UTF-8 JSON-serialized string
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static String calculateEventId({
   required String publicKey,
-  required DateTime createdAt,
+  required int createdAt,
   required int kind,
   required List&lt;List&lt;String&gt;&gt; tags,
   required String content,
@@ -100,7 +100,7 @@ The serialization is done over the UTF-8 JSON-serialized string
     jsonEncode([
       0,
       publicKey,
-      createdAt.millisecondsSinceEpoch ~&#47; 1000,
+      createdAt,
       kind,
       tags,
       content,
@@ -134,7 +134,7 @@ The serialization is done over the UTF-8 JSON-serialized string
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.33
+      0.0.38
   </span>
   
 </footer>

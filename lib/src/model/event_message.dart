@@ -52,8 +52,8 @@ class EventMessage extends RelayMessage {
   /// 32-bytes lowercase hex-encoded public key of the event creator.
   final String pubkey;
 
-  /// Time when the event is created.
-  final DateTime createdAt;
+  /// Timestamp when the event is created.
+  final int createdAt;
 
   /// Integer between 0 and 65535.
   ///
@@ -102,9 +102,9 @@ class EventMessage extends RelayMessage {
     required int kind,
     required String content,
     List<List<String>> tags = const [],
-    DateTime? createdAt,
+    int? createdAt,
   }) async {
-    createdAt ??= DateTime.now();
+    createdAt ??= DateTime.now().microsecondsSinceEpoch;
     final normalizedTags = _normalizeTags(tags);
 
     final String eventId = calculateEventId(
@@ -144,9 +144,7 @@ class EventMessage extends RelayMessage {
     return EventMessage(
       id: payloadJson['id'] as String,
       pubkey: payloadJson['pubkey'] as String,
-      createdAt: DateTime.fromMicrosecondsSinceEpoch(
-        payloadJson['created_at'] as int,
-      ),
+      createdAt: payloadJson['created_at'] as int,
       kind: payloadJson['kind'] as int,
       tags: (payloadJson['tags'] as List<dynamic>)
           .map((e) => (e as List<dynamic>).map((e) => e as String).toList())
@@ -169,7 +167,7 @@ class EventMessage extends RelayMessage {
   Map<String, dynamic> get jsonPayload => {
         'id': id,
         'pubkey': pubkey,
-        'created_at': createdAt.microsecondsSinceEpoch,
+        'created_at': createdAt,
         'kind': kind,
         'tags': tags,
         'content': content,
@@ -200,7 +198,7 @@ class EventMessage extends RelayMessage {
   List<Object?> get props => [
         id,
         pubkey,
-        createdAt.microsecondsSinceEpoch,
+        createdAt,
         tags,
         content,
         sig,
@@ -245,7 +243,7 @@ class EventMessage extends RelayMessage {
   /// [
   ///   0,
   ///   <[pubkey], as a lowercase hex string>,
-  ///   <[createdAt], as unix timestamp in microseconds>,
+  ///   <[createdAt], as unix timestamp>,
   ///   <[kind], as a number>,
   ///   <[tags], as an array of arrays of non-null strings>,
   ///   <[content], as a string>
@@ -253,7 +251,7 @@ class EventMessage extends RelayMessage {
   /// ```
   static String calculateEventId({
     required String publicKey,
-    required DateTime createdAt,
+    required int createdAt,
     required int kind,
     required List<List<String>> tags,
     required String content,
@@ -262,7 +260,7 @@ class EventMessage extends RelayMessage {
       jsonEncode([
         0,
         publicKey,
-        createdAt.microsecondsSinceEpoch,
+        createdAt,
         kind,
         tags,
         content,

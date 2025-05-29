@@ -62,7 +62,7 @@
 <li><span class="parameter" id="fromData-param-kind"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">kind</span>, </span></li>
 <li><span class="parameter" id="fromData-param-content"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">content</span>, </span></li>
 <li><span class="parameter" id="fromData-param-tags"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">tags</span> = <span class="default-value">const []</span>, </span></li>
-<li><span class="parameter" id="fromData-param-createdAt"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">createdAt</span>, </span></li>
+<li><span class="parameter" id="fromData-param-createdAt"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">createdAt</span>, </span></li>
 </ol>})
 
       
@@ -79,9 +79,9 @@
   required int kind,
   required String content,
   List&lt;List&lt;String&gt;&gt; tags = const [],
-  DateTime? createdAt,
+  int? createdAt,
 }) async {
-  createdAt ??= DateTime.now();
+  createdAt ??= DateTime.now().microsecondsSinceEpoch;
   final normalizedTags = _normalizeTags(tags);
 
   final String eventId = calculateEventId(
@@ -129,7 +129,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.33
+      0.0.38
   </span>
   
 </footer>

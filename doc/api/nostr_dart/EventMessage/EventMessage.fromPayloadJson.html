@@ -71,9 +71,7 @@
   return EventMessage(
     id: payloadJson[&#39;id&#39;] as String,
     pubkey: payloadJson[&#39;pubkey&#39;] as String,
-    createdAt: DateTime.fromMillisecondsSinceEpoch(
-      (payloadJson[&#39;created_at&#39;] as int) * 1000,
-    ),
+    createdAt: payloadJson[&#39;created_at&#39;] as int,
     kind: payloadJson[&#39;kind&#39;] as int,
     tags: (payloadJson[&#39;tags&#39;] as List&lt;dynamic&gt;)
         .map((e) =&gt; (e as List&lt;dynamic&gt;).map((e) =&gt; e as String).toList())
@@ -110,7 +108,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.33
+      0.0.38
   </span>
   
 </footer>

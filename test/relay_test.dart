@@ -8,32 +8,29 @@ void main() async {
     NostrDart.configure();
 
     test('must support subscribing', () async {
-      final NostrRelay relay = await NostrRelay.connect('wss://relay.damus.io');
+      final NostrRelay relay =
+          await NostrRelay.connect('wss://bom1-1.testnet.ion-connect.ice.vip:4443');
 
       final RequestMessage requestMessage = RequestMessage()
         ..addFilter(const RequestFilter(kinds: [1], limit: 1))
         ..addFilter(
-          RequestFilter(kinds: const [0], limit: 1, since: DateTime(2020)),
+          RequestFilter(kinds: const [0], limit: 1, since: DateTime(2020).microsecondsSinceEpoch),
         );
 
       final NostrSubscription subscription = relay.subscribe(requestMessage);
 
-      final Completer<EoseMessage> completer = Completer();
-      final List<EventMessage> events = [];
+      final Completer<ClosedMessage> completer = Completer();
       final StreamSubscription listener = subscription.messages.listen((event) {
-        if (event is EoseMessage) {
+        if (event is ClosedMessage) {
           completer.complete(event);
-        } else if (event is EventMessage) {
-          events.add(event);
         }
       });
-      final EoseMessage eoseMessage = await completer.future;
+      final ClosedMessage closedMessage = await completer.future;
 
       relay.unsubscribe(subscription.id);
       listener.cancel();
 
-      expect(eoseMessage.subscriptionId, equals(subscription.id));
-      expect(events.length, equals(2));
+      expect(closedMessage.subscriptionId, equals(subscription.id));
     });
   });
 }

@@ -62,8 +62,8 @@
 <li><span class="parameter" id="copyWith-param-authors"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">authors</span>()?, </span></li>
 <li><span class="parameter" id="copyWith-param-kinds"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>&gt;</span>?</span> <span class="parameter-name">kinds</span>()?, </span></li>
 <li><span class="parameter" id="copyWith-param-tags"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span>?</span> <span class="parameter-name">tags</span>()?, </span></li>
-<li><span class="parameter" id="copyWith-param-since"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">since</span>()?, </span></li>
-<li><span class="parameter" id="copyWith-param-until"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">until</span>()?, </span></li>
+<li><span class="parameter" id="copyWith-param-since"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">since</span>()?, </span></li>
+<li><span class="parameter" id="copyWith-param-until"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">until</span>()?, </span></li>
 <li><span class="parameter" id="copyWith-param-limit"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">limit</span>()?, </span></li>
 <li><span class="parameter" id="copyWith-param-search"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">search</span>()?, </span></li>
 </ol>})
@@ -82,8 +82,8 @@
   List&lt;String&gt;? Function()? authors,
   List&lt;int&gt;? Function()? kinds,
   Map&lt;String, List&lt;String&gt;&gt;? Function()? tags,
-  DateTime? Function()? since,
-  DateTime? Function()? until,
+  int? Function()? since,
+  int? Function()? until,
   int? Function()? limit,
   String? Function()? search,
 }) {
@@ -125,7 +125,7 @@
 <footer>
   <span class="no-break">
     nostr_dart
-      0.0.33
+      0.0.38
   </span>
   
 </footer>
