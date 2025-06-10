@@ -53,8 +53,8 @@ class NostrRelay {
   }) {
     final incomingMessagesController = StreamController<RelayMessage>.broadcast();
     incomingMessagesController
-      .addStream(_transformMessages(socket.messages))
-      .whenComplete(incomingMessagesController.close);
+        .addStream(_transformMessages(socket.messages))
+        .whenComplete(incomingMessagesController.close);
     messages = incomingMessagesController.stream;
 
     _outgoingMessagesController = StreamController<RelayMessage>.broadcast();
@@ -152,7 +152,13 @@ class NostrRelay {
       if (subscription == null) {
         throw SubscriptionNotFoundException(subscriptionId);
       }
-      if (sendCloseMessage) sendMessage(CloseMessage(subscriptionId: subscriptionId));
+      if (sendCloseMessage) {
+        try {
+          sendMessage(CloseMessage(subscriptionId: subscriptionId));
+        } on SocketException {
+          // Socket not connected, skip sending close message
+        }
+      }
       subscription.dispose();
       _subscriptions.remove(subscriptionId);
       _subscriptionsCountController.add(_subscriptions.keys.length);
