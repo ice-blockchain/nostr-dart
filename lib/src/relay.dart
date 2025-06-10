@@ -120,9 +120,11 @@ class NostrRelay {
 
   /// Sends the [RelayMessage] to the Relay
   void sendMessage(RelayMessage message) {
-    if (socket.connection is Connecting ||
-        socket.connection is Reconnecting ||
-        socket.connection is Disconnected) {
+    final connectionState = socket.connection.state;
+    if (connectionState is Connecting ||
+        connectionState is Reconnecting ||
+        connectionState is Disconnecting ||
+        connectionState is Disconnected) {
       throw SocketException('Connection to $url is not established');
     }
     socket.send(message.toString());
