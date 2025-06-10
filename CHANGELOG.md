@@ -1,3 +1,8 @@
+## 0.0.39
+
+* Fix sending `CloseMessage` on `NostrRelay.unsubscribe`
+* Fix casting socket connection state in `NostrRelay`
+
 ## 0.0.38
 
 * Change all timestamps to microseconds since epoch
