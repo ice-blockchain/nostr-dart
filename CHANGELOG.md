@@ -1,3 +1,7 @@
+## 0.0.40
+
+* Update `web_socket_client` lib
+
 ## 0.0.39
 
 * Fix sending `CloseMessage` on `NostrRelay.unsubscribe`
