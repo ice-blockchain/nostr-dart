@@ -10,7 +10,7 @@ dependencies:
   bip340: ^0.3.0
   crypto: ^3.0.6
   equatable: ^2.0.7
-  web_socket_client: ^0.1.5
+  web_socket_client: ^0.2.1
 
 dev_dependencies:
   lint: ^2.3.0
