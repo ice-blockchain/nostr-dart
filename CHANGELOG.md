@@ -1,3 +1,7 @@
+## 0.0.41
+
+* Add `incomingMessageLoggingEnabled` and `outgoingMessageLoggingEnabled` getters to `NostrDartLogger` for controlling message logging
+
 ## 0.0.40
 
 * Update `web_socket_client` lib

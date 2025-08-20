@@ -178,11 +178,15 @@ class NostrRelay {
   }
 
   void _onIncomingMessage(RelayMessage message) {
-    _logger?.info('↓ $url $message');
+    if (_logger?.incomingMessageLoggingEnabled ?? false) {
+      _logger?.info('↓ $url $message');
+    }
   }
 
   void _onOutgoingMessage(RelayMessage message) {
-    _logger?.info('↑ $url $message');
+    if (_logger?.outgoingMessageLoggingEnabled ?? false) {
+      _logger?.info('↑ $url $message');
+    }
   }
 
   void _renewSubscriptions() {

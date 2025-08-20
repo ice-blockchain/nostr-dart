@@ -8,8 +8,7 @@ void main() async {
     NostrDart.configure();
 
     test('must support subscribing', () async {
-      final NostrRelay relay =
-          await NostrRelay.connect('wss://bom1-1.testnet.ion-connect.ice.vip:4443');
+      final NostrRelay relay = await NostrRelay.connect('wss://51.75.87.132:4443');
 
       final RequestMessage requestMessage = RequestMessage()
         ..addFilter(const RequestFilter(kinds: [1], limit: 1))
