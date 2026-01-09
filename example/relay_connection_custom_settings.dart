@@ -13,7 +13,7 @@ void main() async {
     backoff: const ConstantBackoff(Duration(seconds: 5)),
   );
 
-  final NostrRelay relay = await NostrRelay.connect(url, customSocket);
+  final NostrRelay relay = await NostrRelay.connect(url, customSocket: customSocket);
 
   final KeyStore keyStore = KeyStore.generate();
 
