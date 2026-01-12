@@ -1,3 +1,10 @@
+
+## 0.0.42
+
+* Add `connectUrl` (actual transport URL) and `connectUri` to `NostrRelay` to support proxy / failover connections while keeping a stable logical `url`
+* Update `NostrRelay.connect` signature to use named parameters: `connectUrl` and `customSocket`
+* Update example `relay_connection_custom_settings.dart` to pass `customSocket:` as a named argument
+
 ## 0.0.41
 
 * Add `incomingMessageLoggingEnabled` and `outgoingMessageLoggingEnabled` getters to `NostrDartLogger` for controlling message logging
