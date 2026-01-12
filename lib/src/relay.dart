@@ -19,6 +19,17 @@ class NostrRelay {
   /// Must use the scheme `ws` or `wss`.
   final String url;
 
+  /// The actual WebSocket URL used for the current connection.
+  ///
+  /// By default this is the same as [url]. However, in proxy / failover
+  /// setups you may want to keep a stable logical relay identifier in [url]
+  /// (for de-duplication, persistence, metrics, etc.) while connecting the
+  /// underlying socket to a different host.
+  final String connectUrl;
+
+  /// Convenience getter for the URI used to establish the WebSocket.
+  Uri get connectUri => Uri.parse(connectUrl);
+
   /// Corresponding Relay's WebSocket connection
   final WebSocket socket;
 
@@ -49,8 +60,9 @@ class NostrRelay {
 
   NostrRelay({
     required this.url,
+    String? connectUrl,
     required this.socket,
-  }) {
+  })  : connectUrl = connectUrl ?? url {
     final incomingMessagesController = StreamController<RelayMessage>.broadcast();
     incomingMessagesController
         .addStream(_transformMessages(socket.messages))
@@ -233,12 +245,15 @@ class NostrRelay {
   }
 
   /// Creates a new Relay and waits for it to be connected.
-  static Future<NostrRelay> connect(
-    String url, [
-    WebSocket? customSocket,
-  ]) async {
-    final WebSocket socket = customSocket ?? WebSocket(Uri.parse(url));
-    final relay = NostrRelay(url: url, socket: socket);
+  static Future<NostrRelay> connect(String url, {String? connectUrl, WebSocket? customSocket}) async {
+    final transportUrl = connectUrl ?? url;
+
+    final WebSocket socket = customSocket ?? WebSocket(Uri.parse(transportUrl));
+    final relay = NostrRelay(
+      url: url,
+      connectUrl: transportUrl,
+      socket: socket,
+    );
     await socket.connection.firstWhere((state) => state is Connected || state is Reconnected);
     return relay;
   }
