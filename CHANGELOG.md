@@ -1,3 +1,6 @@
+## 0.0.43
+
+* Add `connectUrl` to all the logs inside `NostrRelay` instead of `url`
 
 ## 0.0.42
 

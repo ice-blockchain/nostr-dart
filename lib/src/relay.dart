@@ -125,7 +125,7 @@ class NostrRelay {
         throw SendEventException(notAccepted.first.message);
       }
     } catch (error, stack) {
-      _logger?.warning("$url Failed to send events $events", error, stack);
+      _logger?.warning("$connectUrl Failed to send events $events", error, stack);
       rethrow;
     }
   }
@@ -137,7 +137,7 @@ class NostrRelay {
         connectionState is Reconnecting ||
         connectionState is Disconnecting ||
         connectionState is Disconnected) {
-      throw SocketException('Connection to $url is not established');
+      throw SocketException('Connection to $connectUrl is not established');
     }
     socket.send(message.toString());
     _outgoingMessagesController.add(message);
@@ -154,7 +154,7 @@ class NostrRelay {
       _subscriptionsCountController.add(_subscriptions.keys.length);
       return subscription;
     } catch (error, stack) {
-      _logger?.warning("Failed to subscribe to relay $url", error, stack);
+      _logger?.warning("Failed to subscribe to relay $connectUrl", error, stack);
       rethrow;
     }
   }
@@ -177,13 +177,13 @@ class NostrRelay {
       _subscriptions.remove(subscriptionId);
       _subscriptionsCountController.add(_subscriptions.keys.length);
     } catch (error, stack) {
-      _logger?.warning("Failed to unsubscribe from relay $url", error, stack);
+      _logger?.warning("Failed to unsubscribe from relay $connectUrl", error, stack);
       rethrow;
     }
   }
 
   void _onConnectionStateChange(ConnectionState state) {
-    _logger?.info('$url connection state is ${state.runtimeType}');
+    _logger?.info('$connectUrl connection state is ${state.runtimeType}');
     if (state is Reconnected) {
       _renewSubscriptions();
     }
@@ -191,13 +191,13 @@ class NostrRelay {
 
   void _onIncomingMessage(RelayMessage message) {
     if (_logger?.incomingMessageLoggingEnabled ?? false) {
-      _logger?.info('↓ $url $message');
+      _logger?.info('↓ $connectUrl $message');
     }
   }
 
   void _onOutgoingMessage(RelayMessage message) {
     if (_logger?.outgoingMessageLoggingEnabled ?? false) {
-      _logger?.info('↑ $url $message');
+      _logger?.info('↑ $connectUrl $message');
     }
   }
 
