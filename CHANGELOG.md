@@ -1,3 +1,7 @@
+## 0.0.44
+
+* Fix `RequestFilter` `copyWith` `tags` param type to match the `tags` field type.
+
 ## 0.0.43
 
 * Add `connectUrl` to all the logs inside `NostrRelay` instead of `url`
