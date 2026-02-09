@@ -91,7 +91,7 @@ class RequestFilter extends Equatable {
     List<String>? Function()? ids,
     List<String>? Function()? authors,
     List<int>? Function()? kinds,
-    Map<String, List<String>>? Function()? tags,
+    Map<String, List<Object?>>? Function()? tags,
     int? Function()? since,
     int? Function()? until,
     int? Function()? limit,
