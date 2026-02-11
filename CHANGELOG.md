@@ -1,3 +1,7 @@
+## 0.0.45
+
+* Set `null` for tags in `RequestFilter` `fromJson` if they are empty.
+
 ## 0.0.44
 
 * Fix `RequestFilter` `copyWith` `tags` param type to match the `tags` field type.
