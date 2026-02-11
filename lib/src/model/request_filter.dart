@@ -65,7 +65,7 @@ class RequestFilter extends Equatable {
       ids: json['ids'] != null ? List<String>.from(json['ids'] as List<dynamic>) : null,
       authors: json['authors'] != null ? List<String>.from(json['authors'] as List<dynamic>) : null,
       kinds: json['kinds'] != null ? List<int>.from(json['kinds'] as List<dynamic>) : null,
-      tags: tags,
+      tags: tags.isNotEmpty ? tags : null,
       since: json['since'] != null ? json['since'] as int : null,
       until: json['until'] != null ? json['until'] as int : null,
       limit: json['limit'] != null ? json['limit'] as int : null,
